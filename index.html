@@ -16,21 +16,27 @@
             let myObject = await fetch(file);
             let myText = await myObject.text();
 
+            //var request = $.ajax({
+            //    url: "https://xtriples.lod.academy/extract.xql",
+            //    headers: { 'Access-Control-Allow-Origin': '*' },
+            //    dataType: "json",
+            //    contentType: 'application/json',//"application/xml",
+            //    method: "POST",
+            //    data: JSON.stringify({ format: 'rdf', configuration: myText }),
+            //    async: true,
+            //    processData: false,
+            //    cache: false,
+            //    crossDomain: true,
+            //    //dataType: "rdf",
+            //    //origin: '*'
+            //});
             var request = $.ajax({
                 url: "https://xtriples.lod.academy/extract.xql",
-                headers: { 'Access-Control-Allow-Origin': '*' },
-                dataType: "json",
                 contentType: 'application/json',//"application/xml",
                 method: "POST",
                 data: JSON.stringify({ format: 'rdf', configuration: myText }),
-                async: true,
-                processData: false,
                 cache: false,
-                crossDomain: true,
-                //dataType: "rdf",
-                //origin: '*'
             });
-
             request.done(function (msg) {
                 $("#demo").html(msg);
             });
