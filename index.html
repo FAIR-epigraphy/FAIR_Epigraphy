@@ -32,17 +32,19 @@
             //});
             var request = $.ajax({
                 url: "https://xtriples.lod.academy/extract.xql",
-                contentType: 'application/json',//"application/xml",
-                method: "POST",
-                data: JSON.stringify({ format: 'rdf', configuration: myText }),
                 cache: false,
+                dataType: "json",
+                method: "POST",
+                contentType: 'application/json',//"application/xml",
+                data: JSON.stringify({ format: 'rdf', configuration: myText }),
+                
             });
             request.done(function (msg) {
                 $("#demo").html(msg);
             });
 
             request.fail(function (jqXHR, textStatus) {
-                alert("Request failed: " + textStatus);
+                $("#demo").html("Request failed: " + textStatus);
             });
 
             //document.getElementById("demo").innerHTML = myText;
