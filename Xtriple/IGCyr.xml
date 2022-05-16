@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model
+uri="https://xtriples.lod.academy/xtriples.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"
+?>
+<!--https://xtriples.lod.academy/documentation.html
+once stored somewhere, the configuration can be called like in this example
+https://xtriples.lod.academy/extract.xql?configuration=https://xtriples.lod.academy/examples/gods/configuration.xml&format=svg
+to return directly the results (also format turtle for example)
+-->
+<xtriples>
+    <configuration>
+        <vocabularies>
+            <vocabulary prefix="t" uri="http://www.tei-c.org/ns/1.0"/>
+            <vocabulary prefix="igcyr" uri="https://igcyr.unibo.it/igcyr/"/>
+            <!--CHANGE ME-->
+            <vocabulary prefix="tm" uri="https://www.trismegistos.org/text/"/>
+            <vocabulary prefix="rdfs" uri="http://www.w3.org/2000/01/rdf-schema#"/>
+            <vocabulary prefix="rdf" uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+            <vocabulary prefix="dc" uri="http://purl.org/dc/elements/1.1/"/>
+            <vocabulary prefix="dcterms" uri="http://purl.org/dc/terms/"/>
+            <vocabulary prefix="xsd" uri="http://www.w3.org/2001/XMLSchema#"/>
+            <vocabulary prefix="owl" uri="http://www.w3.org/2002/07/owl#"/>
+            <vocabulary prefix="crm" uri="http://erlangen-crm.org/current/"/>
+            <vocabulary prefix="skos" uri="http://www.w3.org/2004/02/skos/core#"/>
+            <vocabulary prefix="frbr" uri="http://purl.org/vocab/frbr/core#"/>
+            <vocabulary prefix="nmo" uri="http://nomisma.org/ontology#"/>
+            <vocabulary prefix="lawd" uri="http://lawd.info/ontology/"/>
+            <vocabulary prefix="foaf" uri="http://xmlns.com/foaf/0.1/"/>
+            <vocabulary prefix="gn" uri="http://www.geonames.org/ontology#"/>
+            <vocabulary prefix="gndo" uri="http://d-nb.info/standards/elementset/gnd#"/>
+            <vocabulary prefix="geo" uri="http://www.opengis.net/ont/geosparql#"/>
+            <vocabulary prefix="edh" uri="http://edh-www.adw.uni-heidelberg.de/edh/ontology#"/>
+            <vocabulary prefix="epnet"
+                uri="http://www.semanticweb.org/ontologies/2015/1/EPNet-ONTOP_Ontology#"/>
+            <vocabulary prefix="edm" uri="http://www.europeana.eu/schemas/edm/"/>
+            <vocabulary prefix="svcs" uri="http://rdfs.org/sioc/services#"/>
+            <vocabulary prefix="doap" uri="http://usefulinc.com/ns/doap#"/>
+            <vocabulary prefix="crmtex" uri="http://www.cidoc-crm.org/crmtex/"/>
+            <vocabulary prefix="crmsci" uri="http://www.cidoc-crm.org/crmsci/"/>
+            <vocabulary prefix="extech" uri="https://w3id.org/executionTechnique/ontology#"/>
+            <vocabulary prefix="eagle" uri="https://www.eaglenetwork.eu/voc/writing/lod/"/>
+            <vocabulary prefix="eagleExTech" uri="https://www.eagle-network.eu/voc/writing/lod/"/>
+            <vocabulary prefix="eagleObjTyp" uri="https://www.eagle-network.eu/voc/objtyp/lod/"/>
+            <vocabulary prefix="eagleInsTyp" uri="https://www.eagle-network.eu/voc/typeins/lod/"/>
+            <vocabulary prefix="eagleMat" uri="https://www.eagle-network.eu/voc/material/lod/"/>
+            <vocabulary prefix="epont" uri="http://Temporary.Epigraphic.Ontology/"/>
+        </vocabularies>
+        <triples>
+            <!--            
+ :Object a crm:E84_Information_carrier ; 
+  	epOnt:carriesText :INS1 ;  
+	dcterms:temporal :Period ;
+	edh:representsTypeOfMonument eagleObjTyp:123 ; 
+	crm:P46_is_composed_of : OBJ2, OBJ3 ; 
+         	nmo:hasMaterial eagleMat:48 ;
+           	lawd:foundAt :Place ; 
+            lawd:origin :Place2 ;
+            crm:P55_has_current_location :Place3 ;
+            epnet:isDocumentedBy :BibliographicResource ;
+	crm:P138i_has_representation :image1 . 
+-->
+<!--          This should look at bibliography.xml, but for what?
+                <statement>
+                <subject prefix="igcyr">//t:idno[@type='filename']</subject>
+                <predicate prefix="epnet">isDocumentedBy</predicate>
+                <object type="uri">//t:bibl/t:ptr/@target</object>
+            </statement>-->
+            <!--            the path where to retrieve an identifier is not specified in EpiDoc, this is where EAGLE has it in most cases-->
+            <statement>
+                <subject prefix="igcyr">//t:idno[@type='filename']</subject>
+                <predicate prefix="rdf">type</predicate>
+                <object prefix="crm" type="uri">/string("E22_Human-Made_Object")</object>
+            </statement>
+            <!--            This should create a uri http://base.uri/{id}/WrittenText for the inscription-->
+            <statement>
+                <subject prefix="igcyr">//t:idno[@type='filename']</subject>
+                <predicate prefix="epont">carriesText</predicate>
+                <object prefix="igcyr" append="/WrittenText" type="uri"
+                    >//t:idno[@type='filename']</object>
+            </statement>
+            <!--            for dctemporal with PeriodO Uris 
+                <subject resource="http://dbpedia.org/data/Hera.rdf">//foaf:isPrimaryTopicOf/@rdf:resource</subject>
+                picking from the RDF representation-->
+
+            <!--          http://www.stoa.org/epidoc/gl/latest/supp-descobject.html 
+            the use of @ref is however not specified and is the use of the EAGLE project -->
+            <statement>
+                <subject prefix="igcyr">//t:idno[@type='filename']</subject>
+                <predicate prefix="edh">representsTypeOfMonument</predicate>
+<!--                Achtung! the URIs are not correct, there are HTML links in some cases... probably originated in EAGLE data export-->
+                <object type="uri">//t:objectType/@ref</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr">//t:idno[@type='filename']</subject>
+                <predicate prefix="nmo">hasMaterial</predicate>
+                <object type="uri">//t:material/@ref</object>
+            </statement>
+
+            <!--            https://www.stoa.org/epidoc/gl/latest/supp-historigin.html (see last example in section on structured data )-->
+            <statement>
+                <subject prefix="igcyr">//t:idno[@type='filename']</subject>
+                <predicate prefix="lawd">foundAt</predicate>
+                <object type="uri">//t:placeName[@type='ancientFindspot']/@ref</object>
+            </statement>
+            
+
+            <!--            
+:INS1 a crmtex:TX1_Written_text ; 
+          	crm:P56_is_found_on :Object ; 
+            nmo:hasEndDate  "0300" ; 
+            nmo:hasStartDate   "0001" ;
+            crmtex:TXP2_is_included_within :Field ;
+          	crm:P108_was_produced_by :Activity1;
+          	extech:hasExecutionPhase :Activity2;
+          	extech:hasExecutionPhase :Activity3 ;
+           	crmsci:O6_observed_by :Autopsy1 . -->
+
+            <statement>
+                <subject prefix="igcyr" append="/WrittenText" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="rdf">type</predicate>
+                <object prefix="crmtex" type="uri">/string("TX1_Written_text")</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/WrittenText" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="crm">P56_is_found_on</predicate>
+                <object prefix="igcyr" type="uri">//t:idno[@type='filename']</object>
+            </statement>
+
+            <!--            http://www.stoa.org/epidoc/gl/latest/supp-historigdate.html-->
+            <statement>
+                <subject prefix="igcyr" append="/WrittenText" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="nmo">hasStartDate</predicate>
+                <object type="literal" datatype="date"
+                    >//t:origin//t:origDate/@notBefore-custom</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/WrittenText" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="nmo">hasEndDate</predicate>
+                <object type="literal" datatype="date"
+                    >//t:origin//t:origDate/@notAfter-custom</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/WrittenText" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="crm">P108_was_produced_by</predicate>
+                <object prefix="igcyr" append="/Writing" type="uri"
+                    >//t:idno[@type='filename']</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/WrittenText" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="crmsci">O6_observed_by</predicate>
+                <object prefix="igcyr" append="/Reading" type="uri"
+                    >//t:idno[@type='filename']</object>
+            </statement>
+            <!--            This is not specified in EpiDoc, it is the use of the EAGLE project-->
+            <statement>
+                <subject prefix="igcyr" append="/WrittenText" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="foaf">page</predicate>
+                <object type="uri">//t:idno[@type='URI']</object>
+            </statement>
+
+            <!--            
+:Activity1 a crmtex:TX2_Writing ; 
+        crmtex:TXP1_used_writing_system :Script ;
+        crm:P92_brought_into_existence :Text .
+-->
+            <statement>
+                <subject prefix="igcyr" append="/Writing" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="rdf">type</predicate>
+                <object prefix="crmtex" type="uri">/string("TX2_Writing")</object>
+            </statement>
+            <!--            http://www.stoa.org/epidoc/gl/latest/supp-structure.html-->
+            <statement>
+                <subject prefix="igcyr" append="/Writing" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="crmtex">TXP1_used_writing_system</predicate>
+                <object type="literal">//t:div[@type='edition']/@xml:lang</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/Writing" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="crm">P92_brought_into_existence</predicate>
+                <object prefix="igcyr" append="/WrittenWork" type="uri">//t:idno[@type='filename']</object>
+            </statement>
+            
+            <statement>
+                <subject prefix="igcyr" append="/Writing" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="extech">usesTechnique</predicate>
+                <object  type="uri">//t:rs[@type='execution']/@ref</object>
+            </statement>
+            
+
+            <!--  
+:Text a lawd:WrittenWork ;  # E33linguistic object
+        saws:isVersionOf :AnyTextUri ;
+        saws:isCopyInAnotherLanguageOf  :AnyTextUri .
+-->
+
+            <statement>
+                <subject prefix="igcyr" append="/WrittenWork" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="rdf">type</predicate>
+                <object prefix="lawd" type="uri">/string('WrittenWork')</object>
+            </statement>
+
+            <!--            :Autopsy1 a crmtex:TX5_Reading ; 
+crm:P20_had_specific_purpose :Transcription ;
+crmtex:TXP3_is_rendered_by :Transcription ;
+crm:P14_carried_by :editor1 .
+-->
+
+            <statement>
+                <subject prefix="igcyr" append="/Reading" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="rdf">type</predicate>
+                <object prefix="crmtex" type="uri">/string('TX5_Reading')</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/Reading" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="crm">P20_had_specific_purpose</predicate>
+                <object prefix="igcyr" append="/Transcription" type="uri"
+                    >//t:idno[@type='filename']</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/Reading" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="crmtex">TXP3_is_rendered_by</predicate>
+                <object prefix="igcyr" append="/Transcription" type="uri"
+                    >//t:idno[@type='filename']</object>
+            </statement>
+           
+            <!--        
+ :Transcription a crmtex:TX6_Transcription ;
+            dct:contributor        :Contributor ;
+        	dct:date               "2014-10-21"^^xsd:date ;
+            dct:publisher          <http://edh-www.adw.uni-heidelberg.de> ;
+	dct:isPartOf 	"Epigraphic Database Heidelberg" ;
+	crm:P49_created :TranscriptionText ;
+	epOnt:hasEdition :Edition ;
+           	edh:representsTypeOfInscription eagleInsTyp:123 ;
+	lawd:hasAttestation :Attestation1 .
+-->
+            <statement>
+                <subject prefix="igcyr" append="/Transcription" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="rdf">type</predicate>
+                <object prefix="crmtex" type="uri">/string('TX6_Transcription')</object>
+            </statement>
+            
+            <statement>
+                <subject prefix="igcyr" append="/Transcription" type="uri">//t:idno[@type='filename']</subject>
+                <predicate prefix="crm">P14_carried_out_by</predicate>
+                <object type="uri">//t:respStmt/t:name/@ref</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/Transcription" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="dc">publisher</predicate>
+                <object prefix="igcyr" append="/Contributor" type="uri">//t:publisher</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/Transcription" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="crm">P49_created</predicate>
+                <object prefix="igcyr" append="/TranscriptionText" type="uri"
+                    >//t:idno[@type='filename']</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/Transcription" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="crm">P1_is_identified_by</predicate>
+                <object type="literal">//t:idno[not(@type='URI')][not(@type='filename')][not(@type='TM')]</object>
+            </statement>
+<!--            This is not in EpiDoc, it is how EAGLE does this mapping-->
+            <statement>
+                <subject prefix="igcyr" append="/Transcription" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="edh">representsTypeOfInscription</predicate>
+                <object type="uri">//t:term/@ref</object>
+            </statement>
+            <!--            This is done like this only in the EAGLE files!-->
+            <statement>
+                <subject prefix="igcyr" append="/Transcription" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="crm">P48_has_preferred_identifier</predicate>
+                <object prefix="tm" type="uri"
+                    >//t:idno[@type='TM']</object>
+            </statement>
+
+            <!--            http://www.stoa.org/epidoc/gl/latest/supp-desctext.html
+            the use of @ref to align to an external URI is the use in EAGLE -->
+            <statement>
+                <subject prefix="igcyr" append="/Transcription" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="edh">representsTypeOfInscription</predicate>
+                <object type="uri">//t:rs[@type='textType']/@ref</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/Transcription" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="epont">hasEdition</predicate>
+                <object prefix="igcyr" append="/Edition" type="uri"
+                    >//t:idno[@type='filename']</object>
+            </statement>
+
+            <!--
+:TranscriptionText a crm:E33_Linguistic_Object ; 
+edh:hasDiplomaticText "string literal?" ;
+epnet:hasTranscription "literal"; 
+	epnet:hasSimplifiedTranscription "literal" .
+    -->
+            <statement>
+                <subject prefix="igcyr" append="/TranscriptionText" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="rdf">type</predicate>
+                <object prefix="crm" type="uri">/string('E33_Linguistic_Object')</object>
+            </statement>
+            <statement>
+                <subject prefix="igcyr" append="/TranscriptionText" type="uri"
+                    >//t:idno[@type='filename']</subject>
+                <predicate prefix="epnet">hasTEI-annotatedTranscription</predicate>
+                <object>//t:div[@type='edition']</object>
+            </statement>
+
+        </triples>
+    </configuration>
+    <collection>
+        <resource uri="https://igcyr.unibo.it/igcyr/igcyr016800.xml"/>
+    </collection>
+</xtriples>
