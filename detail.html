@@ -44,6 +44,8 @@
 
         ///////////////////////////////////////////////////////////////////////
         //// Show Map
+        initMap();
+
         function initMap() {
             if (obj.geo !== undefined) {
                 let lat_lng = obj.geo.split(',')
@@ -60,7 +62,7 @@
                 });
             }
         }
-        window.initMap = initMap;
+        
     </script>
 </body>
 </html>
