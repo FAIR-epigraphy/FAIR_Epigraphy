@@ -1,0 +1,950 @@
+@prefix crm: <http://erlangen-crm.org/current/> .
+@prefix crmsci: <http://www.cidoc-crm.org/crmsci/> .
+@prefix crmtex: <http://www.cidoc-crm.org/crmtex/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix eagle: <https://www.eaglenetwork.eu/voc/writing/lod/> .
+@prefix eagleExTech: <https://www.eagle-network.eu/voc/writing/lod/> .
+@prefix eagleInsTyp: <https://www.eagle-network.eu/voc/typeins/lod/> .
+@prefix eagleMat: <https://www.eagle-network.eu/voc/material/lod/> .
+@prefix eagleObjTyp: <https://www.eagle-network.eu/voc/objtyp/lod/> .
+@prefix edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#> .
+@prefix edm: <http://www.europeana.eu/schemas/edm/> .
+@prefix epnet: <http://www.semanticweb.org/ontologies/2015/1/EPNet-ONTOP_Ontology#> .
+@prefix epont: <http://Temporary.Epigraphic.Ontology/> .
+@prefix extech: <https://w3id.org/executionTechnique/ontology#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix gndo: <http://d-nb.info/standards/elementset/gnd#> .
+@prefix igcyr: <https://igcyr.unibo.it/> .
+@prefix isicily: <http://sicily.classics.ox.ac.uk/> .
+@prefix lawd: <http://lawd.info/ontology/> .
+@prefix nmo: <http://nomisma.org/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix svcs: <http://rdfs.org/sioc/services#> .
+@prefix t: <http://www.tei-c.org/ns/1.0> .
+@prefix tm: <https://www.trismegistos.org/text/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+isicily:ISic000001 a crm:E22_Human-Made_Object ;
+    epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000001/WrittenText> ;
+    edh:representsTypeOfMonument <https://www.eagle-network.eu/voc/objtyp/lod/259.html> ;
+    crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
+    nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html> ;
+    epnet:isDocumentedBy <https://www.zotero.org/groups/382445/items/7PSFHSUH>,
+        <https://www.zotero.org/groups/382445/items/FZWWPUD6>,
+        <https://www.zotero.org/groups/382445/items/GQN8UZSI> ;
+    geo:SpatialThing <http://sicily.classics.ox.ac.uk/ISic000001#this> .
+
+<http://sicily.classics.ox.ac.uk/ISic000001#this> geo:lat_long "37.49025, 14.06216"^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000001/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <http://sicily.classics.ox.ac.uk/ISic000001/Transcription> ;
+    crmtex:TXP3_is_rendered_by <http://sicily.classics.ox.ac.uk/ISic000001/Transcription> .
+
+<http://sicily.classics.ox.ac.uk/ISic000001/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epnet:hasTEI-annotatedTranscription """
+                
+                    
+                    Dis
+                    ·
+                    
+                        
+                            man
+                            ibus
+                        
+                    
+                    
+                    
+                        Zethi
+                        
+                    
+                    
+                    vixit
+                    ·
+                    
+                        
+                            a
+                            nnis
+                        
+                    
+                    ·
+                    VI
+                
+            """^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000001/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <http://sicily.classics.ox.ac.uk/ISic000001/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "la"^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000001/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <http://sicily.classics.ox.ac.uk/ISic000001/Writing> ;
+    crm:P56_is_found_on isicily:ISic000001 ;
+    nmo:hasEndDate "0300-01-01"^^xsd:date ;
+    nmo:hasStartDate "0050-01-01"^^xsd:date ;
+    crmsci:O6_observed_by <http://sicily.classics.ox.ac.uk/ISic000001/Reading> ;
+    foaf:page <http://sicily.classics.ox.ac.uk/inscription/ISic000001> .
+
+<http://sicily.classics.ox.ac.uk/ISic000001/WrittenWork> a lawd:WrittenWork .
+
+isicily:ISic000002 a crm:E22_Human-Made_Object ;
+    epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000002/WrittenText> ;
+    edh:representsTypeOfMonument <http://www.eagle-network.eu/voc/objtyp/lod/259.html> ;
+    crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
+    lawd:foundAt <http://pleiades.stoa.org/places/462270> ;
+    nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html> ;
+    epnet:isDocumentedBy <http://zotero.org/groups/382445/items/F986DASI>,
+        <http://zotero.org/groups/382445/items/SRZQ4DSI>,
+        <https://www.zotero.org/groups/382445/items/FZWWPUD6>,
+        <https://www.zotero.org/groups/382445/items/GQN8UZSI> ;
+    geo:SpatialThing <http://sicily.classics.ox.ac.uk/ISic000002#this> .
+
+<http://sicily.classics.ox.ac.uk/ISic000002#this> geo:lat_long "37.49223, 15.07041"^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000002/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <http://sicily.classics.ox.ac.uk/ISic000002/Transcription> ;
+    crmtex:TXP3_is_rendered_by <http://sicily.classics.ox.ac.uk/ISic000002/Transcription> .
+
+<http://sicily.classics.ox.ac.uk/ISic000002/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epnet:hasTEI-annotatedTranscription """
+                
+                    
+                    
+                        
+                            D
+                            is
+                        
+                    
+                    ·
+                    
+                        
+                            M
+                            anibus
+                        
+                    
+                    ·
+                    
+                        
+                            s
+                            acrum
+                        
+                    
+                    
+                    
+                        Lurius
+                        ·
+                        Zosimus
+                    
+                    
+                    
+                        
+                            vix
+                            it
+                        
+                    
+                    ·
+                    annis
+                    ·
+                    VII
+                    
+                    
+                        Luria
+                        ·
+                        
+                            
+                                Melanth
+                                
+                                
+                                    e
+                                
+                            
+                        
+                    
+                    
+                        i
+                        
+                            ·
+                        
+                        
+                        · n
+                    ·
+                    suo
+                    ·
+                    filio
+                    ·
+                    fecit
+                    ·
+                
+            """^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000002/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <http://sicily.classics.ox.ac.uk/ISic000002/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "la"^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000002/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <http://sicily.classics.ox.ac.uk/ISic000002/Writing> ;
+    crm:P56_is_found_on isicily:ISic000002 ;
+    nmo:hasEndDate "0300-01-01"^^xsd:date ;
+    nmo:hasStartDate "0201-01-01"^^xsd:date ;
+    crmsci:O6_observed_by <http://sicily.classics.ox.ac.uk/ISic000002/Reading> ;
+    foaf:page <http://sicily.classics.ox.ac.uk/inscription/ISic000002> .
+
+<http://sicily.classics.ox.ac.uk/ISic000002/WrittenWork> a lawd:WrittenWork .
+
+isicily:ISic000003 a crm:E22_Human-Made_Object ;
+    epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000003/WrittenText> ;
+    edh:representsTypeOfMonument <http://www.eagle-network.eu/voc/objtyp/lod/259.html> ;
+    crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
+    lawd:foundAt <http://pleiades.stoa.org/places/462270> ;
+    nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html> ;
+    epnet:isDocumentedBy <https://www.zotero.org/groups/382445/items/EZMBJ6GN>,
+        <https://www.zotero.org/groups/382445/items/FZWWPUD6>,
+        <https://www.zotero.org/groups/382445/items/GQN8UZSI>,
+        <https://www.zotero.org/groups/382445/items/P7QQ9SB6> ;
+    geo:SpatialThing <http://sicily.classics.ox.ac.uk/ISic000003#this> .
+
+<http://sicily.classics.ox.ac.uk/ISic000003#this> geo:lat_long "37.49223, 15.07041"^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000003/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <http://sicily.classics.ox.ac.uk/ISic000003/Transcription> ;
+    crmtex:TXP3_is_rendered_by <http://sicily.classics.ox.ac.uk/ISic000003/Transcription> .
+
+<http://sicily.classics.ox.ac.uk/ISic000003/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epnet:hasTEI-annotatedTranscription """
+                
+                    
+                    Dis
+                    ·
+                    
+                        
+                            Man
+                            ibus
+                        
+                    
+                    ·
+                    
+                        Culuc
+                        uitas
+                    
+                    ·
+                    
+                        
+                            vix
+                            it
+                        
+                    
+                    ·
+                    
+                        
+                            an
+                            nis
+                        
+                    
+                    ·
+                    II
+                    ·
+                    
+                    
+                        
+                            Tyche
+                    
+                    ·
+                    et
+                    ·
+                    
+                        
+                            
+                                Herm
+                                es
+                            
+                        
+                    
+                    ·
+                    
+                        
+                            fe
+                            cerunt
+                        
+                    
+                
+            """^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000003/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <http://sicily.classics.ox.ac.uk/ISic000003/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "la"^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000003/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <http://sicily.classics.ox.ac.uk/ISic000003/Writing> ;
+    crm:P56_is_found_on isicily:ISic000003 ;
+    nmo:hasEndDate "0100-01-01"^^xsd:date,
+        "0200-01-01"^^xsd:date,
+        "0300-01-01"^^xsd:date ;
+    nmo:hasStartDate "0001-01-01"^^xsd:date,
+        "0101-01-01"^^xsd:date ;
+    crmsci:O6_observed_by <http://sicily.classics.ox.ac.uk/ISic000003/Reading> ;
+    foaf:page <http://sicily.classics.ox.ac.uk/inscription/ISic000003> .
+
+<http://sicily.classics.ox.ac.uk/ISic000003/WrittenWork> a lawd:WrittenWork .
+
+isicily:ISic000004 a crm:E22_Human-Made_Object ;
+    epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000004/WrittenText> ;
+    edh:representsTypeOfMonument <http://www.eagle-network.eu/voc/objtyp/lod/259> ;
+    crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
+    lawd:foundAt <http://pleiades.stoa.org/places/462153> ;
+    nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html> ;
+    epnet:isDocumentedBy <http://zotero.org/groups/382445/items/4MCP2PVV>,
+        <https://www.zotero.org/groups/382445/items/FZWWPUD6>,
+        <https://www.zotero.org/groups/382445/items/GQN8UZSI>,
+        <https://www.zotero.org/groups/382445/items/RZSFKACR>,
+        <https://www.zotero.org/groups/382445/items/VF9MMBI9>,
+        <https://www.zotero.org/groups/382445/items/VJZRAI26>,
+        <https://www.zotero.org/groups/382445/items/VQURX85J>,
+        <https://www.zotero.org/groups/382445/items/X8CHRU4D>,
+        <https://www.zotero.org/groups/382445/items/XHMS9K6S> ;
+    geo:SpatialThing <http://sicily.classics.ox.ac.uk/ISic000004#this> .
+
+<http://sicily.classics.ox.ac.uk/ISic000004#this> geo:lat_long "37.62336, 14.74049"^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000004/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <http://sicily.classics.ox.ac.uk/ISic000004/Transcription> ;
+    crmtex:TXP3_is_rendered_by <http://sicily.classics.ox.ac.uk/ISic000004/Transcription> .
+
+<http://sicily.classics.ox.ac.uk/ISic000004/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epnet:hasTEI-annotatedTranscription """
+                
+                    
+                    
+                    
+                    
+                        
+                            
+                        
+                        Cornelius
+                        · 
+                        
+                            
+                                
+                                    P
+                                    ubli
+                                
+                            
+                        
+                        ·
+                        
+                            
+                                f
+                                ilius
+                            
+                        
+                        ·
+                        
+                            Gramme
+                            
+                        
+                        
+                        
+                            
+                            
+                            ipax
+                        
+                    
+                    ·
+                    et
+                    
+                        
+                            
+                                P
+                                ublius
+                            
+                        
+                        ·
+                        Cornelius
+                        ·
+                        
+                            
+                                
+                                    P
+                                    ubli
+                                
+                            
+                        
+                        ·
+                        
+                            
+                                f
+                                ilius
+                            
+                        
+                        ·
+                        
+                            
+                                
+                                    P
+                                    ubli
+                                
+                            
+                        
+                        ·
+                        
+                            
+                                n
+                                epos
+                            
+                        
+                        ·
+                        
+                            Long
+                            
+                        
+                    
+                    
+                    
+                        pater
+                    ·
+                    et
+                    ·
+                    
+                        
+                            f
+                            ilius
+                        
+                    
+                    ·
+                    pro
+                    ·
+                    honore
+                    ·
+                    
+                        
+                            
+                                
+                                    
+                                        II
+                                    
+                                
+                                duum
+                                vira
+                                    tus
+                                
+                            
+                        
+                    
+                    
+                    
+                        sphaeristerium
+                    ·
+                    fecerunt
+                
+            """^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000004/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <http://sicily.classics.ox.ac.uk/ISic000004/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "la"^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000004/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <http://sicily.classics.ox.ac.uk/ISic000004/Writing> ;
+    crm:P56_is_found_on isicily:ISic000004 ;
+    nmo:hasEndDate "0150-01-01"^^xsd:date ;
+    nmo:hasStartDate "0100-01-01"^^xsd:date ;
+    crmsci:O6_observed_by <http://sicily.classics.ox.ac.uk/ISic000004/Reading> ;
+    foaf:page <http://sicily.classics.ox.ac.uk/inscription/ISic000004> .
+
+<http://sicily.classics.ox.ac.uk/ISic000004/WrittenWork> a lawd:WrittenWork .
+
+isicily:ISic000005 a crm:E22_Human-Made_Object ;
+    epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000005/WrittenText> ;
+    crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
+    lawd:foundAt <http://pleiades.stoa.org/places/462153> ;
+    nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html> ;
+    epnet:isDocumentedBy <https://www.zotero.org/groups/382445/items/FZWWPUD6>,
+        <https://www.zotero.org/groups/382445/items/GQN8UZSI> ;
+    geo:SpatialThing <http://sicily.classics.ox.ac.uk/ISic000005#this> .
+
+<http://sicily.classics.ox.ac.uk/ISic000005#this> geo:lat_long "37.62336, 14.74049"^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000005/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <http://sicily.classics.ox.ac.uk/ISic000005/Transcription> ;
+    crmtex:TXP3_is_rendered_by <http://sicily.classics.ox.ac.uk/ISic000005/Transcription> .
+
+<http://sicily.classics.ox.ac.uk/ISic000005/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epnet:hasTEI-annotatedTranscription """
+                
+                    
+                    
+                        
+                            D
+                            is
+                        
+                    
+                    ·
+                    
+                        
+                            M
+                            anibus
+                        
+                    
+                    ·
+                    
+                        
+                            S
+                            acrum
+                        
+                    
+                    ·
+                    
+                    
+                        
+                            
+                                M
+                                arcus
+                            
+                        
+                        ·
+                        Avianius
+                        Pistianus
+                    
+                    
+                    et
+                    ·
+                    
+                        Maria
+                        Eupraxia
+                    
+                    vi
+                    vi
+                    ·
+                    sibi
+                    ·
+                    et
+                    ·
+                    suis
+                    ·
+                    feceru
+                        nt
+                    
+                    
+                    et
+                    ·
+                    
+                        Mario
+                        Eutychiano
+                    
+                    ·
+                    fili
+                    o
+                    suo
+                    piissimo
+                    ·
+                    non
+                    digno
+                    
+                    priori
+                    qui
+                    
+                    
+                        
+                            vix
+                            it
+                        
+                    
+                    
+                        
+                            ann
+                            is
+                        
+                    
+                    XVII
+                    
+                    
+                        
+                            mens
+                            is
+                        
+                    
+                    ·
+                    XI
+                    
+                        
+                            dieb
+                            us
+                        
+                    
+                    XVI
+                
+            """^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000005/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <http://sicily.classics.ox.ac.uk/ISic000005/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "la"^^xsd:string .
+
+<http://sicily.classics.ox.ac.uk/ISic000005/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <http://sicily.classics.ox.ac.uk/ISic000005/Writing> ;
+    crm:P56_is_found_on isicily:ISic000005 ;
+    nmo:hasEndDate "0300-01-01"^^xsd:date ;
+    nmo:hasStartDate "0001-01-01"^^xsd:date ;
+    crmsci:O6_observed_by <http://sicily.classics.ox.ac.uk/ISic000005/Reading> ;
+    foaf:page <http://sicily.classics.ox.ac.uk/inscription/ISic000005> .
+
+<http://sicily.classics.ox.ac.uk/ISic000005/WrittenWork> a lawd:WrittenWork .
+
+<https://igcyr.unibo.it/gvcyr001/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <https://igcyr.unibo.it/gvcyr001/Transcription> ;
+    crmtex:TXP3_is_rendered_by <https://igcyr.unibo.it/gvcyr001/Transcription> .
+
+<https://igcyr.unibo.it/gvcyr001/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epnet:hasTEI-annotatedTranscription """
+                Text
+                
+                   
+                        Κοίσōνος 
+                            στάλα                       
+                        
+                                        
+                    
+                        
+                        ἔστασαν ἑταῖροι
+                     
+	 
+            """^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr001/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <https://igcyr.unibo.it/gvcyr001/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "grc"^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr001/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <https://igcyr.unibo.it/gvcyr001/Writing> ;
+    crm:P56_is_found_on igcyr:gvcyr001 ;
+    crmsci:O6_observed_by <https://igcyr.unibo.it/gvcyr001/Reading> ;
+    foaf:page igcyr:gvcyr001 .
+
+<https://igcyr.unibo.it/gvcyr001/WrittenWork> a lawd:WrittenWork .
+
+<https://igcyr.unibo.it/gvcyr002/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <https://igcyr.unibo.it/gvcyr002/Transcription> ;
+    crmtex:TXP3_is_rendered_by <https://igcyr.unibo.it/gvcyr002/Transcription> .
+
+<https://igcyr.unibo.it/gvcyr002/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epnet:hasTEI-annotatedTranscription """
+                Text
+                
+                    
+                    Ἀράτα ⋮ 
+                        Καλλικράτευς
+                    Ἑσπεριτίς.
+                
+                
+                
+                    
+                    
+                        Πορθμίδος εὐσέλμου μεδέων γέρον, 
+                        ὂς διὰ πάντα
+                    
+                        νυκτὸς ὑπὸ σκιερᾶς πείρατα πλεῖς ποταμοῦ,
+                                     
+                 
+                    
+                        ἆρά τινα Ἀράτας ἄλλαν 
+                        ἀρετὰν ἴδες, εἴ γε
+                    
+                        τάνδ’ ὑπὸ λυγαίαν ἄγαγες ἀϊόνα;
+                        
+                 
+                 
+                    
+                        Οὐκέτι τὰν ἁβρόπαιδα πάτραν σὰν Ἑσπερίδ’ ὄψηι,                                
+                     
+                         οὐδὲ τὸν ἕστεργες σὸν 
+                         πόσιν, οὐδὲ τέκνωι
+                 
+                 
+                     
+                         στρώσεις νυμφιδίαν εὐνὰν τεῷ. Ἦ 
+                         μάλα δαίμων,
+                    
+                        Ἀράτα, 
+                            κρυερὰν σοί τιν’ ἔδειξεν ἀράν.
+                 	   
+            """^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr002/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <https://igcyr.unibo.it/gvcyr002/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "grc"^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr002/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <https://igcyr.unibo.it/gvcyr002/Writing> ;
+    crm:P56_is_found_on igcyr:gvcyr002 ;
+    crmsci:O6_observed_by <https://igcyr.unibo.it/gvcyr002/Reading> ;
+    foaf:page igcyr:gvcyr002 .
+
+<https://igcyr.unibo.it/gvcyr002/WrittenWork> a lawd:WrittenWork .
+
+<https://igcyr.unibo.it/gvcyr003/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <https://igcyr.unibo.it/gvcyr003/Transcription> ;
+    crmtex:TXP3_is_rendered_by <https://igcyr.unibo.it/gvcyr003/Transcription> .
+
+<https://igcyr.unibo.it/gvcyr003/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epnet:hasTEI-annotatedTranscription """
+                Text
+               
+                  
+                  
+                   Ἀριστι
+                
+                
+                
+                
+                
+                   
+                       μναμῆιον τα 
+                   
+                           πάσαις νικη 
+                            
+                   
+                       ἦμεν καὶ τόδε
+                       
+                   
+                           σαμῆιον εὐτυχίας 
+                       
+               
+            """^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr003/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <https://igcyr.unibo.it/gvcyr003/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "grc"^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr003/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <https://igcyr.unibo.it/gvcyr003/Writing> ;
+    crm:P56_is_found_on igcyr:gvcyr003 ;
+    crmsci:O6_observed_by <https://igcyr.unibo.it/gvcyr003/Reading> ;
+    foaf:page igcyr:gvcyr003 .
+
+<https://igcyr.unibo.it/gvcyr003/WrittenWork> a lawd:WrittenWork .
+
+<https://igcyr.unibo.it/gvcyr004/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <https://igcyr.unibo.it/gvcyr004/Transcription> ;
+    crmtex:TXP3_is_rendered_by <https://igcyr.unibo.it/gvcyr004/Transcription> .
+
+<https://igcyr.unibo.it/gvcyr004/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epnet:hasTEI-annotatedTranscription """
+                Text
+                
+                    
+                        Mνῆμα ἀρετῆς τόδε ἔθηκε
+                        Φίλων 
+                    Ἀρχοῖ συνομεύνωι
+                    
+                    
+                        αι 
+                        ωι.
+                                    
+                
+                """^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr004/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <https://igcyr.unibo.it/gvcyr004/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "grc"^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr004/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <https://igcyr.unibo.it/gvcyr004/Writing> ;
+    crm:P56_is_found_on igcyr:gvcyr004 ;
+    crmsci:O6_observed_by <https://igcyr.unibo.it/gvcyr004/Reading> ;
+    foaf:page igcyr:gvcyr004 .
+
+<https://igcyr.unibo.it/gvcyr004/WrittenWork> a lawd:WrittenWork .
+
+<https://igcyr.unibo.it/gvcyr005/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <https://igcyr.unibo.it/gvcyr005/Transcription> ;
+    crmtex:TXP3_is_rendered_by <https://igcyr.unibo.it/gvcyr005/Transcription> .
+
+<https://igcyr.unibo.it/gvcyr005/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epnet:hasTEI-annotatedTranscription """
+                Text
+                
+                    
+                        Δέρκεο τὰν ἀρίσαμον, ὁδοίπορε, τὰν 
+                        Βερενίκας
+                    
+                        εἰκόνα τᾶς μελέας, ἃν τάφος οὖτος ἔχει,
+                     
+                        ἃ τὸ πρὶν ἐπγ ιικαλυβοῖς, νῦν 
+                         δ᾿εἰς Ἀχέροντα                    
+                     
+                        ἐστερόμαν τῶν πρὶν νυμφιδίων θαλάμων,
+                         
+                     
+                        πατρὶ γόους προλιποῦσα Φιλοξένωι, ὂς τόδ᾿ ἔτευξεν
+                     
+                        εἴδωλον νύμφας μναμόσυνον θέμενος.                    
+                 
+ 
+                """^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr005/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <https://igcyr.unibo.it/gvcyr005/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "grc"^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr005/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <https://igcyr.unibo.it/gvcyr005/Writing> ;
+    crm:P56_is_found_on igcyr:gvcyr005 ;
+    crmsci:O6_observed_by <https://igcyr.unibo.it/gvcyr005/Reading> ;
+    foaf:page igcyr:gvcyr005 .
+
+<https://igcyr.unibo.it/gvcyr005/WrittenWork> a lawd:WrittenWork .
+
+<http://sicily.classics.ox.ac.uk/ISic000001/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <http://sicily.classics.ox.ac.uk/ISic000001/Edition> ;
+    edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html> ;
+    crm:P14_carried_out_by <http://orcid.org/0000-0001-6823-0265>,
+        <http://orcid.org/0000-0002-6686-3728>,
+        <http://orcid.org/0000-0002-9695-0240>,
+        <http://orcid.org/0000-0003-3819-8537>,
+        <https://orcid.org/0000-0003-3914-9569> ;
+    crm:P1_is_identified_by "10.5281/zenodo.4333721"^^xsd:string,
+        "21900531"^^xsd:string,
+        "3501"^^xsd:string ;
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/491696> ;
+    crm:P49_created <http://sicily.classics.ox.ac.uk/ISic000001/TranscriptionText> .
+
+<http://sicily.classics.ox.ac.uk/ISic000002/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <http://sicily.classics.ox.ac.uk/ISic000002/Edition> ;
+    edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html> ;
+    crm:P14_carried_out_by <http://orcid.org/0000-0001-6823-0265>,
+        <http://orcid.org/0000-0002-6686-3728>,
+        <http://orcid.org/0000-0002-9695-0240>,
+        <http://orcid.org/0000-0003-3819-8537>,
+        <https://orcid.org/0000-0003-3914-9569> ;
+    crm:P1_is_identified_by "10.5281/zenodo.4333725"^^xsd:string,
+        "141180"^^xsd:string,
+        "21900397"^^xsd:string,
+        "3502"^^xsd:string ;
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/491568> ;
+    crm:P49_created <http://sicily.classics.ox.ac.uk/ISic000002/TranscriptionText> .
+
+<http://sicily.classics.ox.ac.uk/ISic000003/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <http://sicily.classics.ox.ac.uk/ISic000003/Edition> ;
+    edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html> ;
+    crm:P14_carried_out_by <http://orcid.org/0000-0001-6823-0265>,
+        <http://orcid.org/0000-0002-6686-3728>,
+        <http://orcid.org/0000-0002-9695-0240>,
+        <http://orcid.org/0000-0003-3819-8537>,
+        <https://orcid.org/0000-0003-3914-9569> ;
+    crm:P1_is_identified_by "10.5281/zenodo.4333729"^^xsd:string,
+        "141191"^^xsd:string,
+        "21900419"^^xsd:string,
+        "3503"^^xsd:string ;
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/491590> ;
+    crm:P49_created <http://sicily.classics.ox.ac.uk/ISic000003/TranscriptionText> .
+
+<http://sicily.classics.ox.ac.uk/ISic000004/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <http://sicily.classics.ox.ac.uk/ISic000004/Edition> ;
+    edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/86.html> ;
+    crm:P14_carried_out_by <http://orcid.org/0000-0001-6823-0265>,
+        <http://orcid.org/0000-0002-6686-3728>,
+        <http://orcid.org/0000-0002-9695-0240>,
+        <http://orcid.org/0000-0003-3819-8537>,
+        <https://orcid.org/0000-0003-3914-9569> ;
+    crm:P1_is_identified_by "10.5281/zenodo.4333733"^^xsd:string,
+        "21900323"^^xsd:string,
+        "3504"^^xsd:string ;
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/491500> ;
+    crm:P49_created <http://sicily.classics.ox.ac.uk/ISic000004/TranscriptionText> .
+
+<http://sicily.classics.ox.ac.uk/ISic000005/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <http://sicily.classics.ox.ac.uk/ISic000005/Edition> ;
+    edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html> ;
+    crm:P14_carried_out_by <http://orcid.org/0000-0001-6823-0265>,
+        <http://orcid.org/0000-0002-6686-3728>,
+        <http://orcid.org/0000-0002-9695-0240>,
+        <http://orcid.org/0000-0003-3819-8537>,
+        <https://orcid.org/0000-0003-3914-9569> ;
+    crm:P1_is_identified_by "10.5281/zenodo.4333737"^^xsd:string,
+        "21900325"^^xsd:string,
+        "3505"^^xsd:string ;
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/491502> ;
+    crm:P49_created <http://sicily.classics.ox.ac.uk/ISic000005/TranscriptionText> .
+
+igcyr:gvcyr001 a crm:E22_Human-Made_Object ;
+    epont:carriesText <https://igcyr.unibo.it/gvcyr001/WrittenText> ;
+    lawd:foundAt <http://pleiades.stoa.org/places/373778> ;
+    nmo:hasMaterial "limestone"^^xsd:string ;
+    nmo:hasObjectType "stele"^^xsd:string ;
+    gn:alternateName "Shahat"^^xsd:string ;
+    gn:countryCode "LY"^^xsd:string ;
+    gn:name "Cyrene"^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr001/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <https://igcyr.unibo.it/gvcyr001/Edition> ;
+    crm:P1_is_identified_by "236"^^xsd:string,
+        "GVCyr001"^^xsd:string ;
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/738897> ;
+    crm:P49_created <https://igcyr.unibo.it/gvcyr001/TranscriptionText> .
+
+igcyr:gvcyr002 a crm:E22_Human-Made_Object ;
+    epont:carriesText <https://igcyr.unibo.it/gvcyr002/WrittenText> ;
+    lawd:foundAt <http://pleiades.stoa.org/places/373879> ;
+    nmo:hasMaterial "Limestone"^^xsd:string ;
+    nmo:hasObjectType "stele"^^xsd:string ;
+    gn:alternateName "Ţulmaythah"^^xsd:string ;
+    gn:countryCode "LY"^^xsd:string ;
+    gn:name "Cyrene"^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr002/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <https://igcyr.unibo.it/gvcyr002/Edition> ;
+    crm:P1_is_identified_by "GVCyr002"^^xsd:string ;
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/738898> ;
+    crm:P49_created <https://igcyr.unibo.it/gvcyr002/TranscriptionText> .
+
+igcyr:gvcyr003 a crm:E22_Human-Made_Object ;
+    epont:carriesText <https://igcyr.unibo.it/gvcyr003/WrittenText> ;
+    lawd:foundAt <http://pleiades.stoa.org/places/373778> ;
+    nmo:hasMaterial "marble"^^xsd:string ;
+    nmo:hasObjectType "panel"^^xsd:string ;
+    gn:alternateName "Shahat"^^xsd:string ;
+    gn:countryCode "LY"^^xsd:string ;
+    gn:name "Cyrene"^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr003/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <https://igcyr.unibo.it/gvcyr003/Edition> ;
+    crm:P1_is_identified_by "GVCyr003"^^xsd:string ;
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/738899> ;
+    crm:P49_created <https://igcyr.unibo.it/gvcyr003/TranscriptionText> .
+
+igcyr:gvcyr004 a crm:E22_Human-Made_Object ;
+    epont:carriesText <https://igcyr.unibo.it/gvcyr004/WrittenText> ;
+    lawd:foundAt <http://pleiades.stoa.org/places/373778> ;
+    nmo:hasMaterial "marble"^^xsd:string ;
+    nmo:hasObjectType "base"^^xsd:string ;
+    gn:alternateName "Shahat"^^xsd:string ;
+    gn:countryCode "LY"^^xsd:string ;
+    gn:name "Cyrene"^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr004/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <https://igcyr.unibo.it/gvcyr004/Edition> ;
+    crm:P1_is_identified_by "234"^^xsd:string,
+        "GVCyr004"^^xsd:string ;
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/738900> ;
+    crm:P49_created <https://igcyr.unibo.it/gvcyr004/TranscriptionText> .
+
+igcyr:gvcyr005 a crm:E22_Human-Made_Object ;
+    epont:carriesText <https://igcyr.unibo.it/gvcyr005/WrittenText> ;
+    lawd:foundAt <http://pleiades.stoa.org/places/373777> ;
+    nmo:hasMaterial "marble"^^xsd:string ;
+    nmo:hasObjectType "panel"^^xsd:string ;
+    gn:alternateName "Shahat"^^xsd:string ;
+    gn:countryCode "LY"^^xsd:string ;
+    gn:name "Cyrene"^^xsd:string .
+
+<https://igcyr.unibo.it/gvcyr005/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <https://igcyr.unibo.it/gvcyr005/Edition> ;
+    crm:P1_is_identified_by "GVCyr005"^^xsd:string ;
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/738901> ;
+    crm:P49_created <https://igcyr.unibo.it/gvcyr005/TranscriptionText> .
+
