@@ -35,6 +35,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 isicily:ISic000001 a crm:E22_Human-Made_Object ;
+    rdfs:label "Funerary inscription of Zethus"^^xsd:string ;
     epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000001/WrittenText> ;
     edh:representsTypeOfMonument <https://www.eagle-network.eu/voc/objtyp/lod/259.html> ;
     crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
@@ -96,6 +97,7 @@ isicily:ISic000001 a crm:E22_Human-Made_Object ;
 <http://sicily.classics.ox.ac.uk/ISic000001/WrittenWork> a lawd:WrittenWork .
 
 isicily:ISic000002 a crm:E22_Human-Made_Object ;
+    rdfs:label "Epitaph for Lurius Zosimus"^^xsd:string ;
     epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000002/WrittenText> ;
     edh:representsTypeOfMonument <http://www.eagle-network.eu/voc/objtyp/lod/259.html> ;
     crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
@@ -200,6 +202,7 @@ isicily:ISic000002 a crm:E22_Human-Made_Object ;
 <http://sicily.classics.ox.ac.uk/ISic000002/WrittenWork> a lawd:WrittenWork .
 
 isicily:ISic000003 a crm:E22_Human-Made_Object ;
+    rdfs:label "Epitaph for Culucuitas"^^xsd:string ;
     epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000003/WrittenText> ;
     edh:representsTypeOfMonument <http://www.eagle-network.eu/voc/objtyp/lod/259.html> ;
     crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
@@ -295,6 +298,7 @@ isicily:ISic000003 a crm:E22_Human-Made_Object ;
 <http://sicily.classics.ox.ac.uk/ISic000003/WrittenWork> a lawd:WrittenWork .
 
 isicily:ISic000004 a crm:E22_Human-Made_Object ;
+    rdfs:label "Inscription recording construction of a sphaeristrium by a father and son"^^xsd:string ;
     epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000004/WrittenText> ;
     edh:representsTypeOfMonument <http://www.eagle-network.eu/voc/objtyp/lod/259> ;
     crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
@@ -460,6 +464,7 @@ isicily:ISic000004 a crm:E22_Human-Made_Object ;
 <http://sicily.classics.ox.ac.uk/ISic000004/WrittenWork> a lawd:WrittenWork .
 
 isicily:ISic000005 a crm:E22_Human-Made_Object ;
+    rdfs:label "Funerary inscription for Marcus Avianius Pistianus, Maria Eupraxia and Marius Eutychianus"^^xsd:string ;
     epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000005/WrittenText> ;
     crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
     lawd:foundAt <http://pleiades.stoa.org/places/462153> ;
@@ -872,6 +877,8 @@ isicily:ISic000005 a crm:E22_Human-Made_Object ;
     crm:P49_created <http://sicily.classics.ox.ac.uk/ISic000005/TranscriptionText> .
 
 igcyr:gvcyr001 a crm:E22_Human-Made_Object ;
+    rdfs:label """
+          Epitaph of Koison"""^^xsd:string ;
     epont:carriesText <https://igcyr.unibo.it/gvcyr001/WrittenText> ;
     lawd:foundAt <http://pleiades.stoa.org/places/373778> ;
     nmo:hasMaterial "limestone"^^xsd:string ;
@@ -888,6 +895,8 @@ igcyr:gvcyr001 a crm:E22_Human-Made_Object ;
     crm:P49_created <https://igcyr.unibo.it/gvcyr001/TranscriptionText> .
 
 igcyr:gvcyr002 a crm:E22_Human-Made_Object ;
+    rdfs:label """
+          Epitaph of Arata"""^^xsd:string ;
     epont:carriesText <https://igcyr.unibo.it/gvcyr002/WrittenText> ;
     lawd:foundAt <http://pleiades.stoa.org/places/373879> ;
     nmo:hasMaterial "Limestone"^^xsd:string ;
@@ -903,6 +912,8 @@ igcyr:gvcyr002 a crm:E22_Human-Made_Object ;
     crm:P49_created <https://igcyr.unibo.it/gvcyr002/TranscriptionText> .
 
 igcyr:gvcyr003 a crm:E22_Human-Made_Object ;
+    rdfs:label """
+          Honors or epitaph (?)"""^^xsd:string ;
     epont:carriesText <https://igcyr.unibo.it/gvcyr003/WrittenText> ;
     lawd:foundAt <http://pleiades.stoa.org/places/373778> ;
     nmo:hasMaterial "marble"^^xsd:string ;
@@ -918,6 +929,8 @@ igcyr:gvcyr003 a crm:E22_Human-Made_Object ;
     crm:P49_created <https://igcyr.unibo.it/gvcyr003/TranscriptionText> .
 
 igcyr:gvcyr004 a crm:E22_Human-Made_Object ;
+    rdfs:label """
+          Epitaph of Archo"""^^xsd:string ;
     epont:carriesText <https://igcyr.unibo.it/gvcyr004/WrittenText> ;
     lawd:foundAt <http://pleiades.stoa.org/places/373778> ;
     nmo:hasMaterial "marble"^^xsd:string ;
@@ -934,6 +947,8 @@ igcyr:gvcyr004 a crm:E22_Human-Made_Object ;
     crm:P49_created <https://igcyr.unibo.it/gvcyr004/TranscriptionText> .
 
 igcyr:gvcyr005 a crm:E22_Human-Made_Object ;
+    rdfs:label """
+          Epitaph of Berenika"""^^xsd:string ;
     epont:carriesText <https://igcyr.unibo.it/gvcyr005/WrittenText> ;
     lawd:foundAt <http://pleiades.stoa.org/places/373777> ;
     nmo:hasMaterial "marble"^^xsd:string ;

@@ -1,4 +1,6 @@
-﻿function getInscriptionId(insId) {
+﻿const N3Util = N3.Util;
+//////////////////////////////////////////////
+function getInscriptionId(insId) {
     if (insId !== undefined) {
         return insId.split('/').pop();
     }
@@ -13,14 +15,24 @@ function getTrismegistosID(tm_id) {
 }
 
 function getMaterial(matLink) {
-    let N3Util = N3.Util;
     if (matLink !== undefined) {
         if (N3Util.isLiteral(matLink)) {
-            return `<a href="javascript:void(0)">${N3Util.getLiteralValue(matLink)}</a>`;
+            return `<a href="javascript:void(0)">${getLiteralValue(matLink)}</a>`;
         }
         else {
             return `<a href="${matLink}" target="_blank">${matLink.split('/').pop()}</a>`;
         }
     }
     return 'N/A';
+}
+
+function isLiteral(node) {
+    if (N3Util.isLiteral(node))
+        return true;
+
+    return false;
+}
+
+function getLiteralValue(literal) {
+    return N3Util.getLiteralValue(literal)
 }

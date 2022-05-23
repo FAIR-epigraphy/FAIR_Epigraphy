@@ -20,8 +20,11 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-7">Data</div>
-                    <div class="col-md-5" id="map"></div>
+                    <div class="col-md-5">
+                        <p id="inc_text">
+                        </p>
+                    </div>
+                    <div class="col-md-7" id="map" style="height: 70vh;"></div>
                 </div>
             </div>
         </div>
@@ -29,10 +32,14 @@
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 
-    <script src="//maps.googleapis.com/maps/api/js?libraries=geometry,visualization,places&amp;language=en&amp;v=3.23&amp;key=AIzaSyAsmeOloQ8Bgw413D9YoLEGbmQefPIBYcg"></script>
+    <!--<script src="//maps.googleapis.com/maps/api/js?libraries=geometry,visualization,places&amp;language=en&amp;v=3.23&amp;key=AIzaSyAsmeOloQ8Bgw413D9YoLEGbmQefPIBYcg"></script>-->
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    
+    
+    <!-- RDF Library -->
+    <script src="js/n3-browser.js"></script>
 
     <!-- Custome Javascript files-->
     <script src="js/Utility.js"></script>
@@ -40,8 +47,8 @@
         //localStorage.removeItem(jsonObj)
         const obj = JSON.parse(localStorage.getItem('jsonObj'));
         //alert(obj.inscriptionId);
-        $('#ins_id').html(`<a href="${obj.inscriptionURI}" target="_blank">${getInscriptionId(obj.inscriptionId)}</a>`);
-
+        $('#ins_id').html(`<a href="${obj.inscriptionURI}" target="_blank">${getInscriptionId(obj.inscriptionId)}: ${obj.inscriptionLabel}</a>`);
+        $('#inc_text').html(`<b class="text-decoration-underline">Text</b><pre>${obj.inscriptionText}</pre>`);
         ///////////////////////////////////////////////////////////////////////
         //// Show Map
         initMap();
@@ -51,7 +58,7 @@
                 let lat_lng = obj.geo.split(',')
                 const myLatLng = { lat: parseFloat(lat_lng[0]), lng: parseFloat(lat_lng[1]) };
                 const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 4,
+                    zoom: 10,
                     center: myLatLng,
                 });
 
@@ -60,9 +67,17 @@
                     map,
                     title: "Hello World!",
                 });
+
+                let interval = setInterval(() => {
+                    if (map !== undefined) {
+                        google.maps.event.trigger(map, 'resize')
+                        clearInterval(interval);
+                    }
+                }, 500);
+
             }
         }
-        
+
     </script>
 </body>
 </html>
