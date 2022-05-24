@@ -39,7 +39,9 @@ isicily:ISic000001 a crm:E22_Human-Made_Object ;
     epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000001/WrittenText> ;
     edh:representsTypeOfMonument <https://www.eagle-network.eu/voc/objtyp/lod/259.html> ;
     crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
+    nmo:Material "marble"^^xsd:string ;
     nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html> ;
+    nmo:hasObjectType "plaque"^^xsd:string ;
     epnet:isDocumentedBy <https://www.zotero.org/groups/382445/items/7PSFHSUH>,
         <https://www.zotero.org/groups/382445/items/FZWWPUD6>,
         <https://www.zotero.org/groups/382445/items/GQN8UZSI> ;
@@ -102,7 +104,9 @@ isicily:ISic000002 a crm:E22_Human-Made_Object ;
     edh:representsTypeOfMonument <http://www.eagle-network.eu/voc/objtyp/lod/259.html> ;
     crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
     lawd:foundAt <http://pleiades.stoa.org/places/462270> ;
+    nmo:Material "marble"^^xsd:string ;
     nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html> ;
+    nmo:hasObjectType "plaque"^^xsd:string ;
     epnet:isDocumentedBy <http://zotero.org/groups/382445/items/F986DASI>,
         <http://zotero.org/groups/382445/items/SRZQ4DSI>,
         <https://www.zotero.org/groups/382445/items/FZWWPUD6>,
@@ -207,7 +211,9 @@ isicily:ISic000003 a crm:E22_Human-Made_Object ;
     edh:representsTypeOfMonument <http://www.eagle-network.eu/voc/objtyp/lod/259.html> ;
     crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
     lawd:foundAt <http://pleiades.stoa.org/places/462270> ;
+    nmo:Material "marble"^^xsd:string ;
     nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html> ;
+    nmo:hasObjectType "plaque"^^xsd:string ;
     epnet:isDocumentedBy <https://www.zotero.org/groups/382445/items/EZMBJ6GN>,
         <https://www.zotero.org/groups/382445/items/FZWWPUD6>,
         <https://www.zotero.org/groups/382445/items/GQN8UZSI>,
@@ -303,7 +309,9 @@ isicily:ISic000004 a crm:E22_Human-Made_Object ;
     edh:representsTypeOfMonument <http://www.eagle-network.eu/voc/objtyp/lod/259> ;
     crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
     lawd:foundAt <http://pleiades.stoa.org/places/462153> ;
+    nmo:Material "marble"^^xsd:string ;
     nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html> ;
+    nmo:hasObjectType "plaque"^^xsd:string ;
     epnet:isDocumentedBy <http://zotero.org/groups/382445/items/4MCP2PVV>,
         <https://www.zotero.org/groups/382445/items/FZWWPUD6>,
         <https://www.zotero.org/groups/382445/items/GQN8UZSI>,
@@ -468,6 +476,7 @@ isicily:ISic000005 a crm:E22_Human-Made_Object ;
     epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000005/WrittenText> ;
     crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064> ;
     lawd:foundAt <http://pleiades.stoa.org/places/462153> ;
+    nmo:Material "marble"^^xsd:string ;
     nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html> ;
     epnet:isDocumentedBy <https://www.zotero.org/groups/382445/items/FZWWPUD6>,
         <https://www.zotero.org/groups/382445/items/GQN8UZSI> ;
@@ -881,7 +890,7 @@ igcyr:gvcyr001 a crm:E22_Human-Made_Object ;
           Epitaph of Koison"""^^xsd:string ;
     epont:carriesText <https://igcyr.unibo.it/gvcyr001/WrittenText> ;
     lawd:foundAt <http://pleiades.stoa.org/places/373778> ;
-    nmo:hasMaterial "limestone"^^xsd:string ;
+    nmo:Material "limestone"^^xsd:string ;
     nmo:hasObjectType "stele"^^xsd:string ;
     gn:alternateName "Shahat"^^xsd:string ;
     gn:countryCode "LY"^^xsd:string ;
@@ -899,7 +908,7 @@ igcyr:gvcyr002 a crm:E22_Human-Made_Object ;
           Epitaph of Arata"""^^xsd:string ;
     epont:carriesText <https://igcyr.unibo.it/gvcyr002/WrittenText> ;
     lawd:foundAt <http://pleiades.stoa.org/places/373879> ;
-    nmo:hasMaterial "Limestone"^^xsd:string ;
+    nmo:Material "Limestone"^^xsd:string ;
     nmo:hasObjectType "stele"^^xsd:string ;
     gn:alternateName "Ţulmaythah"^^xsd:string ;
     gn:countryCode "LY"^^xsd:string ;
@@ -916,7 +925,7 @@ igcyr:gvcyr003 a crm:E22_Human-Made_Object ;
           Honors or epitaph (?)"""^^xsd:string ;
     epont:carriesText <https://igcyr.unibo.it/gvcyr003/WrittenText> ;
     lawd:foundAt <http://pleiades.stoa.org/places/373778> ;
-    nmo:hasMaterial "marble"^^xsd:string ;
+    nmo:Material "marble"^^xsd:string ;
     nmo:hasObjectType "panel"^^xsd:string ;
     gn:alternateName "Shahat"^^xsd:string ;
     gn:countryCode "LY"^^xsd:string ;
@@ -933,7 +942,7 @@ igcyr:gvcyr004 a crm:E22_Human-Made_Object ;
           Epitaph of Archo"""^^xsd:string ;
     epont:carriesText <https://igcyr.unibo.it/gvcyr004/WrittenText> ;
     lawd:foundAt <http://pleiades.stoa.org/places/373778> ;
-    nmo:hasMaterial "marble"^^xsd:string ;
+    nmo:Material "marble"^^xsd:string ;
     nmo:hasObjectType "base"^^xsd:string ;
     gn:alternateName "Shahat"^^xsd:string ;
     gn:countryCode "LY"^^xsd:string ;
@@ -951,7 +960,7 @@ igcyr:gvcyr005 a crm:E22_Human-Made_Object ;
           Epitaph of Berenika"""^^xsd:string ;
     epont:carriesText <https://igcyr.unibo.it/gvcyr005/WrittenText> ;
     lawd:foundAt <http://pleiades.stoa.org/places/373777> ;
-    nmo:hasMaterial "marble"^^xsd:string ;
+    nmo:Material "marble"^^xsd:string ;
     nmo:hasObjectType "panel"^^xsd:string ;
     gn:alternateName "Shahat"^^xsd:string ;
     gn:countryCode "LY"^^xsd:string ;

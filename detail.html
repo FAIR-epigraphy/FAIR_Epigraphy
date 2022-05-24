@@ -20,11 +20,52 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-5">
-                        <p id="inc_text">
-                        </p>
+                    <div class="col-md-12" id="map" style="height: 50vh;"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>
+                                    Trismegistos ID:
+                                </th>
+                                <td>
+                                    <label id="tmId"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Material:</th>
+                                <td>
+                                    <label id="material"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Object Type:</th>
+                                <td>
+                                    <label id="objectType"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Language:</th>
+                                <td>
+                                    <label id="language"></label>
+                                </td>
+                            </tr>
+                        </table>
+
                     </div>
-                    <div class="col-md-7" id="map" style="height: 70vh;"></div>
+                    <div class="col-md-8">
+                        <button class="btn btn-primary form-control" type="button" id="btnText">
+                            Show Inscription Text
+                        </button>
+                        <div class="mt-3" style="display: none;" id="divInsText">
+                            <!--<b>Text</b>-->
+                            <div class="card card-body">
+                                <p id="inc_text">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,29 +74,45 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 
     <!--<script src="//maps.googleapis.com/maps/api/js?libraries=geometry,visualization,places&amp;language=en&amp;v=3.23&amp;key=AIzaSyAsmeOloQ8Bgw413D9YoLEGbmQefPIBYcg"></script>-->
-
+    <!--<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AnOaryydl-Jd2yCFF8jL91x2YYdv9KxzJNRMfeea8dVaGSZcBGTgKxoaZd8jckDG'></script>-->
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    
-    
+
+
     <!-- RDF Library -->
     <script src="js/n3-browser.js"></script>
 
     <!-- Custome Javascript files-->
     <script src="js/Utility.js"></script>
     <script>
-        //localStorage.removeItem(jsonObj)
-        const obj = JSON.parse(localStorage.getItem('jsonObj'));
-        //alert(obj.inscriptionId);
-        $('#ins_id').html(`<a href="${obj.inscriptionURI}" target="_blank">${getInscriptionId(obj.inscriptionId)}: ${obj.inscriptionLabel}</a>`);
-        $('#inc_text').html(`<b class="text-decoration-underline">Text</b><pre>${obj.inscriptionText}</pre>`);
+        //localStorage.removeItem('jsonObj');
+        const inscription = JSON.parse(localStorage.getItem('jsonObj'));
+        $('#ins_id').html(`<a href="${inscription.inscriptionURI}" target="_blank">${getInscriptionId(inscription.inscriptionId)}: ${inscription.inscriptionLabel}</a>`);
+        $('#tmId').html(`${getTrismegistosID(inscription.tmId)}`);
+        $('#material').html(`${getMaterial(inscription.materialLink, inscription.material)}`);
+        $('#objectType').html(`${getObjectType(inscription.objTypeLink, inscription.objectType)}`);
+        $('#language').html(`${getLanguageName(inscription.language)}`);
+        $('#inc_text').html(`<pre>${inscription.inscriptionText.replace('Text', '')}</pre>`);
+        ////////////////////////////////////////////////////////////
+        /// Show/Hide Inscription Text
+        $('#btnText').click(() => {
+            if ($('#divInsText').attr('style') === 'display: none;') {
+                $('#divInsText').show('fade');
+                $('#btnText').html('Hide Inscription Text')
+            }
+            else {
+                $('#divInsText').hide('fade');
+                $('#btnText').html('Show Inscription Text')
+            }
+        })
+
         ///////////////////////////////////////////////////////////////////////
         //// Show Map
         initMap();
 
         function initMap() {
-            if (obj.geo !== undefined) {
-                let lat_lng = obj.geo.split(',')
+            if (inscription.geo !== undefined) {
+                let lat_lng = inscription.geo.split(',')
                 const myLatLng = { lat: parseFloat(lat_lng[0]), lng: parseFloat(lat_lng[1]) };
                 const map = new google.maps.Map(document.getElementById("map"), {
                     zoom: 10,
@@ -76,8 +133,45 @@
                 }, 500);
 
             }
+            else {
+                setTimeout(() => {
+                    var map = new Microsoft.Maps.Map('#map');
+                    let searchManager;
+                    loadModuleMap(searchManager, map);
+                }, 400)
+            }
         }
 
+
+        function loadModuleMap(searchManager, map) {
+            if (!searchManager) {
+                Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+                    searchManager = new Microsoft.Maps.Search.SearchManager(map);
+                    loadModuleMap(searchManager, map);
+                })
+            }
+            else {
+                //let map = new Microsoft.Maps.Map('#map');
+                map.entities.clear();
+                let searchRequest = {
+                    where: inscription.geoName,
+                    callback: function (r) {
+                        if (r.results) {
+
+                            let pin = new Microsoft.Maps.Pushpin(r.results[0].location);
+                            map.entities.push(pin);
+                            map.setView({
+                                bounds: r.results[0].bestView,
+                                //zoom: 9
+                            });
+                            //map.setView({ zoom: 10 });
+                        }
+                    }
+                };
+
+                searchManager.geocode(searchRequest);
+            }
+        }
     </script>
 </body>
 </html>

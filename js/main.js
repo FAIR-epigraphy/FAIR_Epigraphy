@@ -10,11 +10,12 @@ function loadData(file) {
 
             const parser_for_graphs = new N3.Parser();
             const parser = new N3.Parser();
+            var allPrefixes = {};
 
             let uniqueGraphs = [];
 
-            var obj = { inscriptionId: '', inscriptionURI: '', material: '', tmId: '', foundAt: '', geo: '', inscriptionText: '', inscriptionLabel: '' }
-            var arrayList = [];
+            var obj = { inscriptionId: '', inscriptionURI: '', material: '', materialLink: '', tmId: '', foundAt: '', geo: '', inscriptionText: '', inscriptionLabel: '', geoName: '', objectType: '', objTypeLink: '', language: '' }
+
             parser_for_graphs.parse(responseTxt,
                 (error, quad, prefixes) => {
                     if (quad) {
@@ -28,6 +29,7 @@ function loadData(file) {
                     }
                     //    console.log(quad);
                     else {
+                        allPrefixes = prefixes;
                         parser.parse(responseTxt,
                             (error, quad, prefixes) => {
                                 if (quad) {
@@ -47,23 +49,34 @@ function loadData(file) {
                                         obj = {};
                                         obj.inscriptionId = g.id;
                                         // Get FOAF Page
-                                        obj.inscriptionURI = getObjectValue('http://xmlns.com/foaf/0.1/page', g);
+                                        obj.inscriptionURI = getObjectValue(`${allPrefixes['foaf']}page`, g);
                                         //Material
-                                        obj.material = getObjectValue('http://nomisma.org/ontology#hasMaterial', g);
+                                        obj.material = getObjectValue(`${allPrefixes['nmo']}Material`, g);
+                                        obj.materialLink = getObjectValue(`${allPrefixes['nmo']}hasMaterial`, g);
 
                                         //PM ID
-                                        obj.tmId = getObjectValue('http://erlangen-crm.org/current/P48_has_preferred_identifier', g);
+                                        obj.tmId = getObjectValue(`${allPrefixes['crm']}P48_has_preferred_identifier`, g);
 
                                         //Found at
-                                        obj.foundAt = getObjectValue('http://lawd.info/ontology/foundAt', g);
+                                        obj.foundAt = getObjectValue(`${allPrefixes['lawd']}foundAt`, g);
                                         //Title of the inscription
-                                        obj.inscriptionLabel = getObjectValue('http://www.w3.org/2000/01/rdf-schema#label', g);
+                                        obj.inscriptionLabel = getObjectValue(`${allPrefixes['rdfs']}label`, g);
 
                                         //lat and lng of the geo
-                                        obj.geo = getObjectValue('http://www.w3.org/2003/01/geo/wgs84_pos#lat_long', g);
+                                        obj.geo = getObjectValue(`${allPrefixes['geo']}lat_long`, g);
 
                                         //Inscription text
-                                        obj.inscriptionText = getObjectValue('http://www.semanticweb.org/ontologies/2015/1/EPNet-ONTOP_Ontology#hasTEI-annotatedTranscription', g);
+                                        obj.inscriptionText = getObjectValue(`${allPrefixes['epnet']}hasTEI-annotatedTranscription`, g);
+
+                                        // Geo Name
+                                        obj.geoName = getObjectValue(`${allPrefixes['gn']}name`, g);
+
+                                        // Object Type
+                                        obj.objTypeLink = getObjectValue(`${allPrefixes['edh']}representsTypeOfMonument`, g);
+                                        obj.objectType = getObjectValue(`${allPrefixes['nmo']}hasObjectType`, g);
+
+                                        // Language
+                                        obj.language = getObjectValue(`${allPrefixes['crmtex']}TXP1_used_writing_system`, g);
 
                                         /////////////////
                                         content += getHTMLContent(obj);
@@ -71,17 +84,6 @@ function loadData(file) {
                                     $('#content').html(content);
                                 }
                             })
-
-                        //console.log("# That's all, folks!", prefixes);
-                        //for (const g of store.getGraphs()) {
-                        //    for (const quad of store.match(null, namedNode('http://xmlns.com/foaf/0.1/page'), null, namedNode(g.id)))
-                        //        console.log(quad);
-                        //}
-                        //dispalyHTMLContent(arrayList);
-                        //for (const quad of store.match(null, null, null, namedNode('https://igcyr.unibo.it/gvcyr002')))
-                        //    console.log(quad);
-                        //for (const quad of store.match(null, null, null, namedNode('http://sicily.classics.ox.ac.uk/ISic000005')))
-                        //    console.log(quad);
                     }
                 });
         }
@@ -108,7 +110,7 @@ function getHTMLContent(obj) {
                             <dd class="col-sm-10">${getTrismegistosID(obj.tmId)}</dd>
                             <dt class="col-sm-1 ms-5">Material</dt>
                             <dd class="col-sm-10">
-                                ${getMaterial(obj.material)}
+                                ${getMaterial(obj.materialLink, obj.material)}
                             </dd>
                         </dl>
                     </div> <hr />`;
