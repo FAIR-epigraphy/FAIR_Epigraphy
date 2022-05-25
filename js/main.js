@@ -13,6 +13,7 @@ function loadData(file) {
             var allPrefixes = {};
 
             let uniqueGraphs = [];
+            let records = [];
 
             var obj = { inscriptionId: '', inscriptionURI: '', material: '', materialLink: '', tmId: '', foundAt: '', geo: '', inscriptionText: '', inscriptionLabel: '', geoName: '', objectType: '', objTypeLink: '', language: '' }
 
@@ -44,7 +45,6 @@ function loadData(file) {
                                     }
                                 }
                                 else {
-                                    let content = '';
                                     for (const g of store.getGraphs()) {
                                         obj = {};
                                         obj.inscriptionId = g.id;
@@ -79,9 +79,22 @@ function loadData(file) {
                                         obj.language = getObjectValue(`${allPrefixes['crmtex']}TXP1_used_writing_system`, g);
 
                                         /////////////////
-                                        content += getHTMLContent(obj);
+                                        records.push(obj);
                                     }
-                                    $('#content').html(content);
+                                    const pSize = 5;
+                                    $('#page-selection').pagination({
+                                        dataSource: records,
+                                        pageSize: pSize,
+                                        showNavigator: true,
+                                        formatNavigator: '<%= totalNumber %> total results',
+                                        callback: function (data, pagination) {
+                                            let content = '';
+                                            for (let obj of data) {
+                                                content += getHTMLContent(obj);
+                                            }
+                                            $('#content').html(content);
+                                        }
+                                    });
                                 }
                             })
                     }
@@ -100,7 +113,7 @@ function getObjectValue(predicate, graph) {
 
 function getHTMLContent(obj) {
     //let content = '';
-    return `<div class="col-md-12">
+    return `<div class="col-md-12 hoverDiv">
                 <h4>
                     <a href="javascript:void(0)" onclick="loadDetail('${encodeURIComponent(JSON.stringify(obj))
         }')" title="${obj.inscriptionId}">${getInscriptionId(obj.inscriptionId)}</a>
