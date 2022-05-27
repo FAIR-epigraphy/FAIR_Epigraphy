@@ -51,6 +51,7 @@ function getLiteralValue(literal) {
 ////////////////////////////////////////////////
 //// Get Coordinates from the Pleiades API
 async function getLatLng(API_URL) {
+    API_URL = API_URL.replace('http', 'https');
     let myObject = await fetch(`${API_URL}/json`);
     let jsonData = await myObject.json();
     if (jsonData.features.length > 0) {
