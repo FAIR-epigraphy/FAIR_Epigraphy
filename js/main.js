@@ -115,7 +115,7 @@ function getHTMLContent(obj) {
     //let content = '';
     return `<div class="col-md-12 hoverDiv">
                 <h4>
-                    <a href="javascript:void(0)" onclick="loadDetail('${encodeURIComponent(JSON.stringify(obj))
+                    <a href="javascript:void(0)" class="text-decoration-none" onclick="loadDetail('${encodeURIComponent(JSON.stringify(obj))
         }')" title="${obj.inscriptionId}">${getInscriptionId(obj.inscriptionId)}</a>
                 </h4>
                 <dl class="row">
