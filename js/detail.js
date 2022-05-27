@@ -1,6 +1,6 @@
 ﻿//localStorage.removeItem('jsonObj');
 const inscription = JSON.parse(localStorage.getItem('jsonObj'));
-$('#ins_id').html(`<a href="${inscription.inscriptionURI}" target="_blank">${getInscriptionId(inscription.inscriptionId)}: ${inscription.inscriptionLabel}</a>`);
+$('#ins_id').html(`<a class="text-decoration-none" href="${inscription.inscriptionURI}" target="_blank">${getInscriptionId(inscription.inscriptionId)}: ${inscription.inscriptionLabel}</a>`);
 $('#tmId').html(`${getTrismegistosID(inscription.tmId)}`);
 $('#material').html(`${getMaterial(inscription.materialLink, inscription.material)}`);
 $('#objectType').html(`${getObjectType(inscription.objTypeLink, inscription.objectType)}`);
