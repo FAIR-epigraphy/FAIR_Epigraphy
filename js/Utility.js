@@ -51,7 +51,9 @@ function getLiteralValue(literal) {
 ////////////////////////////////////////////////
 //// Get Coordinates from the Pleiades API
 async function getLatLng(API_URL) {
-    API_URL = API_URL.replace('http', 'https');
+    if (API_URL.indexOf('https') === -1)
+        API_URL = API_URL.replace('http', 'https');
+
     let myObject = await fetch(`${API_URL}/json`);
     let jsonData = await myObject.json();
     if (jsonData.features.length > 0) {
@@ -65,6 +67,47 @@ async function getLatLng(API_URL) {
 
     return null;
 }
+/////////////////////////////////////////////////////////////////
+//// Get Relations with other data sources using TM Relation API
+let projectList = {
+    'EDB': ['Epigraphic Database Bari', 'https://www.edb.uniba.it/epigraph/'],
+    'EDH': ['Epigraphic Database Heidelberg', 'https://edh.ub.uni-heidelberg.de/edh/inschrift/'],
+    'EDCS': ['Epigraphik-Datenbank Clauss / Slaby', 'http://db.edcs.eu/epigr/edcs_id_en.php?p_edcs_id=EDCS-'],
+    'EDR': ['Epigraphic Database Roma', 'http://www.edr-edr.it/edr_programmi/res_complex_comune.php?do=book&id_nr='],
+    'HE': ['Hesperia', 'javascript:void(0)'],
+    'UOXF': ['Last Statues of Antiquity', 'http://laststatues.classics.ox.ac.uk/database/detail-base.php?record='],
+    'RIB': ['Roman Inscriptions of Britain', 'https://romaninscriptionsofbritain.org/inscriptions/'],
+    'PHI': ['PHI Greek Inscriptions', 'http://epigraphy.packhum.org/text/'],
+    'LUPA': ['Ubi Erat Lupa', 'http://lupa.at/'],
+    'ISic': ['Inscriptions of Sicily', 'http://sicily.classics.ox.ac.uk/inscription/'],
+    'IRT': ['Inscriptions of Roman Tripolitania', 'https://inslib.kcl.ac.uk/irt2009/IRT001.html'],
+    'IGCyR': ['Inscriptions of Greek Cyrenaica', 'https://igcyr.unibo.it/'],
+    'Orient': ['Arabic Papyrological Database', 'https://geniza.princeton.edu/en/documents/?q='],
+    'cisp': ['Celtic Inscribed Stones', 'javascript:void(0)'],
+    'DeM': ['The Deir el-Medina Database', 'javascript:void(0)'],
+    'US_Epigraphy': ['U.S. EPIGRAPHY PROJECT', 'https://usepigraphy.brown.edu/projects/usep/inscription/'],
+    'Wikidata': ['Wikidata', 'javascript:void(0)'],
+    'hispEpOl': ['Hispania Epigraphica', 'http://eda-bea.es/pub/record_card_1.php?rec='],
+};
+async function getRelations(tm_id) {
+    API_URL = `https://www.trismegistos.org/dataservices/texrelations/${tm_id.split('/').pop()}`
+
+    let myObject = await fetch(API_URL);
+    let jsonData = await myObject.json();
+    let closeMatch = '';
+    for (let i = 1; i < jsonData.length; i++) {
+        //console.log(jsonData[i]);
+        for (const [key, value] of Object.entries(jsonData[i])) {
+            //console.log(key, value);
+            if (value !== null) {
+                closeMatch += `<a href="${projectList[key][1]}${value}" target="_blank" class="text-decoration-none">${projectList[key][0]}</a> <br />`
+            }
+        }
+    }
+    $('#closeMatch').html(closeMatch);
+}
+
+
 ////////////////////////////////////////////////////////////////////
 /// Lang code to Language name
 let ISO639_1 = { "ab": "Abkhazian", "aa": "Afar", "af": "Afrikaans", "ak": "Akan", "sq": "Albanian", "am": "Amharic", "ar": "Arabic", "an": "Aragonese", "hy": "Armenian", "as": "Assamese", "av": "Avaric", "ae": "Avestan", "ay": "Aymara", "az": "Azerbaijani", "bm": "Bambara", "ba": "Bashkir", "eu": "Basque", "be": "Belarusian", "bn": "Bengali", "bh": "Bihari languages", "bi": "Bislama", "nb": "Norwegian Bokmål", "bs": "Bosnian", "br": "Breton", "bg": "Bulgarian", "my": "Burmese", "es": "Spanish", "ca": "Valencian", "km": "Central Khmer", "ch": "Chamorro", "ce": "Chechen", "ny": "Nyanja", "zh": "Chinese", "za": "Zhuang", "cu": "Old Slavonic", "cv": "Chuvash", "kw": "Cornish", "co": "Corsican", "cr": "Cree", "hr": "Croatian", "cs": "Czech", "da": "Danish", "dv": "Maldivian", "nl": "Flemish", "dz": "Dzongkha", "en": "English", "eo": "Esperanto", "et": "Estonian", "ee": "Ewe", "fo": "Faroese", "fj": "Fijian", "fi": "Finnish", "fr": "French", "ff": "Fulah", "gd": "Scottish Gaelic", "gl": "Galician", "lg": "Ganda", "ka": "Georgian", "de": "German", "ki": "Kikuyu", "el": "Greek, Modern (1453-)", "kl": "Kalaallisut", "gn": "Guarani", "gu": "Gujarati", "ht": "Haitian Creole", "ha": "Hausa", "he": "Hebrew", "hz": "Herero", "hi": "Hindi", "ho": "Hiri Motu", "hu": "Hungarian", "is": "Icelandic", "io": "Ido", "ig": "Igbo", "id": "Indonesian", "ia": "Interlingua (International Auxiliary Language Association)", "ie": "Occidental", "iu": "Inuktitut", "ik": "Inupiaq", "ga": "Irish", "it": "Italian", "ja": "Japanese", "jv": "Javanese", "kn": "Kannada", "kr": "Kanuri", "ks": "Kashmiri", "kk": "Kazakh", "rw": "Kinyarwanda", "ky": "Kyrgyz", "kv": "Komi", "kg": "Kongo", "ko": "Korean", "kj": "Kwanyama", "ku": "Kurdish", "lo": "Lao", "la": "Latin", "lv": "Latvian", "lb": "Luxembourgish", "li": "Limburgish", "ln": "Lingala", "lt": "Lithuanian", "lu": "Luba-Katanga", "mk": "Macedonian", "mg": "Malagasy", "ms": "Malay", "ml": "Malayalam", "mt": "Maltese", "gv": "Manx", "mi": "Maori", "mr": "Marathi", "mh": "Marshallese", "ro": "Romanian", "mn": "Mongolian", "na": "Nauru", "nv": "Navajo", "nd": "North Ndebele", "nr": "South Ndebele", "ng": "Ndonga", "ne": "Nepali", "se": "Northern Sami", "no": "Norwegian", "nn": "Nynorsk, Norwegian", "ii": "Sichuan Yi", "oc": "Occitan (post 1500)", "oj": "Ojibwa", "or": "Oriya", "om": "Oromo", "os": "Ossetic", "pi": "Pali", "pa": "Punjabi", "ps": "Pushto", "fa": "Persian", "pl": "Polish", "pt": "Portuguese", "qu": "Quechua", "rm": "Romansh", "rn": "Rundi", "ru": "Russian", "sm": "Samoan", "sg": "Sango", "sa": "Sanskrit", "sc": "Sardinian", "sr": "Serbian", "sn": "Shona", "sd": "Sindhi", "si": "Sinhalese", "sk": "Slovak", "sl": "Slovenian", "so": "Somali", "st": "Sotho, Southern", "su": "Sundanese", "sw": "Swahili", "ss": "Swati", "sv": "Swedish", "tl": "Tagalog", "ty": "Tahitian", "tg": "Tajik", "ta": "Tamil", "tt": "Tatar", "te": "Telugu", "th": "Thai", "bo": "Tibetan", "ti": "Tigrinya", "to": "Tonga (Tonga Islands)", "ts": "Tsonga", "tn": "Tswana", "tr": "Turkish", "tk": "Turkmen", "tw": "Twi", "ug": "Uyghur", "uk": "Ukrainian", "ur": "Urdu", "uz": "Uzbek", "ve": "Venda", "vi": "Vietnamese", "vo": "Volapük", "wa": "Walloon", "cy": "Welsh", "fy": "Western Frisian", "wo": "Wolof", "xh": "Xhosa", "yi": "Yiddish", "yo": "Yoruba", "zu": "Zulu" };

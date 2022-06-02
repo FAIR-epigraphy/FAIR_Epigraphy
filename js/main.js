@@ -3,7 +3,7 @@ const { namedNode, literal, defaultGraph, quad } = DataFactory;
 const store = new N3.Store();
 
 //////////////////////////////////////////////////////////////////////////
-loadData("data/data_5.txt");
+loadData("data/data.txt");
 function loadData(file) {
     $("#data").load(file, function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success") {
@@ -116,7 +116,7 @@ function getHTMLContent(obj) {
     return `<div class="col-md-12 hoverDiv">
                 <h4>
                     <a href="javascript:void(0)" class="text-decoration-none" onclick="loadDetail('${encodeURIComponent(JSON.stringify(obj))
-        }')" title="${obj.inscriptionId}">${getInscriptionId(obj.inscriptionId)}</a>
+        }')" title="${obj.inscriptionLabel}">${obj.inscriptionLabel.length <= 50 ? obj.inscriptionLabel : obj.inscriptionLabel.substring(0, 49) + '...'}</a>
                 </h4>
                 <dl class="row">
                             <dt class="col-sm-1 ms-5">TM ID</dt>
