@@ -81,6 +81,8 @@ function loadData(file) {
                                         /////////////////
                                         records.push(obj);
                                     }
+                                    localStorage.removeItem('jsonAllData');
+                                    localStorage.setItem('jsonAllData', JSON.stringify(records));
                                     const pSize = 5;
                                     $('#page-selection').pagination({
                                         dataSource: records,

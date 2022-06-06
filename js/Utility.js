@@ -51,18 +51,27 @@ function getLiteralValue(literal) {
 ////////////////////////////////////////////////
 //// Get Coordinates from the Pleiades API
 async function getLatLng(API_URL) {
-    if (API_URL.indexOf('https') === -1)
-        API_URL = API_URL.replace('http', 'https');
-
-    let myObject = await fetch(`${API_URL}/json`);
-    let jsonData = await myObject.json();
-    if (jsonData.features.length > 0) {
-        if (jsonData.features[0].geometry !== undefined) {
-            return [jsonData.features[0].geometry.coordinates[1], jsonData.features[0].geometry.coordinates[0]];
+    try {
+        if (API_URL !== undefined) {
+            if (API_URL.indexOf('https') === -1)
+                API_URL = API_URL.replace('http', 'https');
+            if (API_URL.indexOf('any23.org/tmp') === -1) {
+                let myObject = await fetch(`${API_URL}/json`);
+                let jsonData = await myObject.json();
+                if (jsonData.features.length > 0) {
+                    if (jsonData.features[0].geometry !== undefined) {
+                        return [jsonData.features[0].geometry.coordinates[1], jsonData.features[0].geometry.coordinates[0]];
+                    }
+                }
+                else if (jsonData.reprPoint !== undefined) {
+                    return [jsonData.reprPoint[1], jsonData.reprPoint[0]];
+                }
+            }
         }
     }
-    else if (jsonData.reprPoint !== undefined) {
-        return [jsonData.reprPoint[1], jsonData.reprPoint[0]];
+    catch (err) {
+        console.log(API_URL);
+        console.log(err.message);
     }
 
     return null;
