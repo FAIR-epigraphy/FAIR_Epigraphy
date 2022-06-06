@@ -16,11 +16,11 @@ if (allData !== undefined) {
     //// Show Map
     $('#map').hide();
     $('#legend').hide();
-    $('#divLoading').show()
+    $('#loader-wrapper').show()
     initMap().then((res) => {
         $('#map').show();
         $('#legend').show();
-        $('#divLoading').hide()
+        $('#loader-wrapper').hide()
     })
 
     ///////////////////////////////////////////////////////////////

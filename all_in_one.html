@@ -39,12 +39,17 @@
 
     <div class="container-fluid mt-3">
         <div id="content" class="row" style="margin:10px 0px;">
-            <div class="text-center mt-5 mb-5" id="divLoading">
+            <!--<div class="text-center mt-5 mb-5" id="divLoading">
                 <div class="spinner-border text-primary" style="width: 10rem; height: 10rem;" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
+            </div>-->
+
+            <div id="loader-wrapper">
+                <div id="loader"></div>
+                <span id="loader-message">Loading...</span>
             </div>
-            
+
             <div id="map" class="col-md-12" style="height:80vh">
 
             </div>
@@ -53,7 +58,7 @@
     </div>
 
 
-    <footer>
+    <footer class="fixed-bottom">
         <div class="container-fluid">
             <p class="text-muted">
                 <!--<a href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>Unless specified otherwise, content in <a xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://nomisma.org">Nomisma.org</a> is licensed under a <a xmlns:cc="http://creativecommons.org/ns#" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>.-->
