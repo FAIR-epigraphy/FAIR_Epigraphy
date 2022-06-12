@@ -10,7 +10,7 @@ if (allData !== undefined) {
 
     var map = null;
 
-    const infoWindow = new google.maps.InfoWindow({
+    var infoWindow = new google.maps.InfoWindow({
         content: "",
         disableAutoPan: true,
     });
