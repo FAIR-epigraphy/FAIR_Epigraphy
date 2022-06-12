@@ -75,7 +75,7 @@ if (allData !== undefined) {
     }
 
     function getDisplayIcon(language) {
-        let url = "http://maps.google.com/mapfiles/ms/icons/";
+        let url = "https://maps.google.com/mapfiles/ms/icons/";
 
         switch (language) {
             case 'la':
