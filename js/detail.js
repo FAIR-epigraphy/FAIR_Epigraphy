@@ -85,7 +85,7 @@ function showGoogleMap(lat_lng) {
     new google.maps.Marker({
         position: myLatLng,
         map,
-        title: "Hello World!",
+        title: "",
     });
 
     let interval = setInterval(() => {

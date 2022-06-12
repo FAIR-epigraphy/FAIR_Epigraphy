@@ -8,10 +8,8 @@ if (allData !== undefined) {
     var uniqueLanguages = [];
     var commonInscriptions = [];
 
-    const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 4,
-        //center: myLatLng,
-    });
+    var map = null;
+
     const infoWindow = new google.maps.InfoWindow({
         content: "",
         disableAutoPan: true,
@@ -30,7 +28,7 @@ if (allData !== undefined) {
     ///////////////////////////////////////////////////////////////
     async function initMap() {
         var lat_lng = '';
-        
+
         for (let inscription of allData) {
             if (inscription.geo !== undefined) {
                 lat_lng = [parseFloat(inscription.geo.split(',')[0]), parseFloat(inscription.geo.split(',')[1])]
@@ -93,7 +91,14 @@ if (allData !== undefined) {
 
     function showGoogleMap(lat_lng, inscriptions) {
         const myLatLng = { lat: parseFloat(lat_lng[0]), lng: parseFloat(lat_lng[1]) };
-        map.setCenter(myLatLng);
+        //map.setCenter(myLatLng);
+        if (map === null) {
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 4,
+                center: myLatLng,
+            });
+        }
+        
         const marker = new google.maps.Marker({
             position: myLatLng,
             map,
@@ -137,4 +142,7 @@ if (allData !== undefined) {
 
         return url;
     }
+}
+else {
+    location.href = 'index.html';
 }
