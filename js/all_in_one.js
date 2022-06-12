@@ -47,7 +47,7 @@ if (allData !== undefined) {
             legend.appendChild(div);
         }
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
-        alert(uniqueLanguages)
+        //alert(uniqueLanguages)
     }
 
     function showGoogleMap(lat_lng, inscription) {
