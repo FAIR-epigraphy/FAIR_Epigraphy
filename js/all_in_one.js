@@ -1,7 +1,7 @@
 ﻿const allData = JSON.parse(localStorage.getItem('jsonAllData'));
 
 
-if (allData !== undefined) {
+if (allData !== undefined && allData !== null) {
     //console.log(allData);
     //const myLatLng = { lat: -25.363, lng: 131.044 };
     var legend = document.getElementById("legend");
