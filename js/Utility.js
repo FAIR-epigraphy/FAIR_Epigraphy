@@ -1,4 +1,32 @@
 ﻿const N3Util = N3.Util;
+///////////////////////////////////////////////////////////////
+/// Leiden text css
+const Leidenstyles = `
+    .leiden-num-span  {
+      float: left;
+      width: 40px;
+    }
+    .leiden-transcription {
+      font-family: NewAthena;
+    }
+    .underline {
+      text-decoration-line: underline;
+    }
+    .supraline {
+        text-decoration-line: overline;
+    }
+    .strikethrough {
+      text-decoration-line: line-through;
+    }
+    .section-heading {
+      display:block;
+      margin-top:1em
+    }
+    .single-space-holder::after { 
+      content: '\\0020'; 
+    }
+`;
+
 //////////////////////////////////////////////
 function getInscriptionId(insId) {
     if (insId !== undefined) {
@@ -48,6 +76,38 @@ function isLiteral(node) {
 function getLiteralValue(literal) {
     return N3Util.getLiteralValue(literal)
 }
+////////////////////////////////////////////
+///// Get XML text
+async function getEpiDocText(Id, datasource) {
+    if (datasource.indexOf('sicily') !== -1) {
+        var url = `http://sicily.classics.ox.ac.uk/services/inscription/${Id}.xml`;
+    }
+    else if (datasource.indexOf('igcyr') !== -1) {
+        var url = `https://igcyr.unibo.it/igcyr/${Id}.xml`;
+    }
+    else if (datasource.indexOf('edh') !== -1) {
+        var url = `https://edh.ub.uni-heidelberg.de/edh/inschrift/${Id}/xml`;
+    }
+    else if (datasource.indexOf('romaninscriptionsofbritain') !== -1) {
+        return '';
+    }
+
+    var proxyUrl = 'https://intense-cliffs-42360.herokuapp.com/';
+    url = proxyUrl + url;
+
+    let myObject = await fetch(`${url}`);
+    let xmlData = await myObject.text();
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(xmlData, "application/xml");
+    const epidoc_text = xml.getElementsByTagName('text')[0].innerHTML;
+    let output = convert(epidoc_text, {}, true, {}).innerHTML;
+    //return '<style>' + Leidenstyles + '/<style>' + output.innerHTML;
+    const regex = /null \d/ig;
+    const regex_null = /null/ig;
+    return output.replaceAll(regex, '').replaceAll(regex_null, '');
+    //let jsonData = await myObject.json(); 
+}
+
 ////////////////////////////////////////////////
 //// Get Coordinates from the Pleiades API
 async function getLatLng(API_URL) {
@@ -76,6 +136,8 @@ async function getLatLng(API_URL) {
 
     return null;
 }
+
+
 /////////////////////////////////////////////////////////////////
 //// Get Relations with other data sources using TM Relation API
 let projectList = {
@@ -91,11 +153,13 @@ let projectList = {
     'ISic': ['Inscriptions of Sicily', 'http://sicily.classics.ox.ac.uk/inscription/'],
     'IRT': ['Inscriptions of Roman Tripolitania', 'https://inslib.kcl.ac.uk/irt2009/IRT001.html'],
     'IGCyR': ['Inscriptions of Greek Cyrenaica', 'https://igcyr.unibo.it/'],
+    'GVCYR': ['Inscriptions of Greek Cyrenaica', 'https://igcyr.unibo.it/'],
     'Orient': ['Arabic Papyrological Database', 'https://geniza.princeton.edu/en/documents/?q='],
     'cisp': ['Celtic Inscribed Stones', 'javascript:void(0)'],
     'DeM': ['The Deir el-Medina Database', 'javascript:void(0)'],
     'US_Epigraphy': ['U.S. EPIGRAPHY PROJECT', 'https://usepigraphy.brown.edu/projects/usep/inscription/'],
     'Wikidata': ['Wikidata', 'javascript:void(0)'],
+    'CIL': ['Corpus Inscriptionum Latinarum', 'https://cil.bbaw.de/en/'],
     'hispEpOl': ['Hispania Epigraphica', 'http://eda-bea.es/pub/record_card_1.php?rec='],
 };
 async function getRelations(tm_id) {

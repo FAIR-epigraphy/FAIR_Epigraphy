@@ -5,7 +5,20 @@ $('#tmId').html(`${getTrismegistosID(inscription.tmId)}`);
 $('#material').html(`${getMaterial(inscription.materialLink, inscription.material)}`);
 $('#objectType').html(`${getObjectType(inscription.objTypeLink, inscription.objectType)}`);
 $('#language').html(`${getLanguageName(inscription.language)}`);
-$('#inc_text').html(`<pre>${inscription.inscriptionText.replace('Text', '')}</pre>`);
+//$('#inc_text').html(`<pre>${inscription.inscriptionText.replace('Text', '')}</pre>`);
+
+(async () => {
+    let text = await getEpiDocText(getInscriptionId(inscription.inscriptionId), inscription.inscriptionId);
+    $('#inc_text').next('div').remove();
+    if (text !== '') {
+        $('#inc_text').html(`${text.replace('Text', '')}`);
+    }
+    else {
+        $('#inc_text').html(`<pre>${inscription.inscriptionText.replace('Text', '').trim()}</pre>`);
+    }
+})();
+
+
 ////////////////////////////////////////////////////////////
 /// Show/Hide Inscription Text
 $('#btnText').click(() => {
