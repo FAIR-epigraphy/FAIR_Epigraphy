@@ -23,7 +23,7 @@
                     <div class="col-md-12" id="map" style="height: 50vh;"></div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <table class="table table-hover">
                             <tr>
                                 <th>
@@ -58,8 +58,21 @@
                             </tr>
                         </table>
 
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-share-fill"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><button class="dropdown-item" type="button" onclick="downloadRDF('ttl')">Turtle (.ttl)</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="downloadRDF('n3')">Notation3 (.n3)</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="downloadRDF('nt')">N-Triples (.nt)</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="downloadRDF('nq')">N-Quads (.nq)</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="downloadRDF('trig')">Trig (.trig)</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="downloadRDF('rdf')">RDF/XML (.rdf)</button></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <button class="btn btn-primary form-control" type="button" id="btnText">
                             Show Inscription Text
                         </button>
@@ -83,12 +96,12 @@
 
     <!--<script src="//maps.googleapis.com/maps/api/js?libraries=geometry,visualization,places&amp;language=en&amp;v=3.23&amp;key=AIzaSyAsmeOloQ8Bgw413D9YoLEGbmQefPIBYcg"></script>-->
     <!--<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AnOaryydl-Jd2yCFF8jL91x2YYdv9KxzJNRMfeea8dVaGSZcBGTgKxoaZd8jckDG'></script>-->
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-
+    <!-- JavaScript Bootstrap & Popper -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>-->
 
     <!-- RDF Library -->
-    <script src="js/n3-browser.js"></script>
+    <script src="js/n3.min.js"></script>
 
     <!-- Convert EpiDoc XML to Leident Text -->
     <script src="js/convertToLeiden.js"></script>
