@@ -33,7 +33,7 @@ $('#btnText').click(() => {
 })
 //////////////////////////////////////////////////////////
 /// Get Relations
-getRelations(inscription.tmId);
+getRelations(inscription.tmId, '#closeMatch');
 ///////////////////////////////////////////////////////////////////////
 //// Show Map
 initMap();
@@ -107,4 +107,8 @@ function showGoogleMap(lat_lng) {
             clearInterval(interval);
         }
     }, 500);
+}
+
+function downloadRDF(format) {
+    downloadRDFSerialisation(inscription.rdfData, format, getInscriptionId(inscription.inscriptionId));
 }

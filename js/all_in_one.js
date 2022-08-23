@@ -33,13 +33,13 @@ if (allData !== undefined && allData !== null) {
             if (inscription.geo !== undefined) {
                 lat_lng = [parseFloat(inscription.geo.split(',')[0]), parseFloat(inscription.geo.split(',')[1])]
             }
-            else {
-                let lt_lg = await getLatLng(inscription.foundAt);
-                if (lt_lg !== undefined && lt_lg !== null && lt_lg.length > 0) {
-                    //showGoogleMap(lat_lng, inscription);
-                    lat_lng = lt_lg
-                }
-            }
+            //else {
+            //    let lt_lg = await getLatLng(inscription.foundAt);
+            //    if (lt_lg !== undefined && lt_lg !== null && lt_lg.length > 0) {
+            //        //showGoogleMap(lat_lng, inscription);
+            //        lat_lng = lt_lg
+            //    }
+            //}
 
             if (commonInscriptions.length === 0) {
                 let dictTMID = { tmId: 0, lat_lng: '', inscriptions: [] };

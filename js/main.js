@@ -1,16 +1,17 @@
 ﻿const { DataFactory } = N3;
 const { namedNode, literal, defaultGraph, quad } = DataFactory;
 const store = new N3.Store();
+var allPrefixes = {};
 
 //////////////////////////////////////////////////////////////////////////
 loadData("data/data.txt");
+
 function loadData(file) {
     $("#data").load(file, function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success") {
 
             const parser_for_graphs = new N3.Parser();
             const parser = new N3.Parser();
-            var allPrefixes = {};
 
             let uniqueGraphs = [];
             let records = [];
@@ -83,6 +84,13 @@ function loadData(file) {
                                     }
                                     localStorage.removeItem('jsonAllData');
                                     localStorage.setItem('jsonAllData', JSON.stringify(records));
+
+                                    //localData.remove('rdfData');
+                                    //localData.set('rdfData', store);
+
+                                    //localStorage.removeItem('prefixes');
+                                    //localStorage.setItem('prefixes', JSON.stringify(allPrefixes));
+
                                     const pSize = 5;
                                     $('#page-selection').pagination({
                                         dataSource: records,
@@ -134,8 +142,43 @@ function getHTMLContent(obj) {
     //$('#content').html(content);
 }
 
-function loadDetail(obj) {
+async function loadDetail(obj) {
     obj = JSON.parse(decodeURIComponent(obj))
+    //////////////////////////////////////////////////
+    /// Get Visualisation
+    var writer = null;
+    writer = new N3.Writer({ prefixes: allPrefixes });
+    for (const triple of store.match(null, null, null, namedNode(obj.inscriptionId))) {
+        if (triple.subject.value.indexOf('TranscriptionText') === -1) {
+            let subject = namedNode(triple.subject.value);
+            let predicate = namedNode(triple.predicate.value);
+            let object = N3Util.isLiteral(triple.object) === true ? literal(triple.object.value) : namedNode(triple.object.value);
+            writer.addQuad(quad(
+                subject, predicate, object, defaultGraph(),
+            ));
+        }
+    }
+
+    let closeMatches = await getRelations(obj.tmId, null);
+    for (let match of closeMatches) {
+        if (match.split('/').pop() !== obj.inscriptionId.split('/').pop()) {
+            let subject = namedNode(obj.inscriptionId);
+            let predicate = namedNode(`${allPrefixes['skos']}closeMatch`);
+            let object = namedNode(match);
+            writer.addQuad(quad(
+                subject, predicate, object, defaultGraph(),
+            ));
+        }
+    }
+
+    var rdf = '';
+    writer.end((error, result) => {
+        rdf = result;
+        console.log(error);
+    });
+
+    //console.log(rdf);
+    obj.rdfData = rdf;
     localStorage.setItem('jsonObj', JSON.stringify(obj));
     $('#page').load('detail.html', function () {
         var myModal = new bootstrap.Modal(document.getElementById('myModal'), {

@@ -108,6 +108,67 @@ async function getEpiDocText(Id, datasource) {
     //let jsonData = await myObject.json(); 
 }
 
+function downloadRDFSerialisation(rdfData, format, inscriptionId) {
+    if (format === 'ttl') {
+        const contentType = 'text/plain';
+        const a = document.createElement('a');
+        const file = new Blob([rdfData], { type: contentType });
+        const filename = `${inscriptionId}.${format}`; // 'nanopub.trig';
+
+        a.href = URL.createObjectURL(file);
+        a.download = filename;
+        a.click();
+
+        URL.revokeObjectURL(a.href);
+    }
+    else {
+        const parser = new N3.Parser();
+        let quads = [];
+        parser.parse(
+            rdfData,
+            (error, quad, prefixes) => {
+                if (quad)
+                    quads.push(quad);
+                else {
+                    var writer = null;
+                    if (format === 'n3') {
+                        writer = new N3.Writer({ prefixes: prefixes, format: 'text/rdf+n3' });
+                    }
+                    else if (format === 'nt') {
+                        writer = new N3.Writer({ prefixes: prefixes, format: 'N-Triples' });
+                    }
+                    else if (format === 'nq') {
+                        writer = new N3.Writer({ prefixes: prefixes, format: 'N-Quads' });
+                    }
+                    else if (format === 'trig') {
+                        writer = new N3.Writer({ prefixes: prefixes, format: 'application/trig' });
+                    }
+                    else if (format === 'rdf') {
+                        writer = new N3.Writer({ prefixes: prefixes, format: 'application/rdfstar+xml' });
+                    }
+
+                    for (let q of quads) {
+                        writer.addQuad(q);
+                    }
+
+                    writer.end((error, result) => {
+                        rdf = result;
+                        const contentType = 'text/plain';
+                        const a = document.createElement('a');
+                        const file = new Blob([rdf], { type: contentType });
+                        const filename = `${inscriptionId}.${format}`; // 'nanopub.trig';
+
+                        a.href = URL.createObjectURL(file);
+                        a.download = filename;
+                        a.click();
+
+                        URL.revokeObjectURL(a.href);
+                    });
+                }
+            });
+    }
+}
+
 ////////////////////////////////////////////////
 //// Get Coordinates from the Pleiades API
 async function getLatLng(API_URL) {
@@ -162,22 +223,27 @@ let projectList = {
     'CIL': ['Corpus Inscriptionum Latinarum', 'https://cil.bbaw.de/en/'],
     'hispEpOl': ['Hispania Epigraphica', 'http://eda-bea.es/pub/record_card_1.php?rec='],
 };
-async function getRelations(tm_id) {
+async function getRelations(tm_id, control) {
     API_URL = `https://www.trismegistos.org/dataservices/texrelations/${tm_id.split('/').pop()}`
 
     let myObject = await fetch(API_URL);
     let jsonData = await myObject.json();
     let closeMatch = '';
+    let closeMatches = [];
     for (let i = 1; i < jsonData.length; i++) {
         //console.log(jsonData[i]);
         for (const [key, value] of Object.entries(jsonData[i])) {
             //console.log(key, value);
             if (value !== null) {
                 closeMatch += `<a href="${projectList[key][1]}${value}" target="_blank" class="text-decoration-none">${projectList[key][0]}</a> <br />`
+                closeMatches.push(`${projectList[key][1]}${value}`)
             }
         }
     }
-    $('#closeMatch').html(closeMatch);
+    if (control !== null)
+        $(control).html(closeMatch);
+    else
+        return closeMatches;
 }
 
 
