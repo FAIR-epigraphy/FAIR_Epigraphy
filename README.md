@@ -66,11 +66,7 @@ Contributors
 [](https://github.com/FAIR-epigraphy/RDF_pilot_1)
 
 * * *
-
-![](images/oxlogo.png)
-
-![](images/uni_mainz.png)
-
-![](images/DGF.png)
-
-![](images/UKRI_Arts_Humanities.png)
+<img src="images/oxlogo.png" alt="University of Oxford" width="200"/>
+<img src="images/uni_mainz.png" alt="uni_mainz" width="200"/>
+<img src="images/DGF.png" alt="DGF" width="200"/>
+<img src="images/UKRI_Arts_Humanities.png" alt="UKRI_Arts_Humanities" width="200"/>
