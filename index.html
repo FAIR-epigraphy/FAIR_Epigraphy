@@ -11,7 +11,6 @@
     <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
-
     <nav class="navbar navbar-expand-sm bg-light navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
@@ -23,10 +22,13 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Browse</a>
+                        <span class="nav-link active" onclick="navigatePage('home', this)">Home</span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link" onclick="navigatePage('browse', this)">Browse</span>
                     </li>
                     <li>
-                        <a class="nav-link" href="all_in_one.html">All in One</a>
+                        <span class="nav-link" onclick="navigatePage('all in one', this)">All in One</span>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -41,26 +43,9 @@
         </div>
     </nav>
 
-    <div class="container-fluid mt-3">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Epigraphy</h1>
-                <!-- Modal -->
-                <div class="modal fade" id="myModal">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content" id="page">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-        <div id="content" class="row" style="margin:10px 0px;">
-        </div>
-        <div id="page-selection" class="mb-3"></div>
+    <div class="container-fluid mt-3" id="content-place">
+           
     </div>
-
 
     <footer>
         <div class="container-fluid">
@@ -71,7 +56,6 @@
         </div>
     </footer>
 
-    <div id="data" style="display:none"></div>
     <!-- Parent Jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -94,7 +78,59 @@
 
     <!-- Custome Javascript files-->
     <script src="js/Utility.js"></script>
-    <script src="js/main.js"></script>
 
+    <script>
+        if (localStorage.getItem('page') !== undefined && localStorage.getItem('page') !== null) {
+            //localStorage.setItem('page', 'home')
+            let pageObj = JSON.parse(localStorage.getItem('page'))
+            navigatePage(pageObj.pageName, null);
+        }
+        else {
+            $('#content-place').load('about.html')
+        }
+
+        function navigatePage(pageName, control) {
+            if (pageName === 'home') {
+                $('#content-place').load('about.html')
+            }
+            else if (pageName === 'browse') {
+                $('#content-place').load('browse.html')
+            }
+            else if (pageName === 'all in one') {
+                $('#content-place').load('all_in_one.html')
+            }
+
+            $('.nav-link').removeClass('active');
+            if (control !== null)
+                $(control).addClass('active')
+            else {
+                let all = $('.nav-link');
+                let active = Array.from(all).filter(x =>
+                    $(x).html().toLowerCase() === pageName
+                )
+
+                $(active[0]).addClass('active')
+            }
+
+            localStorage.setItem('page', JSON.stringify({ pageName: pageName }))
+            changeurl(pageName);
+        }
+
+        function changeurl(pageName) {
+            var new_url = get_hostname(window.location.href);
+            //if (pageName === 'home')
+            //    new_url = get_hostname(window.location.href);
+            //else
+            //    new_url = `${get_hostname(window.location.href)}/${pageName.replaceAll(" ", "_")}`;
+
+            window.history.pushState("data", "Title", new_url);
+            document.title = `inscriptiones.org | ${pageName.toUpperCase()}`;
+        }
+
+        function get_hostname(url) {
+            var m = url.match(/^http:\/\/[^/]+/);
+            return m ? m[0] : null;
+        }
+    </script>
 </body>
 </html>

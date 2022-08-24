@@ -82,8 +82,6 @@ function loadData(file) {
                                         /////////////////
                                         records.push(obj);
                                     }
-                                    localStorage.removeItem('jsonAllData');
-                                    localStorage.setItem('jsonAllData', JSON.stringify(records));
 
                                     //localData.remove('rdfData');
                                     //localData.set('rdfData', store);
