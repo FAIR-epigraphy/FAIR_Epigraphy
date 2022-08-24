@@ -21,7 +21,7 @@ The pilot project uses data from the following four publicly available epigraphi
 *   [Greek Verse Inscriptions of Cyrenaica](https://igcyr.unibo.it/)
 *   [The Roman Inscriptions of Britain](https://romaninscriptionsofbritain.org/)
 
-For the purposes of the pilot, we display only a sample of 146 inscriptions drawn from across these four projects.
+For the purposes of the pilot, we display only a sample of 146 inscriptions drawn from across these four projects; the full available dataset would number 8,509
 
 Approach
 --------
