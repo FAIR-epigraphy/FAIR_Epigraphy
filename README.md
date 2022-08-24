@@ -7,7 +7,7 @@ The FAIR Epigraphy project aims to enable the epigraphy linked data cloud and fa
 2.  Develop the tools for community implementation of those standards (vocabulary and ontology hosting and publication)
 3.  Host and make fully accessible the resulting linked open data published by individual projects (RDF/XML data publication)
 
-This website presents a pilot project intended to illustrate the potential of such an approach through a very simple illustration of what published linked data can enable (an example of (3) above), using existing published and publicly available epigraphic data.
+[This website](https://inscriptiones.org/) presents a pilot project intended to illustrate the potential of such an approach through a very simple illustration of what published linked data can enable (an example of (3) above), using existing published and publicly available epigraphic data.
 
 FAIR-Epigraphy project is co-directed by [Marietta Horster (Mainz, Germany)](https://uni-mainz.academia.edu/MariettaHorster) and [Jonathan Prag (Oxford, UK)](https://www.classics.ox.ac.uk/people/dr-jonathan-prag). [Petra Hermankova](https://orcid.org/0000-0002-6349-0540) provides the research contributions with her experience in ancient history, digital epigraphy, and archaeology. [Imran Asif](https://csad.web.ox.ac.uk/people/dr-imran-asif) joined the team and built/developed the front-end and backend of the inscriptiones.org project.
 
@@ -61,21 +61,5 @@ Contributors
 *   [Petra Hermankova](https://orcid.org/0000-0002-6349-0540)
 *   [Imran Asif](https://csad.web.ox.ac.uk/people/dr-imran-asif)
 
-### Source Code
-
-[](https://github.com/FAIR-epigraphy/RDF_pilot_1)
-
 * * *
-<svg fill="none" viewBox="0 0 800 400" width="800" height="400" xmlns="http://www.w3.org/2000/svg">
-	<foreignObject width="100%" height="100%">
-		<div xmlns="http://www.w3.org/1999/xhtml">
-			<style>
-			</style>
-			<img src="images/oxlogo.png" alt="University of Oxford" width="100" style="float:left !important;" />
-		</div>
-	</foreignObject>
-</svg>
-
-<img src="images/uni_mainz.png" alt="uni_mainz" width="200" style="float:left !important;margin-left:3% !important" />
-<img src="images/DGF.png" alt="DGF" width="200" style="float:left !important;margin-left:3% !important" />
-<img src="images/UKRI_Arts_Humanities.png" alt="UKRI_Arts_Humanities" width="200" style="float:left !important;margin-left:3% !important"/>
+<img src="images/all_logos.png" />
