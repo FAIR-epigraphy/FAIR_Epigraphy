@@ -66,7 +66,16 @@ Contributors
 [](https://github.com/FAIR-epigraphy/RDF_pilot_1)
 
 * * *
-<img src="images/oxlogo.png" alt="University of Oxford" width="100" style="float:left !important;" />
+<svg fill="none" viewBox="0 0 800 400" width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div xmlns="http://www.w3.org/1999/xhtml">
+			<style>
+			</style>
+			<img src="images/oxlogo.png" alt="University of Oxford" width="100" style="float:left !important;" />
+		</div>
+	</foreignObject>
+</svg>
+
 <img src="images/uni_mainz.png" alt="uni_mainz" width="200" style="float:left !important;margin-left:3% !important" />
 <img src="images/DGF.png" alt="DGF" width="200" style="float:left !important;margin-left:3% !important" />
 <img src="images/UKRI_Arts_Humanities.png" alt="UKRI_Arts_Humanities" width="200" style="float:left !important;margin-left:3% !important"/>
