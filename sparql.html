@@ -35,18 +35,8 @@
     //});
 
     var yasgui = new Yasgui(document.getElementById("yasgui"), {
-        corsProxy: "/proxy",
-        nonSslDomain: "http://yasgui.triply.cc",
-        yasqe: {
-            createShortLink: function (yasqe, longString) {
-                return yasqe.superagent
-                    .post("https://api.triplydb.com/short")
-                    .send({ longUrl: longString })
-                    .then(function (resp) {
-                        return resp.body.error || resp.body.shortUrl;
-                    });
-            }
-        }
+        requestConfig: { endpoint: undefined },
+        yasqe: {}
     });
 
     // Fires when a query is executed
