@@ -172,7 +172,7 @@ async function loadDetail(obj) {
     var rdf = '';
     writer.end((error, result) => {
         rdf = result;
-        console.log(error);
+        //console.log(error);
     });
 
     //console.log(rdf);

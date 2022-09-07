@@ -1,0 +1,116 @@
+﻿<link href="https://unpkg.com/@triply/yasgui/build/yasgui.min.css" rel="stylesheet" type="text/css" />
+
+<script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
+
+<style>
+    .yasgui .controlbar {
+        display: none !important;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="yasgui"></div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/n3.min.js"></script>
+<script src="https://rdf.js.org/comunica-browser/versions/v2.2.1/engines/query-sparql-rdfjs/comunica-browser.js"></script>
+
+<script>
+    //////////////////////////////////////////////////////////////////
+    /// Load data
+    const { DataFactory } = N3;
+    const { namedNode, literal, defaultGraph, quad } = DataFactory;
+    var store = new N3.Store();
+
+    fetch("data/data.txt").then(function (response) {
+        return response
+    }).then(function (data) {
+        return data.text()
+    }).then(function (dataset) {
+        const parser = new N3.Parser();
+        parser.parse(dataset,
+            (error, quaad, prefixes) => {
+                if (quaad) {
+                    //console.log(quad);
+                    store.addQuad(
+                        quaad.subject,
+                        quaad.predicate,
+                        quaad.object,
+                        //namedNode(graph)
+                    )
+                }
+                else {
+                    /////////////////////////////////////////////////
+                }
+
+            });
+    }).catch(function (err) {
+        console.log('Fetch problem show: ' + err.message);
+    });
+    ////////////////////////////////////////////////////////////////////////
+
+    const yasgui = new Yasgui(document.getElementById("yasgui"), {
+        requestConfig: { endpoint: "" },
+        copyEndpointOnNewTab: false,
+    });
+
+    //let instance = yasgui.rootEl;
+    //let tab = yasgui.tabPanelsEl;
+
+    //tab.yasr.setResponse({
+    //    data: '',
+    //    contentType: "application/sparql-results+json",
+    //    status: 200,
+    //    executionTime: 1000, // ms
+    //    // error to show
+    //})
+
+    //let Yasqui = document.getElementById("yasgui");
+
+    // Fires when a query is executed
+    yasgui.on("query", async (instance, tab) => {
+        // Sparql
+        let myEngine = new Comunica.QueryEngine();
+
+        const result = await myEngine.query(tab.getQuery(), {
+            sources: [store],
+        });
+        var json = '';
+        const { data } = await myEngine.resultToString(result, 'application/sparql-results+json');
+        //data.pipe(process.stdout);
+        //data.pipe(console.std)
+        //process.stdout.write(data)
+        data.on('data', (d) => {
+            //console.log(d);
+            json += d.toString();
+            return d.toString()
+        })
+
+        data.on('end', () => {
+            //console.log(json)
+            tab.yasr.setResponse({
+                data: json,
+                contentType: "application/sparql-results+json",
+                status: 200,
+                executionTime: 1000, // ms
+                // error to show
+            })
+        })
+        //////////////////////////////////////////////////////////////////////////
+    });
+
+    //yasgui.on("queryResponse", (Yasgui, tab) => {
+    //    tab.yasr.setResponse({
+    //        data: '',
+    //        contentType: "application/sparql-results+json",
+    //        status: 200,
+    //        executionTime: 1000, // ms
+    //        // error to show
+    //    })
+    //});
+</script>
