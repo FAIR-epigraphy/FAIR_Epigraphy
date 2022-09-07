@@ -24,15 +24,30 @@
     const { DataFactory } = N3;
     const { namedNode, literal, defaultGraph, quad } = DataFactory;
     var store = new N3.Store();
-    const yasgui = new Yasgui(document.getElementById("yasgui"), {
-        requestConfig: { endpoint: "http://example.com/sparql" },
-        copyEndpointOnNewTab: false,
-    });
+    //const yasgui = new Yasgui(document.getElementById("yasgui"), {
+    //    requestConfig: { endpoint: "http://example.com/sparql" },
+    //    copyEndpointOnNewTab: false,
+    //});
 
     // Fires when a query is executed
     //yasgui.on("query", (Yasgui, Tab) => {
     //    console.log('triggered run query button')
     //});
+
+    var yasgui = new Yasgui(document.getElementById("yasgui"), {
+        corsProxy: "/proxy",
+        nonSslDomain: "http://yasgui.triply.cc",
+        yasqe: {
+            createShortLink: function (yasqe, longString) {
+                return yasqe.superagent
+                    .post("https://api.triplydb.com/short")
+                    .send({ longUrl: longString })
+                    .then(function (resp) {
+                        return resp.body.error || resp.body.shortUrl;
+                    });
+            }
+        }
+    });
 
     fetch("data/data.txt").then(function (response) {
         return response
