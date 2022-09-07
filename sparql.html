@@ -1,6 +1,5 @@
-﻿<link href="https://unpkg.com/@triply/yasgui/build/yasgui.min.css" rel="stylesheet" type="text/css" />
-
-<script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
+﻿<link href="css/yasgui.min.css" rel="stylesheet" />
+<script src="js/yasgui.min.js"></script>
 
 <style>
     .yasgui .controlbar {
@@ -16,9 +15,8 @@
     </div>
 </div>
 
-
 <script src="js/n3.min.js"></script>
-<script src="https://rdf.js.org/comunica-browser/versions/v2.2.1/engines/query-sparql-rdfjs/comunica-browser.js"></script>
+<script src="js/comunica-browser.js"></script>
 
 <script>
     //////////////////////////////////////////////////////////////////
@@ -55,15 +53,15 @@
                     });
 
                     // Fires when a query is executed
-                    yasgui.on("query", (instance, tab) => {
+                    yasgui.on("query", async (instance, tab) => {
                         // Sparql
                         let myEngine = new Comunica.QueryEngine();
 
-                        const result = myEngine.query(tab.getQuery(), {
+                        const result = await myEngine.query(tab.getQuery(), {
                             sources: [store],
                         });
                         var json = '';
-                        const { data } = myEngine.resultToString(result, 'application/sparql-results+json');
+                        const { data } = await myEngine.resultToString(result, 'application/sparql-results+json');
                         //data.pipe(process.stdout);
                         //data.pipe(console.std)
                         //process.stdout.write(data)
