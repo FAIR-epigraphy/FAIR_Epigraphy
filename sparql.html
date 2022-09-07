@@ -72,37 +72,7 @@
                     console.log(prefixes)
                     
 
-                    // Fires when a query is executed
-                    yasgui.on("query", async (instance, tab) => {
-                        // Sparql
-                        let myEngine = new Comunica.QueryEngine();
-
-                        const result = await myEngine.query(tab.getQuery(), {
-                            sources: [store],
-                        });
-                        var json = '';
-                        const { data } = await myEngine.resultToString(result, 'application/sparql-results+json');
-                        //data.pipe(process.stdout);
-                        //data.pipe(console.std)
-                        //process.stdout.write(data)
-                        data.on('data', (d) => {
-                            //console.log(d);
-                            json += d.toString();
-                            return d.toString()
-                        })
-
-                        data.on('end', () => {
-                            //console.log(json)
-                            tab.yasr.setResponse({
-                                data: json,
-                                contentType: "application/sparql-results+json",
-                                status: 200,
-                                executionTime: 1000, // ms
-                                // error to show
-                            })
-                        })
-                        //////////////////////////////////////////////////////////////////////////
-                    });
+                    
                 }
 
             });
@@ -110,6 +80,41 @@
         console.log('Fetch problem show: ' + err.message);
     });
     ////////////////////////////////////////////////////////////////////////
+    var interval = setInterval(() => {
+        // Fires when a query is executed
+        yasgui.on("query", async (instance, tab) => {
+            // Sparql
+            let myEngine = new Comunica.QueryEngine();
+
+            const result = await myEngine.query(tab.getQuery(), {
+                sources: [store],
+            });
+            var json = '';
+            const { data } = await myEngine.resultToString(result, 'application/sparql-results+json');
+            //data.pipe(process.stdout);
+            //data.pipe(console.std)
+            //process.stdout.write(data)
+            data.on('data', (d) => {
+                //console.log(d);
+                json += d.toString();
+                return d.toString()
+            })
+
+            data.on('end', () => {
+                //console.log(json)
+                tab.yasr.setResponse({
+                    data: json,
+                    contentType: "application/sparql-results+json",
+                    status: 200,
+                    executionTime: 1000, // ms
+                    // error to show
+                })
+            })
+            //////////////////////////////////////////////////////////////////////////
+        });
+
+    }, 500)
+
     //let instance = yasgui.rootEl;
     //let tab = yasgui.tabPanelsEl;
 
