@@ -55,15 +55,15 @@
                     });
 
                     // Fires when a query is executed
-                    yasgui.on("query", async (instance, tab) => {
+                    yasgui.on("query", (instance, tab) => {
                         // Sparql
                         let myEngine = new Comunica.QueryEngine();
 
-                        const result = await myEngine.query(tab.getQuery(), {
+                        const result = myEngine.query(tab.getQuery(), {
                             sources: [store],
                         });
                         var json = '';
-                        const { data } = await myEngine.resultToString(result, 'application/sparql-results+json');
+                        const { data } = myEngine.resultToString(result, 'application/sparql-results+json');
                         //data.pipe(process.stdout);
                         //data.pipe(console.std)
                         //process.stdout.write(data)
