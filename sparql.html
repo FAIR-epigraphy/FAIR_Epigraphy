@@ -29,6 +29,11 @@
         copyEndpointOnNewTab: false,
     });
 
+    // Fires when a query is executed
+    yasgui.on("query", (Yasgui, Tab) => {
+        console.log('triggered run query button')
+    });
+
     //fetch("data/data.txt").then(function (response) {
     //    return response
     //}).then(function (data) {
