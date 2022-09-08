@@ -38,13 +38,11 @@ GUI (Graphical User Interface)
 This pilot has two main pages (Browse, All in one). The Browse page displays all the inscription data with minimal information (Figure 1);
 
 ![Browse Page](images/Figure1.png)
-
 Figure 1: Browse Page
 
 clicking on any inscription displays more detailed information about the inscription (Figure 2).
 
 ![Detailed Page](images/Figure2.png)
-
 Figure 2: Detailed information about inscription
 
 clicking on 'Show Inscription Text' button we can see Inscription text using [epidoc-viewer](https://github.com/ISicily/epidoc-viewer) (Figure 3).
@@ -55,7 +53,6 @@ Figure 3: I.Sicily EpiDoc Viewer
 The All in One page shows all inscription data over the map; clicking on a map-marker generates a pop-up which will provide basic details and links to individual inscriptions. (Figure 4).
 
 ![All in One Page](images/Figure4.png)
-
 Figure 4: All in One Page
 
 Contributors
