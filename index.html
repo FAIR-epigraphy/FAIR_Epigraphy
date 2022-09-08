@@ -140,7 +140,12 @@
         }
 
         function get_hostname(url) {
-            var m = url.match(/^http:\/\/[^/]+/);
+            var m;
+            if (url.indexOf('https') !== -1)
+                m = url.match(/^https:\/\/[^/]+/);
+            else
+                m = url.match(/^http:\/\/[^/]+/);
+
             return m ? m[0] : null;
         }
 
