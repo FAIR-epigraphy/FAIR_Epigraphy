@@ -1,12 +1,16 @@
 ﻿<!--<link href="css/yasgui.min.css" rel="stylesheet" />-->
 <!--<script src="js/yasgui.min.js"></script>-->
-<link href="css/yasgui-pro.min.css" rel="stylesheet" />
-<script src="js/yasgui-pro.min.js"></script>
-<!--<style>
+<!--<link href="css/yasgui-pro.min.css" rel="stylesheet" />
+<script src="js/yasgui-pro.min.js"></script>-->
+<style>
     .yasgui .controlbar {
         display: none !important;
     }
-</style>-->
+
+    .yasr_external_ref_btn {
+        display: none !important;
+    }
+</style>
 
 <div class="container-fluid">
     <div class="row">
@@ -16,8 +20,8 @@
     </div>
 </div>
 
-<script src="js/n3.min.js"></script>
-<script src="js/comunica-browser.js"></script>
+<!--<script src="js/n3.min.js"></script>
+<script src="js/comunica-browser.js"></script>-->
 
 <script>
     //////////////////////////////////////////////////////////////////
@@ -25,34 +29,36 @@
     const { DataFactory } = N3;
     const { namedNode, literal, defaultGraph, quad } = DataFactory;
     var store = new N3.Store();
-    //const yasgui = new Yasgui(document.getElementById("yasgui"), {
-    //    requestConfig: { endpoint: "http://example.com/sparql" },
-    //    copyEndpointOnNewTab: false,
-    //});
+    const yasgui = new Yasgui(document.getElementById("yasgui"), {
+        requestConfig: {
+            endpoint: "",
+            method: ''
+        },
+        copyEndpointOnNewTab: false,
 
-    // Fires when a query is executed
-    //yasgui.on("query", (Yasgui, Tab) => {
-    //    console.log('triggered run query button')
-    //});
-
-    var yasgui = new Yasgui(document.getElementById("yasgui"), {
-        requestConfig: { endpoint: undefined },
-        yasqe: {}
     });
 
-    // Fires when a query is executed
-    yasgui.on("query", async (instance, tab) => {
-        // Sparql
+    yasgui.selectTabId().yasqeWrapperEl.getElementsByClassName('yasqe_queryButton')[0].addEventListener('click', runQuery)
+
+    document.getElementsByClassName('addTab')[0].addEventListener('click', (e) => {
+        yasgui.selectTabId().yasqeWrapperEl.getElementsByClassName('yasqe_queryButton')[0].addEventListener('click', runQuery)
+    })
+
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            yasgui.selectTabId().yasqeWrapperEl.getElementsByClassName('yasqe_queryButton')[0].addEventListener('click', runQuery)
+        })
+    })
+
+    async function runQuery(e) {
         let myEngine = new Comunica.QueryEngine();
 
-        const result = await myEngine.query(tab.getQuery(), {
+        const result = await myEngine.query(yasgui.selectTabId().yasqe.getValue(), {
             sources: [store],
         });
         var json = '';
         const { data } = await myEngine.resultToString(result, 'application/sparql-results+json');
-        //data.pipe(process.stdout);
-        //data.pipe(console.std)
-        //process.stdout.write(data)
+
         data.on('data', (d) => {
             //console.log(d);
             json += d.toString();
@@ -61,7 +67,7 @@
 
         data.on('end', () => {
             //console.log(json)
-            tab.yasr.setResponse({
+            yasgui.selectTabId().yasr.setResponse({
                 data: json,
                 contentType: "application/sparql-results+json",
                 status: 200,
@@ -69,9 +75,7 @@
                 // error to show
             })
         })
-        //////////////////////////////////////////////////////////////////////////
-    });
-
+    }
     fetch("data/data.txt").then(function (response) {
         return response
     }).then(function (data) {
@@ -91,7 +95,6 @@
                 }
                 else {
                     /////////////////////////////////////////////////
-                    console.log('yes we have the data')
                     console.log(prefixes)
                 }
 
@@ -100,26 +103,5 @@
         console.log('Fetch problem show: ' + err.message);
     });
     ////////////////////////////////////////////////////////////////////////
-    //let instance = yasgui.rootEl;
-    //let tab = yasgui.tabPanelsEl;
-
-    //tab.yasr.setResponse({
-    //    data: '',
-    //    contentType: "application/sparql-results+json",
-    //    status: 200,
-    //    executionTime: 1000, // ms
-    //    // error to show
-    //})
-
-    //let Yasqui = document.getElementById("yasgui");
-
-    //yasgui.on("queryResponse", (Yasgui, tab) => {
-    //    tab.yasr.setResponse({
-    //        data: '',
-    //        contentType: "application/sparql-results+json",
-    //        status: 200,
-    //        executionTime: 1000, // ms
-    //        // error to show
-    //    })
-    //});
+   
 </script>
