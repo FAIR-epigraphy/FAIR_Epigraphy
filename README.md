@@ -47,11 +47,14 @@ clicking on any inscription displays more detailed information about the inscrip
 
 Figure 2: Detailed information about inscription
 
+clicking on 'Show Inscription Text' button we can see Inscription text using [epidoc-viewer](https://github.com/ISicily/epidoc-viewer) (Figure 3).
+![Detailed Page](images/Figure3.png)
+
 The All in One page shows all inscription data over the map; clicking on a map-marker generates a pop-up which will provide basic details and links to individual inscriptions. (Figure 3).
 
-![All in One Page](images/Figure3.png)
+![All in One Page](images/Figure4.png)
 
-Figure 3: All in One Page
+Figure 4: All in One Page
 
 Contributors
 ------------
