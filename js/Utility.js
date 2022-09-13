@@ -197,7 +197,31 @@ async function getLatLng(API_URL) {
 
     return null;
 }
+///////////////////////////////////////////////////////////////////
+/// Get visualisation
+async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
+    //let from = 'ttl'
+    //let to = 'svg';
 
+    rdf = encodeURIComponent(rdfdata).replaceAll('%20', '+');;
+
+    var proxyUrl = 'https://intense-cliffs-42360.herokuapp.com/',
+        targetUrl = `https://www.ldf.fi/service/rdf-grapher?rdf=${rdf}&from=${from}&to=${to}`
+    //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
+
+    var url = proxyUrl + targetUrl;
+
+    const response = await fetch(url, {
+        method: 'POST',
+    });
+    const imageBlob = await response.blob()
+    const reader = new FileReader();
+    reader.readAsDataURL(imageBlob);
+    reader.onloadend = () => {
+        const base64data = reader.result;
+        $(controlToShow).attr('src', base64data);
+    }
+}
 
 /////////////////////////////////////////////////////////////////
 //// Get Relations with other data sources using TM Relation API

@@ -1,4 +1,7 @@
 ﻿//localStorage.removeItem('jsonObj');
+$('#loading').show()
+$('.showDiv').hide();
+//////////////////////////////////////////////////////////////////
 const inscription = JSON.parse(localStorage.getItem('jsonObj'));
 $('#ins_id').html(`<a class="text-decoration-none" href="${inscription.inscriptionURI}" target="_blank">${getInscriptionId(inscription.inscriptionId)}: ${inscription.inscriptionLabel}</a>`);
 $('#tmId').html(`${getTrismegistosID(inscription.tmId)}`);
@@ -6,7 +9,15 @@ $('#material').html(`${getMaterial(inscription.materialLink, inscription.materia
 $('#objectType').html(`${getObjectType(inscription.objTypeLink, inscription.objectType)}`);
 $('#language').html(`${getLanguageName(inscription.language)}`);
 //$('#inc_text').html(`<pre>${inscription.inscriptionText.replace('Text', '')}</pre>`);
+//////////////////////////////////////////////////////////////////////////////
+//// Display image
+async function f() {
+    await getVisualisationFromRDF(inscription.rdfData, 'ttl', 'png', '#visualiseRDFInImage');
+    $('#loading').hide()
+    $('.showDiv').show();
+}; f();
 
+////////////////////////////////////////////////////////////////////////////
 (async () => {
     let text = await getEpiDocText(getInscriptionId(inscription.inscriptionId), inscription.inscriptionId);
     $('#inc_text').next('div').remove();
