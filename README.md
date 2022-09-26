@@ -31,6 +31,7 @@ This project makes visible and searchable the epigraphic data within these datas
 *   Convert XML data to RDF using [xTriples](https://xtriples.lod.academy/index.html) templates
 *   Develop the front-end side using [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 *   Enable the front-end using the backend with the help of JavaScript language
+*   Provide the SPARQL Editor to play with the RDF data using [Yasgui API](https://github.com/TriplyDB/Yasgui)
 
 GUI (Graphical User Interface)
 ------------------------------
