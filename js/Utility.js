@@ -269,7 +269,672 @@ async function getRelations(tm_id, control) {
     else
         return closeMatches;
 }
+///////////////////////////////////////////////////////////////////
+/// SPARQL Queries
+const SAPRQL_Queries = [{
+    Queries: [{
+        Full_Query: `PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+                    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX isicily: <http://sicily.classics.ox.ac.uk/> 
+                    PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/> 
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/> 
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
 
+                    SELECT DISTINCT ?page ?title ?latlng ?language 
+                     WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                        epont:carriesText ?writtenText .
+                           ?writtenText foaf:page ?page  ;
+                            crm:P108_was_produced_by ?writing .
+                            ?writing crmtex:TXP1_used_writing_system ?language .
+                            OPTIONAL { ?sub rdfs:label ?title }
+                            OPTIONAL { ?writtenText foaf:page ?page }
+                            OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                     ?geo geo:lat_long ?latlng . }
+                          FILTER(STR(?language) = "la") 
+                    } `,
+        Preview_Query: `SELECT DISTINCT ?page ?title ?latlng ?language
+                          WHERE {
+                              ?sub a crm:E22_Human-Made_Object ;
+  	                            epont:carriesText ?writtenText .
+                               ?writtenText foaf:page ?page  ;
+                                crm:P108_was_produced_by ?writing .
+                              ?writing crmtex:TXP1_used_writing_system ?language .
+                              OPTIONAL { ?sub rdfs:label ?title }
+                              OPTIONAL { ?writtenText foaf:page ?page }
+                              OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                         ?geo geo:lat_long ?latlng . }
+                             FILTER(STR(?language) = "la") `,
+        query: 'Show in List'
+    },
+    {
+        Full_Query: `PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/> 
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/> 
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+
+                    SELECT (COUNT(DISTINCT ?page) as ?totalNumber)  
+                     WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                        epont:carriesText ?writtenText .
+                           ?writtenText foaf:page ?page  ;
+                            crm:P108_was_produced_by ?writing .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          FILTER(STR(?language) = "la") 
+                    } `,
+        Preview_Query: `SELECT (COUNT(DISTINCT ?page) as ?totalNumber)  
+                         WHERE {
+                              ?sub a crm:E22_Human-Made_Object ;
+  	                            epont:carriesText ?writtenText .
+                               ?writtenText foaf:page ?page  ;
+                                crm:P108_was_produced_by ?writing .
+                               ?writing crmtex:TXP1_used_writing_system ?language .
+                               FILTER(STR(?language) = "la") 
+                         } `,
+        query: `Total number`
+    }
+    ],
+    Query: `Show all the Latin inscriptions`,
+}, {
+    Queries: [{
+        Full_Query: `PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+                    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX isicily: <http://sicily.classics.ox.ac.uk/> 
+                    PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/> 
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/> 
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+
+                    SELECT DISTINCT ?page ?title ?latlng ?language WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                    epont:carriesText ?writtenText .
+                       ?writtenText foaf:page ?page  ;
+                        crm:P108_was_produced_by ?writing .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      OPTIONAL { ?sub rdfs:label ?title }
+                      OPTIONAL { ?writtenText foaf:page ?page }
+                      OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                 ?geo geo:lat_long ?latlng . }
+                      FILTER(STR(?language) = "grc") 
+                    } `,
+        Preview_Query: `SELECT DISTINCT ?page ?title ?latlng ?language WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                        epont:carriesText ?writtenText .
+                           ?writtenText foaf:page ?page  ;
+                            crm:P108_was_produced_by ?writing .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          OPTIONAL { ?sub rdfs:label ?title }
+                          OPTIONAL { ?writtenText foaf:page ?page }
+                          OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                     ?geo geo:lat_long ?latlng . }
+                          FILTER(STR(?language) = "grc") 
+                        } `,
+        query: 'Show in List'
+    },
+    {
+        Full_Query: `PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/> 
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/> 
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/>  
+
+                    SELECT (COUNT(DISTINCT ?page) as ?totalNumber)  WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                    epont:carriesText ?writtenText .
+                       ?writtenText foaf:page ?page  ;
+                        crm:P108_was_produced_by ?writing .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      FILTER(STR(?language) = "grc") 
+                    } `,
+        Preview_Query: `SELECT (COUNT(DISTINCT ?page) as ?totalNumber)  WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                        epont:carriesText ?writtenText .
+                           ?writtenText foaf:page ?page  ;
+                            crm:P108_was_produced_by ?writing .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          FILTER(STR(?language) = "grc") 
+                        } `,
+        query: `Total number`
+    }],
+    Query: `Show all the Greek inscriptions`,
+}, {
+    Queries: [{
+        Full_Query: `PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+                    PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+                    SELECT ?page ?title ?latlng ?language ?material ?materialLink WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                       nmo:Material ?material ;
+  	                    epont:carriesText ?writtenText .
+                       ?writtenText foaf:page ?page  ;
+                        crm:P108_was_produced_by ?writing .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      OPTIONAL { ?sub rdfs:label ?title }
+                      OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                      OPTIONAL { ?writtenText foaf:page ?page }
+                      OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                 ?geo geo:lat_long ?latlng . }
+                      FILTER(lcase(STR(?material)) = "marble") 
+                    } `,
+        Preview_Query: `SELECT ?page ?title ?latlng ?language ?material ?materialLink WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                           nmo:Material ?material ;
+  	                        epont:carriesText ?writtenText .
+                           ?writtenText foaf:page ?page  ;
+                            crm:P108_was_produced_by ?writing .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          OPTIONAL { ?sub rdfs:label ?title }
+                          OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                          OPTIONAL { ?writtenText foaf:page ?page }
+                          OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                 ?geo geo:lat_long ?latlng . }
+                       FILTER(lcase(STR(?material)) = "marble")  `,
+        query: 'Show in List'
+    },
+    {
+        Full_Query: `PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+
+                    SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                       nmo:Material ?material .
+                      FILTER(lcase(STR(?material)) = "marble") 
+                    } `,
+        Preview_Query: `SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                           nmo:Material ?material .
+                          FILTER(lcase(STR(?material)) = "marble") 
+                        }`,
+        query: `Total number`
+    }],
+    Query: `Show all the the marble inscriptions`,
+}, {
+    Queries: [{
+        Full_Query: `PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+                    PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+                    SELECT ?page ?title ?latlng ?language ?material ?materialLink WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                       nmo:Material ?material ;
+  	                    epont:carriesText ?writtenText .
+                       ?writtenText foaf:page ?page  ;
+                        crm:P108_was_produced_by ?writing .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      OPTIONAL { ?sub rdfs:label ?title }
+                      OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                      OPTIONAL { ?writtenText foaf:page ?page }
+                      OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                 ?geo geo:lat_long ?latlng . }
+                      FILTER(lcase(STR(?material)) = "marble" && STR(?language) = "la") 
+                    } `,
+        Preview_Query: `SELECT ?page ?title ?latlng ?language ?material ?materialLink WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                           nmo:Material ?material ;
+  	                        epont:carriesText ?writtenText .
+                           ?writtenText foaf:page ?page  ;
+                            crm:P108_was_produced_by ?writing .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          OPTIONAL { ?sub rdfs:label ?title }
+                          OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                          OPTIONAL { ?writtenText foaf:page ?page }
+                          OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                     ?geo geo:lat_long ?latlng . }
+                          FILTER(lcase(STR(?material)) = "marble" && STR(?language) = "la") 
+                        } `,
+        query: 'Show in List'
+    },
+    {
+        Full_Query: `PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+
+                    SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	  	                     nmo:Material ?material ;
+                             epont:carriesText ?writtenText .
+                       ?writtenText crm:P108_was_produced_by ?writing .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      FILTER(lcase(STR(?material)) = "marble" && STR(?language) = "la") 
+                    } `,
+        Preview_Query: `SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	  	                         nmo:Material ?material ;
+                                 epont:carriesText ?writtenText .
+                           ?writtenText crm:P108_was_produced_by ?writing .
+                           ?writing crmtex:TXP1_used_writing_system ?language .
+                          FILTER(lcase(STR(?material)) = "marble" && STR(?language) = "la") 
+                        }`,
+        query: `Total number`
+    }],
+    Query: `Show all the Latin on marble inscriptions`,
+}, {
+    Queries: [{
+        Full_Query: `PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+                    PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+                    SELECT ?page ?title ?latlng ?language ?material ?materialLink WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                       nmo:Material ?material ;
+  	                    epont:carriesText ?writtenText .
+                       ?writtenText foaf:page ?page  ;
+                        crm:P108_was_produced_by ?writing .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      OPTIONAL { ?sub rdfs:label ?title }
+                      OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                      OPTIONAL { ?writtenText foaf:page ?page }
+                      OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                 ?geo geo:lat_long ?latlng . }
+                      FILTER(lcase(STR(?material)) = "marble" && STR(?language) = "grc") 
+                    } `,
+        Preview_Query: `SELECT ?page ?title ?latlng ?language ?material ?materialLink WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                           nmo:Material ?material ;
+  	                        epont:carriesText ?writtenText .
+                           ?writtenText foaf:page ?page  ;
+                            crm:P108_was_produced_by ?writing .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          OPTIONAL { ?sub rdfs:label ?title }
+                          OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                          OPTIONAL { ?writtenText foaf:page ?page }
+                          OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                     ?geo geo:lat_long ?latlng . }
+                          FILTER(lcase(STR(?material)) = "marble" && STR(?language) = "grc") 
+                        }`,
+        query: 'Show in List'
+    },
+    {
+        Full_Query: `PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+
+                    SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	  	                     nmo:Material ?material ;
+                             epont:carriesText ?writtenText .
+                       ?writtenText crm:P108_was_produced_by ?writing .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      FILTER(lcase(STR(?material)) = "marble" && STR(?language) = "grc") 
+                    } `,
+        Preview_Query: `SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	  	                         nmo:Material ?material ;
+                                 epont:carriesText ?writtenText .
+                           ?writtenText crm:P108_was_produced_by ?writing .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          FILTER(lcase(STR(?material)) = "marble" && STR(?language) = "grc") 
+                        }`,
+        query: `Total number`
+    }],
+    Query: `Show all the Greek on marble inscriptions`,
+}, {
+    Queries: [{
+        Full_Query: `PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+
+                    SELECT DISTINCT ?objectType WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                       nmo:hasObjectType ?objectType
+                    } `,
+        Preview_Query: `SELECT DISTINCT ?objectType WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                           nmo:hasObjectType ?objectType
+                        } `,
+        query: 'Show in List'
+    }
+    ],
+    Query: `List all the object types?`,
+}, {
+    Queries: [{
+        Full_Query: `PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+                    PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX crmsci: <http://www.cidoc-crm.org/crmsci/>
+                    PREFIX edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#>
+
+                    SELECT ?page ?title ?latlng ?language ?material ?materialLink WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                       nmo:Material ?material ;
+  	                    epont:carriesText ?writtenText .
+                       ?writtenText foaf:page ?page  ;
+                        crm:P108_was_produced_by ?writing ;
+                        crmsci:O6_observed_by ?reading .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      ?reading crm:P20_had_specific_purpose ?transcription .
+                      ?transcription edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html>
+                      OPTIONAL { ?sub rdfs:label ?title }
+                      OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                      OPTIONAL { ?writtenText foaf:page ?page }
+                      OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                 ?geo geo:lat_long ?latlng . }
+                    } `,
+        Preview_Query: `SELECT ?page ?title ?latlng ?language ?material ?materialLink WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                           nmo:Material ?material ;
+  	                        epont:carriesText ?writtenText .
+                           ?writtenText foaf:page ?page  ;
+                            crm:P108_was_produced_by ?writing ;
+                            crmsci:O6_observed_by ?reading .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          ?reading crm:P20_had_specific_purpose ?transcription .
+                          ?transcription edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html>
+                          OPTIONAL { ?sub rdfs:label ?title }
+                          OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                          OPTIONAL { ?writtenText foaf:page ?page }
+                          OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                     ?geo geo:lat_long ?latlng . }
+                        } `,
+        query: 'Show in List'
+    },
+    {
+        Full_Query: `PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX crmsci: <http://www.cidoc-crm.org/crmsci/>
+                    PREFIX edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#>
+
+                    SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                    epont:carriesText ?writtenText .
+                      ?writtenText crm:P108_was_produced_by ?writing ;
+                        crmsci:O6_observed_by ?reading .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      ?reading crm:P20_had_specific_purpose ?transcription .
+                      ?transcription edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html>
+                    } `,
+        Preview_Query: `SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                        epont:carriesText ?writtenText .
+                          ?writtenText crm:P108_was_produced_by ?writing ;
+                            crmsci:O6_observed_by ?reading .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          ?reading crm:P20_had_specific_purpose ?transcription .
+                          ?transcription edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html>
+                        }`,
+        query: `Total number`
+    }],
+    Query: `Show all the <a href="https://www.eagle-network.eu/voc/typeins/lod/92.html" target="_blank">funerary epitaphs</a>`,
+}, {
+    Queries: [{
+        Full_Query: `PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+                    PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX crmsci: <http://www.cidoc-crm.org/crmsci/>
+                    PREFIX edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#>
+
+                    SELECT ?page ?title ?latlng ?language ?material ?materialLink WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                       nmo:Material ?material ;
+  	                    epont:carriesText ?writtenText .
+                       ?writtenText foaf:page ?page  ;
+                        crm:P108_was_produced_by ?writing ;
+                        crmsci:O6_observed_by ?reading .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      ?reading crm:P20_had_specific_purpose ?transcription .
+                      ?transcription crm:P14_carried_out_by <http://orcid.org/0000-0003-3819-8537>
+                      OPTIONAL { ?sub rdfs:label ?title }
+                      OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                      OPTIONAL { ?writtenText foaf:page ?page }
+                      OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                 ?geo geo:lat_long ?latlng . }
+                    } `,
+        Preview_Query: `SELECT ?page ?title ?latlng ?language ?material ?materialLink WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                           nmo:Material ?material ;
+  	                        epont:carriesText ?writtenText .
+                           ?writtenText foaf:page ?page  ;
+                            crm:P108_was_produced_by ?writing ;
+                            crmsci:O6_observed_by ?reading .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          ?reading crm:P20_had_specific_purpose ?transcription .
+                          ?transcription crm:P14_carried_out_by <http://orcid.org/0000-0003-3819-8537>
+                          OPTIONAL { ?sub rdfs:label ?title }
+                          OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                          OPTIONAL { ?writtenText foaf:page ?page }
+                          OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                     ?geo geo:lat_long ?latlng . }
+                        }`,
+        query: 'Show in List'
+    },
+    {
+        Full_Query: `PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX crmsci: <http://www.cidoc-crm.org/crmsci/>
+                    PREFIX edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#>
+
+                    SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                    epont:carriesText ?writtenText .
+                      ?writtenText crm:P108_was_produced_by ?writing ;
+                        crmsci:O6_observed_by ?reading .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      ?reading crm:P20_had_specific_purpose ?transcription .
+                      ?transcription crm:P14_carried_out_by <http://orcid.org/0000-0003-3819-8537>
+                    } `,
+        Preview_Query: `SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                        epont:carriesText ?writtenText .
+                          ?writtenText crm:P108_was_produced_by ?writing ;
+                            crmsci:O6_observed_by ?reading .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          ?reading crm:P20_had_specific_purpose ?transcription .
+                          ?transcription crm:P14_carried_out_by <http://orcid.org/0000-0003-3819-8537>
+                        } `,
+        query: `Total number`
+    }],
+    Query: `Show all inscriptions to which <b>Jonathan R.W. Prag</b> contributed `,
+}, {
+    Queries: [{
+        Full_Query: `PREFIX pav: <http://purl.org/pav/>
+                    PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+                    PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+                    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX crmsci: <http://www.cidoc-crm.org/crmsci/>
+                    PREFIX edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#>
+
+                    SELECT ?page ?title ?latlng ?language ?material ?materialLink ?authoredBy WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                       nmo:Material ?material ;
+                          pav:authoredBy ?authoredBy ;
+  	                    epont:carriesText ?writtenText .
+                       ?writtenText foaf:page ?page  ;
+                        crm:P108_was_produced_by ?writing ;
+                        crmsci:O6_observed_by ?reading .
+                      ?writing crmtex:TXP1_used_writing_system ?language .
+                      ?reading crm:P20_had_specific_purpose ?transcription .
+                      ?transcription edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html>
+                      OPTIONAL { ?sub rdfs:label ?title }
+                      OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                      OPTIONAL { ?writtenText foaf:page ?page }
+                      OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                 ?geo geo:lat_long ?latlng . }
+                     FILTER(lcase(STR(?authoredBy)) = "i.sicily") 
+                    } `,
+        Preview_Query: `SELECT ?page ?title ?latlng ?language ?material ?materialLink ?authoredBy 
+                        WHERE {
+                              ?sub a crm:E22_Human-Made_Object ;
+  	                               nmo:Material ?material ;
+                                  pav:authoredBy ?authoredBy ;
+  	                            epont:carriesText ?writtenText .
+                               ?writtenText foaf:page ?page  ;
+                                crm:P108_was_produced_by ?writing ;
+                                crmsci:O6_observed_by ?reading .
+                              ?writing crmtex:TXP1_used_writing_system ?language .
+                              ?reading crm:P20_had_specific_purpose ?transcription .
+                              ?transcription edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html>
+                              OPTIONAL { ?sub rdfs:label ?title }
+                              OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                              OPTIONAL { ?writtenText foaf:page ?page }
+                              OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                         ?geo geo:lat_long ?latlng . }
+                             FILTER(lcase(STR(?authoredBy)) = "i.sicily") 
+                        } `,
+        query: 'Show in List'
+    },
+    {
+        Full_Query: `PREFIX pav: <http://purl.org/pav/>
+                    PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                    PREFIX crm: <http://erlangen-crm.org/current/>
+                    PREFIX nmo: <http://nomisma.org/ontology#>
+                    PREFIX crmsci: <http://www.cidoc-crm.org/crmsci/>
+                    PREFIX edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#>
+
+                    SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                      ?sub a crm:E22_Human-Made_Object ;
+  	                       nmo:Material ?material ;
+                           pav:authoredBy ?authoredBy ;
+  	                       epont:carriesText ?writtenText .
+                      ?writtenText crm:P108_was_produced_by ?writing ;
+   			                       crmsci:O6_observed_by ?reading .
+                      ?reading crm:P20_had_specific_purpose ?transcription .
+                      ?transcription edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html>
+                     FILTER(lcase(STR(?authoredBy)) = "i.sicily") 
+                    } `,
+        Preview_Query: `SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                           nmo:Material ?material ;
+                               pav:authoredBy ?authoredBy ;
+  	                           epont:carriesText ?writtenText .
+                          ?writtenText crm:P108_was_produced_by ?writing ;
+   			                           crmsci:O6_observed_by ?reading .
+                          ?reading crm:P20_had_specific_purpose ?transcription .
+                          ?transcription edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/92.html>
+                         FILTER(lcase(STR(?authoredBy)) = "i.sicily") 
+                        } `,
+        query: `Total number`
+    }],
+    Query: `How many funerary inscriptions in Sicily?`,
+    }, {
+        Queries: [{
+            Full_Query: `PREFIX pav: <http://purl.org/pav/>
+                        PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+                        PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                        PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                        PREFIX crm: <http://erlangen-crm.org/current/>
+                        PREFIX nmo: <http://nomisma.org/ontology#>
+                        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                        PREFIX crmsci: <http://www.cidoc-crm.org/crmsci/>
+                        PREFIX edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#>
+
+                        SELECT ?page ?title ?latlng ?language ?material ?materialLink ?authoredBy WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+  	                           nmo:Material ?material ;
+                              pav:authoredBy ?authoredBy ;
+  	                        epont:carriesText ?writtenText .
+                           ?writtenText foaf:page ?page  ;
+                            crm:P108_was_produced_by ?writing ;
+                            crmsci:O6_observed_by ?reading .
+                          ?writing crmtex:TXP1_used_writing_system ?language .
+                          ?reading crm:P20_had_specific_purpose ?transcription .
+                          ?transcription edh:representsTypeOfInscription "Epitaph"
+                          OPTIONAL { ?sub rdfs:label ?title }
+                          OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                          OPTIONAL { ?writtenText foaf:page ?page }
+                          OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                     ?geo geo:lat_long ?latlng . }
+                          FILTER(contains(lcase(STR(?authoredBy)), "britain")) 
+                        } `,
+            Preview_Query: `SELECT ?page ?title ?latlng ?language ?material ?materialLink ?authoredBy 
+                            WHERE {
+                              ?sub a crm:E22_Human-Made_Object ;
+  	                               nmo:Material ?material ;
+                                  pav:authoredBy ?authoredBy ;
+  	                            epont:carriesText ?writtenText .
+                               ?writtenText foaf:page ?page  ;
+                                crm:P108_was_produced_by ?writing ;
+                                crmsci:O6_observed_by ?reading .
+                              ?writing crmtex:TXP1_used_writing_system ?language .
+                              ?reading crm:P20_had_specific_purpose ?transcription .
+                              ?transcription edh:representsTypeOfInscription "Epitaph"
+                              OPTIONAL { ?sub rdfs:label ?title }
+                              OPTIONAL { ?sub nmo:hasMaterial ?materialLink }
+                              OPTIONAL { ?writtenText foaf:page ?page }
+                              OPTIONAL { ?sub geo:SpatialThing ?geo .
+                                         ?geo geo:lat_long ?latlng . }
+                              FILTER(contains(lcase(STR(?authoredBy)), "britain")) 
+                            }`,
+            query: 'Show in List'
+        },
+        {
+            Full_Query: `PREFIX pav: <http://purl.org/pav/>
+                        PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
+                        PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
+                        PREFIX crm: <http://erlangen-crm.org/current/>
+                        PREFIX crmsci: <http://www.cidoc-crm.org/crmsci/>
+                        PREFIX edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#>
+
+                        SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                          ?sub a crm:E22_Human-Made_Object ;
+                               pav:authoredBy ?authoredBy ;
+  	                           epont:carriesText ?writtenText .
+                               ?writtenText crmsci:O6_observed_by ?reading .
+                               ?reading crm:P20_had_specific_purpose ?transcription .
+                               ?transcription edh:representsTypeOfInscription "Epitaph"
+                          FILTER(contains(lcase(STR(?authoredBy)), "britain")) 
+                        } `,
+            Preview_Query: `SELECT (COUNT(*) as ?TotalNumber) WHERE {
+                              ?sub a crm:E22_Human-Made_Object ;
+                                   pav:authoredBy ?authoredBy ;
+  	                               epont:carriesText ?writtenText .
+                                   ?writtenText crmsci:O6_observed_by ?reading .
+                                   ?reading crm:P20_had_specific_purpose ?transcription .
+                                   ?transcription edh:representsTypeOfInscription "Epitaph"
+                              FILTER(contains(lcase(STR(?authoredBy)), "britain")) 
+                            } `,
+            query: `Total number`
+        }],
+    Query: `How many funerary inscriptions in Britain?`,
+    }
+]
 
 ////////////////////////////////////////////////////////////////////
 /// Lang code to Language name

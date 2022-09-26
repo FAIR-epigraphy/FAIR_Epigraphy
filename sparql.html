@@ -1,7 +1,7 @@
 ﻿<!--<link href="css/yasgui.min.css" rel="stylesheet" />-->
 <!--<script src="js/yasgui.min.js"></script>-->
-<!--<link href="css/yasgui-pro.min.css" rel="stylesheet" />
-<script src="js/yasgui-pro.min.js"></script>-->
+<link href="css/yasgui-pro.min.css" rel="stylesheet" />
+<script src="js/yasgui-pro.min.js"></script>
 <style>
     .yasgui .controlbar {
         display: none !important;
@@ -10,6 +10,22 @@
     .yasr_external_ref_btn {
         display: none !important;
     }
+
+    pre {
+        white-space: pre-line;
+        background: #f8f9fa;
+        border-radius: 2px;
+        color: #222;
+        display: block;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+    }
+
+    .popover {
+        max-width: 50%; /* Max Width of the popover (depending on the container!) */
+    }
 </style>
 
 <div class="container-fluid">
@@ -17,91 +33,74 @@
         <div class="col-md-12">
             <div id="yasgui"></div>
         </div>
+        <div class="col-md-12 mt-3">
+
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <div id="modalButton" style="display:none;">
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">SPARQL Examples</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tbody id="divQueries">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Prefixes -->
+    <div class="modal fade" id="modalPrefixes" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-node-plus-fill fs-3"></i> Add Prefixes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group" id="divPrefixes">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reset History Modal HTML -->
+    <div id="modalHistory" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header flex-column">
+                    <div class="icon-box">
+                        <i class="bi bi-x-lg"></i>
+                    </div>
+                    <h4 class="modal-title w-100">Are you sure?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete history? This process will remove all your queries and reset the editor.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" onclick="DeleteHistory()">Delete</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<!--<script src="js/n3.min.js"></script>
-<script src="js/comunica-browser.js"></script>-->
-
-<script>
-    //////////////////////////////////////////////////////////////////
-    /// Load data
-    const { DataFactory } = N3;
-    const { namedNode, literal, defaultGraph, quad } = DataFactory;
-    var store = new N3.Store();
-    const yasgui = new Yasgui(document.getElementById("yasgui"), {
-        requestConfig: {
-            endpoint: "",
-            method: ''
-        },
-        copyEndpointOnNewTab: false,
-
-    });
-
-    yasgui.selectTabId().yasqeWrapperEl.getElementsByClassName('yasqe_queryButton')[0].addEventListener('click', runQuery)
-
-    document.getElementsByClassName('addTab')[0].addEventListener('click', (e) => {
-        yasgui.selectTabId().yasqeWrapperEl.getElementsByClassName('yasqe_queryButton')[0].addEventListener('click', runQuery)
-    })
-
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.addEventListener('click', (e) => {
-            yasgui.selectTabId().yasqeWrapperEl.getElementsByClassName('yasqe_queryButton')[0].addEventListener('click', runQuery)
-        })
-    })
-
-    async function runQuery(e) {
-        let myEngine = new Comunica.QueryEngine();
-
-        const result = await myEngine.query(yasgui.selectTabId().yasqe.getValue(), {
-            sources: [store],
-        });
-        var json = '';
-        const { data } = await myEngine.resultToString(result, 'application/sparql-results+json');
-
-        data.on('data', (d) => {
-            //console.log(d);
-            json += d.toString();
-            return d.toString()
-        })
-
-        data.on('end', () => {
-            //console.log(json)
-            yasgui.selectTabId().yasr.setResponse({
-                data: json,
-                contentType: "application/sparql-results+json",
-                status: 200,
-                executionTime: 1000, // ms
-                // error to show
-            })
-        })
-    }
-    fetch("data/data.txt").then(function (response) {
-        return response
-    }).then(function (data) {
-        return data.text()
-    }).then(function (dataset) {
-        const parser = new N3.Parser();
-        parser.parse(dataset,
-            (error, quaad, prefixes) => {
-                if (quaad) {
-                    //console.log(quad);
-                    store.addQuad(
-                        quaad.subject,
-                        quaad.predicate,
-                        quaad.object,
-                        //namedNode(graph)
-                    )
-                }
-                else {
-                    /////////////////////////////////////////////////
-                    console.log(prefixes)
-                }
-
-            });
-    }).catch(function (err) {
-        console.log('Fetch problem show: ' + err.message);
-    });
-    ////////////////////////////////////////////////////////////////////////
-   
-</script>
+<script src="js/n3.min.js"></script>
+<script src="js/comunica-browser.js"></script>
+<script src="js/Utility.js"></script>
+<script src="js/sparql_editor.js"></script>
