@@ -114,21 +114,6 @@ function refreshYasguiControls() {
 }
 
 function createModalButtons() {
-    //document.getElementById('modalButton').innerHTML =
-    //    `<button id="btnModal" type="button" class="btn btn-outline-secondary fs-6 float-start" data-bs-toggle="modal" data-bs-target="#exampleModal" title="SPARQL Examples">
-    //            <i class="bi bi-folder2-open"></i>
-    //        </button>`
-
-    //document.getElementById('modalButton').innerHTML +=
-    //    `<button id="btnModalPrefix" type="button" class="btn btn-outline-secondary fs-6 float-start" data-bs-toggle="modal" data-bs-target="#modalPrefixes" title="Add Prefixes" onclick="DisplayPrefixes()">
-    //            <i class="bi bi-link-45deg"></i>
-    //        </button>`
-
-    //document.getElementById('modalButton').innerHTML +=
-    //    `<button id="btnResetHistory" type="button" class="btn btn-outline-danger fs-6 float-start" data-bs-toggle="modal" data-bs-target="#modalHistory" title="Delete History">
-    //            <i class="bi bi-clock-history"></i>
-    //    </button>`;
-
     document.getElementById('modalButton').innerHTML += `<div class="dropdown mt-2" id="btnModals">
                                     <i class="bi bi-plus-circle-fill dropdown-toggle fs-1" data-bs-toggle="dropdown" aria-expanded="false" title="More options..."></i>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -138,7 +123,6 @@ function createModalButtons() {
                                   </div>
                                 </div>`
 
-    /*return [document.getElementById('btnModal'), document.getElementById('btnModalPrefix'), document.getElementById('btnResetHistory')]*/
     return [document.getElementById('btnModals')]
 }
 
