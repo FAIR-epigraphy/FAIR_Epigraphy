@@ -124,7 +124,7 @@ footer {
 /*Confirmation Modal*/
 .modal-confirm {
     color: #636363;
-    width: 40%;
+    /*width: 40%;*/
 }
 
     .modal-confirm .modal-content {
@@ -219,3 +219,25 @@ footer {
     display: inline-block;
     margin: 100px auto;
 }
+/*Dropdown in the SPARQL Editor*/
+.dropdown-toggle::after {
+    display: none;
+}
+
+#btnModals {
+    color: #505050 !important;
+}
+
+    #btnModals .dropdown-menu {
+        --bs-dropdown-border-color: transparent !important;
+        --bs-dropdown-min-width: 0 !important;
+        --bs-dropdown-item-padding-x: 0 !important;
+    }
+
+    #btnModals i {
+        cursor: pointer !important;
+    }
+
+    #btnModals .dropdown-menu i {
+        color: #505050 !important;
+    }
