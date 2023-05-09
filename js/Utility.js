@@ -203,6 +203,13 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
     //let from = 'ttl'
     //let to = 'svg';
 
+    let headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    //headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+    headers.append('Origin','https://inscriptiones.org');
+
     rdf = encodeURIComponent(rdfdata).replaceAll('%20', '+');;
 
     var proxyUrl = 'https://intense-cliffs-42360.herokuapp.com/',
@@ -212,7 +219,10 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
     var url = targetUrl;
 
     const response = await fetch(url, {
+        mode: 'cors',
+        credentials: 'include',
         method: 'POST',
+        headers: headers
     });
     const imageBlob = await response.blob()
     const reader = new FileReader();
