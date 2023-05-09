@@ -205,7 +205,7 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
 
     let headers = new Headers();
 
-    headers.append('Origin','https://inscriptiones.org');
+    headers.append('Origin', 'https://inscriptiones.org');
 
     rdf = encodeURIComponent(rdfdata).replaceAll('%20', '+');;
 
@@ -213,19 +213,33 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
         targetUrl = `https://www.ldf.fi/service/rdf-grapher?rdf=${rdf}&from=${from}&to=${to}`
     //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
 
-    await $.ajax({
-        type: 'POST',
-        contentType: 'image/png; charset=utf-8',
-        data: {},
-        url: targetUrl,
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR)
-        },
-        success: function (data) {
-            console.log(data);
-            return data;
-        }
-    });
+    // await $.ajax({
+    //     type: 'POST',
+    //     contentType: 'image/png; charset=utf-8',
+    //     data: {},
+    //     url: targetUrl,
+    //     error: function (jqXHR, textStatus, errorThrown) {
+    //         console.log(jqXHR)
+    //     },
+    //     success: function (data) {
+    //         console.log(data);
+    //         return data;
+    //     }
+    // });
+    var request = new XMLHttpRequest();
+    request.open('POST', targetUrl, true);
+    request.responseType = 'arraybuffer';
+    request.onload = function (e) {
+        var data = new Uint8Array(this.response);
+        var raw = String.fromCharCode.apply(null, data);
+        var base64 = btoa(raw);
+        var src = "data:image/jpeg;base64," + base64;
+
+        console.log(src);
+    };
+
+    request.send();
+
     var url = targetUrl;
 
     const response = await fetch(url, {
@@ -871,9 +885,9 @@ const SAPRQL_Queries = [{
         query: `Total number`
     }],
     Query: `How many funerary inscriptions in Sicily?`,
-    }, {
-        Queries: [{
-            Full_Query: `PREFIX pav: <http://purl.org/pav/>
+}, {
+    Queries: [{
+        Full_Query: `PREFIX pav: <http://purl.org/pav/>
                         PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
                         PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
                         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
@@ -903,7 +917,7 @@ const SAPRQL_Queries = [{
                                      ?geo geo:lat_long ?latlng . }
                           FILTER(contains(lcase(STR(?authoredBy)), "britain")) 
                         } `,
-            Preview_Query: `SELECT ?page ?title ?latlng ?language ?material ?materialLink ?authoredBy 
+        Preview_Query: `SELECT ?page ?title ?latlng ?language ?material ?materialLink ?authoredBy 
                             WHERE {
                               ?sub a crm:E22_Human-Made_Object ;
   	                               nmo:Material ?material ;
@@ -922,10 +936,10 @@ const SAPRQL_Queries = [{
                                          ?geo geo:lat_long ?latlng . }
                               FILTER(contains(lcase(STR(?authoredBy)), "britain")) 
                             }`,
-            query: 'Show in List'
-        },
-        {
-            Full_Query: `PREFIX pav: <http://purl.org/pav/>
+        query: 'Show in List'
+    },
+    {
+        Full_Query: `PREFIX pav: <http://purl.org/pav/>
                         PREFIX crmtex: <http://www.cidoc-crm.org/crmtex/>
                         PREFIX epont: <http://Temporary.Epigraphic.Ontology/>
                         PREFIX crm: <http://erlangen-crm.org/current/>
@@ -941,7 +955,7 @@ const SAPRQL_Queries = [{
                                ?transcription edh:representsTypeOfInscription "Epitaph"
                           FILTER(contains(lcase(STR(?authoredBy)), "britain")) 
                         } `,
-            Preview_Query: `SELECT (COUNT(*) as ?TotalNumber) WHERE {
+        Preview_Query: `SELECT (COUNT(*) as ?TotalNumber) WHERE {
                               ?sub a crm:E22_Human-Made_Object ;
                                    pav:authoredBy ?authoredBy ;
   	                               epont:carriesText ?writtenText .
@@ -950,10 +964,10 @@ const SAPRQL_Queries = [{
                                    ?transcription edh:representsTypeOfInscription "Epitaph"
                               FILTER(contains(lcase(STR(?authoredBy)), "britain")) 
                             } `,
-            query: `Total number`
-        }],
+        query: `Total number`
+    }],
     Query: `How many funerary inscriptions in Britain?`,
-    }
+}
 ]
 
 ////////////////////////////////////////////////////////////////////
