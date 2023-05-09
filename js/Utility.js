@@ -214,14 +214,14 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
     //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
 
     await $.ajax({
-        type: 'POST',
-        contentType: 'image/png; charset=utf-8',
+        cache: false,
+        method: 'POST',
         data: {},
         url: targetUrl,
-        cors: true,
+        async: true,
+        crossDomain: true,
         headers: {
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Origin': 'https://inscriptiones.org'
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(jqXHR)
