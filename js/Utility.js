@@ -214,8 +214,9 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
     //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
 
     await $.ajax({
-        type: 'GET',
+        type: 'POST',
         dataType: 'jsonp',
+        contentType: 'image/png',
         data: {},
         url: targetUrl,
         error: function (jqXHR, textStatus, errorThrown) {
