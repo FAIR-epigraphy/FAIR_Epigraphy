@@ -213,6 +213,19 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
         targetUrl = `https://www.ldf.fi/service/rdf-grapher?rdf=${rdf}&from=${from}&to=${to}`
     //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
 
+    await $.ajax({
+        type: 'GET',
+        dataType: 'jsonp',
+        data: {},
+        url: targetUrl,
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR)
+        },
+        success: function (data) {
+            console.log(data);
+            return data;
+        }
+    });
     var url = targetUrl;
 
     const response = await fetch(url, {
