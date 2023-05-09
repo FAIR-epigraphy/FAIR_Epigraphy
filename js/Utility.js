@@ -213,33 +213,23 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
         targetUrl = `https://www.ldf.fi/service/rdf-grapher?rdf=${rdf}&from=${from}&to=${to}`
     //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
 
-    // await $.ajax({
-    //     type: 'POST',
-    //     contentType: 'image/png; charset=utf-8',
-    //     data: {},
-    //     url: targetUrl,
-    //     error: function (jqXHR, textStatus, errorThrown) {
-    //         console.log(jqXHR)
-    //     },
-    //     success: function (data) {
-    //         console.log(data);
-    //         return data;
-    //     }
-    // });
-    var request = new XMLHttpRequest();
-    request.open('POST', targetUrl, true);
-    request.responseType = 'arraybuffer';
-    request.onload = function (e) {
-        var data = new Uint8Array(this.response);
-        var raw = String.fromCharCode.apply(null, data);
-        var base64 = btoa(raw);
-        var src = "data:image/jpeg;base64," + base64;
-
-        console.log(src);
-    };
-
-    request.send();
-
+    await $.ajax({
+        type: 'POST',
+        contentType: 'image/png; charset=utf-8',
+        data: {},
+        url: targetUrl,
+        cors: true,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR)
+        },
+        success: function (data) {
+            console.log(data);
+            return data;
+        }
+    });
     var url = targetUrl;
 
     const response = await fetch(url, {
