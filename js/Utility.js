@@ -221,6 +221,7 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
         cors: true,
         headers: {
             'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': 'https://inscriptiones.org'
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(jqXHR)
