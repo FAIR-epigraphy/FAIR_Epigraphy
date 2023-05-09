@@ -215,24 +215,22 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
         targetUrl = `https://www.ldf.fi/service/rdf-grapher?rdf=${rdf}&from=${from}&to=${to}`
     //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
 
-    // await $.ajax({
-    //     cache: false,
-    //     method: 'POST',
-    //     data: {},
-    //     url: targetUrl,
-    //     async: true,
-    //     crossDomain: true,
-    //     headers: {
-    //         'Access-Control-Allow-Origin': '*',
-    //     },
-    //     error: function (jqXHR, textStatus, errorThrown) {
-    //         console.log(jqXHR)
-    //     },
-    //     success: function (data) {
-    //         console.log(data);
-    //         return data;
-    //     }
-    // });
+    await $.ajax({
+        method: 'POST',
+        data: {},
+        url: targetUrl,
+        crossDomain: true,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR)
+        },
+        success: function (data) {
+            console.log(data);
+            return data;
+        }
+    });
 
 
     var url = targetUrl;
