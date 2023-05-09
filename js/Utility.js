@@ -205,10 +205,7 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
 
     let headers = new Headers();
 
-    //headers.append('Content-Type', 'application/json');
-    //headers.append('Accept', 'application/json');
-    //headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
-    headers.append('Access-Control-Allow-Origin','https://inscriptiones.org');
+    headers.append('Origin','https://inscriptiones.org');
 
     rdf = encodeURIComponent(rdfdata).replaceAll('%20', '+');;
 
