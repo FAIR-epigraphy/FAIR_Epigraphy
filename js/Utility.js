@@ -204,38 +204,40 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
     //let to = 'svg';
 
     let headers = new Headers();
-
-    headers.append('Origin', 'https://inscriptiones.org');
-
+    //headers.append('Origin', 'https://inscriptiones.org');
+    headers.append("Access-Control-Allow-Origin", "https://inscriptiones.org"); // update to match the domain you will make the request from
+    headers.append("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   
+   
     rdf = encodeURIComponent(rdfdata).replaceAll('%20', '+');;
 
     var proxyUrl = 'https://intense-cliffs-42360.herokuapp.com/',
         targetUrl = `https://www.ldf.fi/service/rdf-grapher?rdf=${rdf}&from=${from}&to=${to}`
     //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
 
-    await $.ajax({
-        cache: false,
-        method: 'POST',
-        data: {},
-        url: targetUrl,
-        async: true,
-        crossDomain: true,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR)
-        },
-        success: function (data) {
-            console.log(data);
-            return data;
-        }
-    });
-    var url = targetUrl;
+    // await $.ajax({
+    //     cache: false,
+    //     method: 'POST',
+    //     data: {},
+    //     url: targetUrl,
+    //     async: true,
+    //     crossDomain: true,
+    //     headers: {
+    //         'Access-Control-Allow-Origin': '*',
+    //     },
+    //     error: function (jqXHR, textStatus, errorThrown) {
+    //         console.log(jqXHR)
+    //     },
+    //     success: function (data) {
+    //         console.log(data);
+    //         return data;
+    //     }
+    // });
 
+
+    var url = targetUrl;
     const response = await fetch(url, {
         mode: 'cors',
-        credentials: 'include',
         method: 'POST',
         headers: headers
     });
