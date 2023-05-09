@@ -215,7 +215,6 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
 
     await $.ajax({
         type: 'POST',
-        dataType: 'jsonp',
         contentType: 'image/png; charset=utf-8',
         data: {},
         url: targetUrl,
