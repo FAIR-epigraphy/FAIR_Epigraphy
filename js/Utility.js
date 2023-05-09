@@ -92,7 +92,7 @@ async function getEpiDocText(Id, datasource) {
         return '';
     }
 
-    var proxyUrl = 'https://intense-cliffs-42360.herokuapp.com/';
+    var proxyUrl = 'https://cors-anywhere.herokuapp.com/' //'https://intense-cliffs-42360.herokuapp.com/';
     url = proxyUrl + url;
 
     let myObject = await fetch(`${url}`);
@@ -211,29 +211,12 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
    
     rdf = encodeURIComponent(rdfdata).replaceAll('%20', '+');;
 
-    var proxyUrl = 'https://intense-cliffs-42360.herokuapp.com/',
+    var proxyUrl = 'https://cors-anywhere.herokuapp.com/', //'https://intense-cliffs-42360.herokuapp.com/',
         targetUrl = `https://www.ldf.fi/service/rdf-grapher?rdf=${rdf}&from=${from}&to=${to}`
     //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
 
-    await $.ajax({
-        method: 'POST',
-        data: {},
-        url: targetUrl,
-        crossDomain: true,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR)
-        },
-        success: function (data) {
-            console.log(data);
-            return data;
-        }
-    });
 
-
-    var url = targetUrl;
+    var url = proxyUrl + targetUrl;
     const response = await fetch(url, {
         mode: 'cors',
         method: 'POST',
