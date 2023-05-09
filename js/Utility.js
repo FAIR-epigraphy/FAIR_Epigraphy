@@ -209,7 +209,7 @@ async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
         targetUrl = `https://www.ldf.fi/service/rdf-grapher?rdf=${rdf}&from=${from}&to=${to}`
     //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
 
-    var url = proxyUrl + targetUrl;
+    var url = targetUrl;
 
     const response = await fetch(url, {
         method: 'POST',
