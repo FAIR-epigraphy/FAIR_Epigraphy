@@ -92,7 +92,7 @@ async function getEpiDocText(Id, datasource) {
         return '';
     }
 
-    var proxyUrl = 'https://intense-cliffs-42360.herokuapp.com/';
+    var proxyUrl = 'https://fair.classics.ox.ac.uk/proxy/proxy-server.php?url=';
     url = proxyUrl + url;
 
     let myObject = await fetch(`${url}`);
@@ -202,43 +202,23 @@ async function getLatLng(API_URL) {
 async function getVisualisationFromRDF(rdfdata, from, to, controlToShow) {
     //let from = 'ttl'
     //let to = 'svg';
-
-    let headers = new Headers();
-    //headers.append('Origin', 'https://inscriptiones.org');
-    headers.append("Access-Control-Allow-Origin", "https://inscriptiones.org"); // update to match the domain you will make the request from
-    headers.append("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-   
    
     rdf = encodeURIComponent(rdfdata).replaceAll('%20', '+');;
 
-    var proxyUrl = 'https://intense-cliffs-42360.herokuapp.com/',
-        targetUrl = `https://www.ldf.fi/service/rdf-grapher?rdf=${rdf}&from=${from}&to=${to}`
+    var proxyUrl = 'https://fair.classics.ox.ac.uk/proxy/proxy-server.php?url=',
+        targetUrl = proxyUrl + `https://www.ldf.fi/service/rdf-grapher?rdf=${rdf}&from=${from}&to=${to}`
     //targetUrl = `https://www.ldf.fi/service/rdf-grapher`
-
-    await $.ajax({
-        method: 'POST',
-        data: {},
-        url: targetUrl,
-        crossDomain: true,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR)
-        },
-        success: function (data) {
-            console.log(data);
-            return data;
-        }
-    });
 
 
     var url = targetUrl;
+    //let response = await fetch(`${url}`);
     const response = await fetch(url, {
-        mode: 'cors',
+        //mode: 'cors',
         method: 'POST',
-        headers: headers
+        //headers: headers
     });
+    //let xmlData = await response.text();
+    //let s = '';
     const imageBlob = await response.blob()
     const reader = new FileReader();
     reader.readAsDataURL(imageBlob);
