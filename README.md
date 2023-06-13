@@ -16,12 +16,13 @@ Datasets
 
 The pilot project uses data from the following four publicly available epigraphic datasets:
 
-*   [iSicily](http://sicily.classics.ox.ac.uk/)
+*   [I.Sicily](http://sicily.classics.ox.ac.uk/)
 *   [Epigraphische Datenbank Heidelberg](https://edh.ub.uni-heidelberg.de/home?lang=en)
 *   [Greek Verse Inscriptions of Cyrenaica](https://igcyr.unibo.it/)
 *   [The Roman Inscriptions of Britain](https://romaninscriptionsofbritain.org/)
 
-For the purposes of the pilot, we display only a sample of 146 inscriptions drawn from across these four projects; the full available dataset would number 8,509
+For the purposes of the pilot, we display only a sample of 146 inscriptions drawn from across these four projects; the full dataset in this initial test numbered 8,509 (RIB = 2911; I.Sicily = 4572; IGCYR = 976; EDH = 50 (download sample only)).
+
 
 Approach
 --------
