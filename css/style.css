@@ -1,243 +1,264 @@
-﻿body {
+/* Reset some default browser styles */
+body,
+h1,
+h2,
+p,
+ul {
+  margin: 0;
+  padding: 0;
 }
 
-footer {
-    padding: 10px 0;
-    border-top: 1px solid #e7e7e7;
-    text-align: center;
-    background-color: #f8f9fa;
+body {
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-.hoverDiv:hover {
-    background-color: #f8f9fa;
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#legend {
-    font-family: Arial, sans-serif;
-    background: #fff;
-    padding: 10px;
-    margin: 10px;
-    border: 3px solid #000;
+.logo {
+  display: flex;
+  align-items: center;
 }
 
-    #legend h3 {
-        margin-top: 0;
-    }
+.logo img {
+  width: 60px;
+  /* Adjust the width as needed */
+  height: auto;
+  margin-right: 10px;
+  /* Add some spacing between image and text */
+}
 
-    #legend img {
-        vertical-align: middle;
-    }
+.logo-text {
+  font-size: 24px;
+  /* Adjust font size as needed */
+  font-weight: bold;
+}
 
-/*Pre loading div*/
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff; /* Set the background color as needed */
+}
 
-#loader-wrapper {
-    position: fixed;
-    top: 0;
+.menu-list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-list li a {
+  text-decoration: none;
+  color: #333333;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.menu-list li a:hover {
+  color: #007bff;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+
+.bar {
+  width: 30px;
+  height: 3px;
+  background-color: #333333;
+  margin: 3px 0;
+  transition: background-color 0.3s;
+}
+
+
+/* Hero Section Styles */
+.hero {
+  background-image: url('../images/background.png');
+  background-size: 80rem;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+  padding: 100px 0;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+}
+
+/* About Section Styles */
+.about {
+  background-color: #f9f9f9;
+  padding: 80px 0;
+  /* text-align: center; */
+}
+
+.about-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #222;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+}
+
+.footer-content p {
+  margin-bottom: 10px;
+}
+
+.social-icons {
+  list-style: none;
+  display: flex;
+}
+
+.social-icons li {
+  margin: 0 10px;
+}
+
+.social-icons a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.all_logos img:nth-child(1) {
+  width: 30% !important;
+}
+
+.all_logos img:nth-child(2) {
+  width: 60% !important;
+}
+
+.all_logos img:nth-child(3) {
+  width: 45% !important;
+}
+
+.all_logos img:nth-child(4) {
+  width: 45% !important;
+}
+
+/* Styling for Team Member Cards */
+.team-card {
+  background-color: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.team-card .card-img-top {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  object-fit: cover;
+  max-height: 200px;
+}
+
+.team-card .card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.team-card .card-text {
+  font-size: 16px;
+  color: #777;
+}
+
+.team-card .social-links {
+  margin-top: 15px;
+}
+
+.team-card .social-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #007bff; /* Blue color for social icons */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.team-card .social-icon:hover {
+  color: #0056b3; /* Darker blue color on hover */
+}
+
+.team-card .card-body{
+  height: 25vh;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+  .menu-list {
+    display: none;
+    flex-direction: column;
+    background-color: #ffffff;
+    position: absolute;
+    top: 100%;
     left: 0;
     width: 100%;
-    height: 100%;
-    z-index: 1000;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-list.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .menu-toggle.active .bar {
+    background-color: #007bff;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .cta-button {
+    font-size: 0.9rem;
+  }
 }
-
-#loader {
-    display: block;
-    position: relative;
-    left: 50%;
-    top: 50%;
-    width: 150px;
-    height: 150px;
-    margin: -75px 0 0 -75px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: #3498db;
-    -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
-}
-
-    #loader:before {
-        content: "";
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        right: 5px;
-        bottom: 5px;
-        border-radius: 50%;
-        border: 3px solid transparent;
-        border-top-color: #e74c3c;
-        -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-        animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
-    }
-
-    #loader:after {
-        content: "";
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        right: 15px;
-        bottom: 15px;
-        border-radius: 50%;
-        border: 3px solid transparent;
-        border-top-color: #f9c922;
-        -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-        animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
-    }
-
-#loader-wrapper #loader-message {
-    display: block;
-    position: relative;
-    left: 48%;
-    top: 39%;
-}
-
-@-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(0deg); /* IE 9 */
-        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(360deg); /* IE 9 */
-        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
-    }
-}
-
-@keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(0deg); /* IE 9 */
-        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(360deg); /* IE 9 */
-        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
-    }
-}
-
-.nav-link {
-    cursor: pointer;
-}
-
-/*Confirmation Modal*/
-.modal-confirm {
-    color: #636363;
-    /*width: 40%;*/
-}
-
-    .modal-confirm .modal-content {
-        padding: 20px;
-        border-radius: 5px;
-        border: none;
-        text-align: center;
-        font-size: 14px;
-    }
-
-    .modal-confirm .modal-header {
-        border-bottom: none;
-        position: relative;
-    }
-
-    .modal-confirm h4 {
-        text-align: center;
-        font-size: 26px;
-        margin: 30px 0 -10px;
-    }
-
-    .modal-confirm .close {
-        position: absolute;
-        top: -5px;
-        right: -2px;
-    }
-
-    .modal-confirm .modal-body {
-        color: #999;
-    }
-
-    .modal-confirm .modal-footer {
-        border: none;
-        text-align: center;
-        border-radius: 5px;
-        font-size: 13px;
-        padding: 10px 15px 25px;
-    }
-
-        .modal-confirm .modal-footer a {
-            color: #999;
-        }
-
-    .modal-confirm .icon-box {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto;
-        border-radius: 50%;
-        z-index: 9;
-        text-align: center;
-        border: 3px solid #f15e5e;
-    }
-
-        .modal-confirm .icon-box i {
-            color: #f15e5e;
-            font-size: 35px;
-            display: inline-block;
-            margin-top: 13px;
-        }
-
-    .modal-confirm .btn, .modal-confirm .btn:active {
-        color: #fff;
-        border-radius: 4px;
-        background: #60c7c1;
-        text-decoration: none;
-        transition: all 0.4s;
-        line-height: normal;
-        min-width: 120px;
-        border: none;
-        min-height: 40px;
-        border-radius: 3px;
-        margin: 0 5px;
-    }
-
-    .modal-confirm .btn-secondary {
-        background: #c1c1c1;
-    }
-
-        .modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
-            background: #a8a8a8;
-        }
-
-    .modal-confirm .btn-danger {
-        background: #f15e5e;
-    }
-
-        .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
-            background: #ee3535;
-        }
-
-.trigger-btn {
-    display: inline-block;
-    margin: 100px auto;
-}
-/*Dropdown in the SPARQL Editor*/
-.dropdown-toggle::after {
-    display: none;
-}
-
-#btnModals {
-    color: #505050 !important;
-}
-
-    #btnModals .dropdown-menu {
-        --bs-dropdown-border-color: transparent !important;
-        --bs-dropdown-min-width: 0 !important;
-        --bs-dropdown-item-padding-x: 0 !important;
-    }
-
-    #btnModals i {
-        cursor: pointer !important;
-    }
-
-    #btnModals .dropdown-menu i {
-        color: #505050 !important;
-    }
