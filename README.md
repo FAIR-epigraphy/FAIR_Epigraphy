@@ -1,69 +1,23 @@
-FAIR Epigraphy and the RDF Pilot
-================================
+# The FAIR Epigraphy Project 
 
-The FAIR Epigraphy project aims to enable the epigraphy linked data cloud and facilitate interoperability in the epigraphic world. To achieve our goal, we need to make epigraphic data [FAIR (Findable, Accessible, Interoperable, Reusable)](https://www.go-fair.org/fair-principles/). With the increase in Linked Open Data and novel interface technologies and standards, this project will be able to create the tools and the community needed to transform epigraphic research in the digital age. Our internationally collaborative approach will enable and support innovative research across epigraphic data and the wider linked web of data, such that all epigraphic data is increasingly FAIR for both the research community and the wider public. To that end, we aim to
+<img align="left" style="margin-right: 2%;" width="100" height="100" src="https://github.com/FAIR-epigraphy/home/blob/main/docs/FAIRlogo_canva_lighter.png" title="FAIR Epigraphy logo">
 
-1.  Consolidate community-wide standards (vocabularies and ontology)
-2.  Develop the tools for community implementation of those standards (vocabulary and ontology hosting and publication)
-3.  Host and make fully accessible the resulting linked open data published by individual projects (RDF/XML data publication)
-
-[This website](https://inscriptiones.org/) presents a pilot project intended to illustrate the potential of such an approach through a very simple illustration of what published linked data can enable (an example of (3) above), using existing published and publicly available epigraphic data.
-
-FAIR-Epigraphy project is co-directed by [Marietta Horster (Mainz, Germany)](https://uni-mainz.academia.edu/MariettaHorster) and [Jonathan Prag (Oxford, UK)](https://www.classics.ox.ac.uk/people/dr-jonathan-prag). [Petra Hermankova](https://orcid.org/0000-0002-6349-0540) provides the research contributions with her experience in ancient history, digital epigraphy, and archaeology. [Imran Asif](https://csad.web.ox.ac.uk/people/dr-imran-asif) joined the team and built/developed the front-end and backend of the inscriptiones.org project.
-
-Datasets
---------
-
-The pilot project uses data from the following four publicly available epigraphic datasets:
-
-*   [I.Sicily](http://sicily.classics.ox.ac.uk/)
-*   [Epigraphische Datenbank Heidelberg](https://edh.ub.uni-heidelberg.de/home?lang=en)
-*   [Greek Verse Inscriptions of Cyrenaica](https://igcyr.unibo.it/)
-*   [The Roman Inscriptions of Britain](https://romaninscriptionsofbritain.org/)
-
-For the purposes of the pilot, we display only a sample of 146 inscriptions drawn from across these four projects; the full dataset in this initial test numbered 8,509 (RIB = 2911; I.Sicily = 4572; IGCYR = 976; EDH = 50 (download sample only)).
+FAIR Epigraphy aims to serve as a hub for digital epigraphers providing access to FAIR and linked open data for epigraphy.
+Our mission is to provide projects in digital epigraphy with high quality Linked Open Datasets, but also with sets of guidelines helping them to implement **FAIR** ([*Findable* - *Accessible* - *Interoperable* - *Reusable*](https://www.go-fair.org/fair-principles/)) data principles within the epigraphic discipline.
+The FAIR Epigraphy project will run for 36 months from 2022-2025, and is co-directed by Prof Marietta Horster (Mainz, Germany) and Prof Jonathan Prag (Oxford, UK).
 
 
-Approach
---------
+### Funding
 
-This project makes visible and searchable the epigraphic data within these datasets which is interlinked with other datasets containing additional information about the inscriptions such as Name, Object Type, Material, Location, Trismegistos ID, Language, and Inscription Text. We achieve these tasks with the help of the following technologies.
+FAIR Epigraphy is supported by the Arts and Humanities Research Council (AHRC) [grant number AH/W010682/1]; and the Deutsche Forschungsgemeinschaft (DFG) [grant number 468455971].
 
-*   Convert XML data to RDF using [xTriples](https://xtriples.lod.academy/index.html) templates
-*   Develop the front-end side using [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
-*   Enable the front-end using the backend with the help of JavaScript language
-*   Provide the SPARQL Editor to play with the RDF data using [Yasgui API](https://github.com/TriplyDB/Yasgui)
+### The team 🙋‍
 
-GUI (Graphical User Interface)
-------------------------------
+* Imran Asif, [![](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0002-1144-6265), University of Oxford, imran.asif@classics.ox.ac.uk
+* Petra Hermankova [![](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0002-6349-0540), Johannes Gutenberg University, petra.hermankova@uni-mainz.de, [@petrifiedvoices](https://github.com/petrifiedvoices)
+* Marietta Horster [![](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0003-1434-224X), Johannes Gutenberg University in Mainz, Corpus Inscriptionum Latinarum/BBAW, horster@uni.mainz.de
+* Jonathan Prag [![](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0003-3819-8537), University of Oxford, jonathan.prag@merton.ox.ac.uk, [@JonPrag](https://github.com/JonPrag)
 
-This pilot has two main pages (Browse, All in one). The Browse page displays all the inscription data with minimal information (Figure 1);
+ 
 
-![Browse Page](images/Figure1.png)
-Figure 1: Browse Page
-
-clicking on any inscription displays more detailed information about the inscription (Figure 2).
-
-![Detailed Page](images/Figure2.png)
-Figure 2: Detailed information about inscription
-
-clicking on 'Show Inscription Text' button we can see Inscription text using [epidoc-viewer](https://github.com/ISicily/epidoc-viewer) (Figure 3).
-
-![Detailed Page](images/Figure3.png)
-Figure 3: I.Sicily EpiDoc Viewer
-
-The All in One page shows all inscription data over the map; clicking on a map-marker generates a pop-up which will provide basic details and links to individual inscriptions. (Figure 4).
-
-![All in One Page](images/Figure4.png)
-Figure 4: All in One Page
-
-Contributors
-------------
-
-*   [Jonathan Prag (Oxford, UK)](https://www.classics.ox.ac.uk/people/dr-jonathan-prag)
-*   [Marietta Horster (Mainz, Germany)](https://uni-mainz.academia.edu/MariettaHorster)
-*   [Petra Hermankova](https://orcid.org/0000-0002-6349-0540)
-*   [Imran Asif](https://csad.web.ox.ac.uk/people/dr-imran-asif)
-
-* * *
-<img src="images/all_logos.png" />
+### For more information, visit inscriptiones.org
