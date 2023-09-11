@@ -20,4 +20,4 @@ FAIR Epigraphy is supported by the Arts and Humanities Research Council (AHRC) [
 
  
 
-### For more information, visit inscriptiones.org
+### For more information, visit https://www.inscriptiones.org
