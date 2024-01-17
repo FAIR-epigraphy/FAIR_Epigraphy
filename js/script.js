@@ -28,3 +28,63 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+//////////////////////////////////////////////////////////////////////
+//// Visitor Counter Methods
+let visitor = {
+  visitor_id: '',
+  access_url: '',
+  ip_address: '',
+  city: '',
+  continentCode: '',
+  countryCode: '',
+  countryName: '',
+  stateProv: ''   
+};
+
+updateVisitorCounter()
+async function updateVisitorCounter(){
+  if (localStorage.getItem('visitor')) {
+    let v = JSON.parse(localStorage.getItem('visitor') || '{}');
+    visitor.visitor_id = v.visitor_id;
+    visitor.ip_address = v.ip_address;
+    visitor.access_url = window.location.hostname;
+    await callVisitorCounter(visitor);
+  }
+  else{
+    let info = await getClientIP();
+    visitor.ip_address = info.ipAddress;
+    visitor.access_url = window.location.hostname;
+    visitor.city = info.city;
+    visitor.continentCode = info.continentCode;
+    visitor.countryCode = info.countryCode;
+    visitor.countryName = info.countryName;
+    visitor.stateProv = info.stateProv;
+  
+    let visit = await callVisitorCounter(visitor);
+    if(typeof visit === 'object'){
+      console.log(visit.message);
+    }
+    else{
+      localStorage.setItem('visitor', JSON.stringify({visitor_id: visit, ip_address: visitor.ip_address}))
+    }
+  }
+}
+
+async function getClientIP() {
+  //let url = 'https://www.cloudflare.com/cdn-cgi/trace';
+  let url = 'https://api.db-ip.com/v2/free/self';
+  return await (await fetch(url)).json();
+}
+
+async function callVisitorCounter(visitor) {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json' // Set the content type based on the data you are sending
+      // You can add other headers as needed
+    },
+    body: JSON.stringify({ visitor: visitor }) // Convert the data to JSON format
+  };
+  return await (await fetch('https://fair.classics.ox.ac.uk/visitorInfo.php', options)).json();
+}
