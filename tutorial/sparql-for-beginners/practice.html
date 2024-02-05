@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords"
+        content="SPARQL, RDF, RDF triple, RDF graph, Semantic Web, querying RDF data, RDF dataset, SPARQL SELECT, SPARQL WHERE, SPARQL FILTER, SPARQL ORDER BY, SPARQL LIMIT, SPARQL OFFSET, SPARQL CONSTRUCT, SPARQL DESCRIBE, SPARQL ASK, SPARQL PREFIX, RDF namespaces, triple patterns, graph patterns, SPARQL variables, SPARQL result set, federated SPARQL, RDF data model, triplestore, querying linked data, SPARQL tutorial, RDF tutorial, semantic technologies, RDF query language, W3C RDF, RDF resource, RDF predicate, RDF subject, RDF object, RDF literals, RDF datatype, SPARQL FILTER functions">
+    <meta name="description"
+        content="Learn SPARQL from scratch with our beginner-friendly tutorial. Understand RDF, triple patterns, SPARQL queries, and more.">
+    <meta name="author" content="Imran Asif">
+    <link rel="canonical" href="https://inscriptiones.org/tutorial/sparql-for-beginners">
+    <meta name="language" content="en">
+
+    <title>Practice - SPARQL For Beginners – The FAIR Epigraphy</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/bootstrap-icons.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link href="css/yasgui-pro.min.css" rel="stylesheet" />
+    <script src="js/yasgui-pro.min.js"></script>
+    <link href="css/codemirror.css" rel="stylesheet">
+    <link href="css/show-hint.css" rel="stylesheet">
+
+    <link href="css/vis.css" rel="stylesheet">
+
+    <style>
+        .yasgui .controlbar {
+            display: none !important;
+        }
+
+        .yasr_external_ref_btn {
+            display: none !important;
+        }
+
+        /* pre {
+            white-space: pre-line;
+            background: #f8f9fa;
+            border-radius: 2px;
+            color: #222;
+            display: block;
+            padding: 9.5px;
+            margin: 0 0 10px;
+            font-size: 13px;
+            line-height: 1.42857143;
+        } */
+
+        .popover {
+            max-width: 50%;
+            /* Max Width of the popover (depending on the container!) */
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header sticky-top">
+        <div class="logo">
+            <img src="/images/logo.png" alt="Your Logo">
+            <div class="logo-text">FAIR Epigraphy</div>
+        </div>
+        <nav class="nav-menu">
+            <ul class="menu-list">
+                <li><a href="/">Home</a></li>
+                <li><a href="/index.html#about">About</a></li>
+                <li><a href="/index.html#projects">Projects</a></li>
+                <li><a href="/index.html#team">Team</a></li>
+                <li><a href="/index.html#publications">Publications</a></li>
+                <li><a href="/index.html#contact">Contact</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Tutorials
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="/tutorial/sparql-for-beginners/">SPARQL for Beginners</a>
+                            <a class="dropdown-item" href="/tutorial/sparql-for-beginners/practice.html">SPARQL
+                                Playground</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 p-0">
+                <div class="card mt-2">
+                    <div class="card-header">
+                        <h5>Turtle Editor</h5>
+                        <div class="text-body-tertiary">
+                            <i class="bi bi-grip-vertical fs-4"></i>
+                            <i type="button" class="bi bi-file-earmark-font fs-5" onclick="new_clear_content()"
+                                title="New..."></i>
+                            <input type="file" name="ttlFile" id="ttlFile" onchange="selectFile()" accept=".ttl"
+                                class="d-none" />
+                            <i type="button" class="bi bi-folder2-open fs-5 ms-2" onclick="openFile()"
+                                title="Open..."></i>
+                            <i type="button" onclick="saveFile()" title="Save...">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
+                                    class="bi bi-floppy2-fill ms-2" viewBox="0 0 16 16">
+                                    <path d="M12 2h-2v3h2z" />
+                                    <path
+                                        d="M1.5 0A1.5 1.5 0 0 0 0 1.5v13A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5V2.914a1.5 1.5 0 0 0-.44-1.06L14.147.439A1.5 1.5 0 0 0 13.086 0zM4 6a1 1 0 0 1-1-1V1h10v4a1 1 0 0 1-1 1zM3 9h10a1 1 0 0 1 1 1v5H2v-5a1 1 0 0 1 1-1" />
+                                </svg>
+                            </i>
+                            <i type="button" class="bi bi-repeat fs-5 ms-2" onclick="reload()" title="Reload"></i>
+                            <i class="bi bi-grip-vertical fs-4"></i>
+                            <i type="button" onclick="copyContent()" title="Copy all content to clipboard">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
+                                    class="bi bi-copy" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                                </svg>
+                            </i>
+                            <i type="button" class="bi bi-x fs-5 ms-2" onclick="new_clear_content()"></i>
+                            <i type="button" class="bi bi-bezier fs-3 ms-2 float-end text-primary" 
+                                data-bs-toggle="modal" data-bs-target="#modalRDFGraph"
+                                title="Show RDF Visualisation">
+                            </i>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="form-group">
+                            <textarea class="p-0" id="rdf-turtle-contents" placeholder="File content will appear here"
+                                rows="24" wrap="hard">
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix sn: <http://www.snee.com/hr/> .
+
+sn:emp1   vcard:given-name        "Heidi" .
+sn:emp1   vcard:family-name       "Peter" .
+sn:emp1   vcard:title             "CEO" .
+sn:emp1   sn:hireDate             "2016-10-21" .
+sn:emp1   sn:completedOrientation "2016-10-30" .
+
+sn:emp2   vcard:given-name         "John" .
+sn:emp2   vcard:family-name        "Peter" .
+sn:emp2   sn:hireDate              "2016-10-28" .
+sn:emp2   vcard:title              "Engineer" .
+sn:emp2   sn:completedOrientation  "2015-01-30" .
+
+sn:emp3   vcard:given-name          "Imran" .
+sn:emp3   vcard:family-name         "Asif" .
+sn:emp3   sn:hireDate               "2014-12-03" .
+sn:emp3   vcard:title               "Vice President" .
+
+sn:emp4   vcard:given-name          "Duke" .
+sn:emp4   vcard:family-name         "Walliam" .
+sn:emp4   vcard:title               "Sales" .
+sn:emp4   sn:hireDate               "2015-11-10" .</textarea>
+                        </div>
+                        <div id="syntax-check">
+                            <p id="syntax-check-failed" style="display: none">
+                                <i class="bi bi-bug-fill fs-4 ms-3 text-danger"></i>
+                                <span class="status">Syntax check failed.</span>
+                            </p>
+                            <p id="syntax-check-working" style="display: none">
+                                <i class="bi bi-hourglass-split fs-4 ms-3 text-warning"></i>
+                                <span class="status">Syntax checker working.</span>
+                            </p>
+                            <p id="syntax-check-pending">
+                                <i class="bi bi-hourglass-split fs-4 ms-3 text-warning"></i>
+                                <span class="status">Syntax check pending...</span>
+                            </p>
+                            <p id="syntax-check-off" style="display: none">
+                                <i class="bi bi-hourglass-split fs-4 ms-3 text-warning"></i>
+                                <span class="status">Syntax checking is disabled. Click to enable.</span>
+                            </p>
+                            <p id="syntax-check-passed" style="display: none">
+                                <i class="bi bi-check2 fs-3 ms-3 text-success"></i>
+                                <span class="status">Syntax check passed.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div id="yasgui"></div>
+            </div>
+        </div>
+
+        <!-- Button trigger modal -->
+        <div id="modalButton" style="display:none;">
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">SPARQL Examples</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tbody id="divQueries">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Prefixes -->
+        <div class="modal fade" id="modalPrefixes" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-node-plus-fill fs-3"></i> Add
+                            Prefixes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group" id="divPrefixes">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal RDF Graph -->
+        <div class="modal fade" id="modalRDFGraph" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-bezier fs-3"></i> 
+                            RDF Visualisation
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="list-group" id="divGraph" style=" width: auto;
+                        height: 100%;">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reset History Modal HTML -->
+        <div id="modalHistory" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header flex-column">
+                        <div class="icon-box">
+                            <i class="bi bi-x-lg"></i>
+                        </div>
+                        <h4 class="modal-title w-100">Are you sure?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you really want to delete history? This process will remove all your queries and reset the
+                            editor.</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" onclick="DeleteHistory()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Parent Jquery -->
+    <script type="text/javascript" src="js/jquery-latest.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/n3.min.js"></script>
+    <script src="js/comunica-browser.js"></script>
+    <script src="js/codemirror.js"></script>
+    <script src="js/turtle.js"></script>
+    <script src="js/vis.js"></script>
+    <!-- <script src="js/Utility.js"></script> -->
+    <script src="js/sparql_editor.js"></script>
+</body>
+
+</html>
