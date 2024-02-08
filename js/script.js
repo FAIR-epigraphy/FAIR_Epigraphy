@@ -1,3 +1,24 @@
+////////////////////////////////////////////////////////////////////
+/////////////////////// Cookie Consent
+window.cookieconsent.initialise({
+  container: document.getElementById("content"),
+  palette: {
+    popup: { background: "#000" },
+    button: { background: "#f1d600" },
+  },
+  revokable: true,
+  onStatusChange: function (status) {
+    console.log(this.hasConsented() ?
+      'enable cookies' : 'disable cookies');
+  },
+  theme: 'edgeless',
+  type: 'opt-out',
+  law: {
+    regionalLaw: false,
+  },
+  location: true,
+});
+//////////////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', function () {
   const menuToggle = document.querySelector('.menu-toggle');
   const menuList = document.querySelector('.menu-list');
@@ -39,11 +60,11 @@ let visitor = {
   continentCode: '',
   countryCode: '',
   countryName: '',
-  stateProv: ''   
+  stateProv: ''
 };
 
 updateVisitorCounter()
-async function updateVisitorCounter(){
+async function updateVisitorCounter() {
   if (localStorage.getItem('visitor')) {
     let v = JSON.parse(localStorage.getItem('visitor') || '{}');
     visitor.visitor_id = v.visitor_id;
@@ -51,7 +72,7 @@ async function updateVisitorCounter(){
     visitor.access_url = window.location.hostname;
     await callVisitorCounter(visitor);
   }
-  else{
+  else {
     let info = await getClientIP();
     visitor.ip_address = info.ipAddress;
     visitor.access_url = window.location.hostname;
@@ -60,13 +81,13 @@ async function updateVisitorCounter(){
     visitor.countryCode = info.countryCode;
     visitor.countryName = info.countryName;
     visitor.stateProv = info.stateProv;
-  
+
     let visit = await callVisitorCounter(visitor);
-    if(typeof visit === 'object'){
+    if (typeof visit === 'object') {
       console.log(visit.message);
     }
-    else{
-      localStorage.setItem('visitor', JSON.stringify({visitor_id: visit, ip_address: visitor.ip_address}))
+    else {
+      localStorage.setItem('visitor', JSON.stringify({ visitor_id: visit, ip_address: visitor.ip_address }))
     }
   }
 }
