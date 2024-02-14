@@ -2,16 +2,26 @@
 /////////////////////// Cookie Consent
 window.cookieconsent.initialise({
   container: document.getElementById("content"),
+  cookie: {
+    domain: window.location.hostname // or 'your.domain.com' // it is mandatory to set a domain, for cookies to work properly (see https://goo.gl/S2Hy2A)
+  },
   palette: {
     popup: { background: "#000" },
     button: { background: "#f1d600" },
   },
+  position: "bottom-right",
   revokable: true,
   onStatusChange: function (status) {
     console.log(this.hasConsented() ?
-      'enable cookies' : 'disable cookies');
+      window.location.reload() : 'disable cookies');
   },
-  theme: 'edgeless',
+  onPopupOpen: function(e) {
+    document.getElementById('overlay').style.display = 'block';
+  },
+  onPopupClose: function(e) {
+    document.getElementById('overlay').style.display = 'none';
+  },
+  theme: 'classic',
   type: 'opt-out',
   law: {
     regionalLaw: false,
