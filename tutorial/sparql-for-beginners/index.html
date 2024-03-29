@@ -26,7 +26,8 @@
             margin: 0 0 1.75em;
             padding: 1.75em;
         }
-        h5{
+
+        h5 {
             text-decoration: underline;
         }
     </style>
@@ -54,7 +55,8 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a class="dropdown-item" href="/tutorial/sparql-for-beginners/">SPARQL for Beginners</a>
-                            <a class="dropdown-item" href="/tutorial/sparql-for-beginners/practice.html">SPARQL Playground</a>
+                            <a class="dropdown-item" href="/tutorial/sparql-for-beginners/practice.html">SPARQL
+                                Playground</a>
                         </li>
                     </ul>
                 </li>
@@ -183,32 +185,50 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
 <span style="color:red">sn:emp2   sn:completedOrientation   "2015-03-15" .</span>
 </code></pre>
                         </p>
+                        <div class="alert alert-warning fs-4" role="alert">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Note: You can run the following queries on <a href="practice.html" target="_blank">SPARQL Playground</a>.
+                        </div>
                         <h3>SPARQL Example Queries</h3>
-                            <hr />
-                            <h5>WHERE Clause</h5>
-                            <p>
-                                let's look at a simple SPARQL query that retrieve some of the data from the <a href="#rdfTriples">above RDF Triples</a>. <br /><b id="query1">Query 1: We want a list of all employees whose last name is Peter.</b>
-                                <pre><code style="font-size:1.125rem;">    PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
+                        <hr />
+                        <h5>WHERE Clause</h5>
+                        <p>
+                            let's look at a simple SPARQL query that retrieve some of the data from the <a
+                                href="#rdfTriples">above RDF Triples</a>. <br /><b id="query1">Query 1: We want a list
+                                of all employees whose last name is Peter.</b><i class="bi bi-copy"></i> 
+                        <pre><code style="font-size:1.125rem;">    PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
     
     SELECT ?person
     WHERE
     {
       ?person vcard:family-name "Peter" .
     }</code></pre>
-                            </p>
-                            <p>
-                                We can define the prefixes in the start of SPARQL query due to the Turtle RDF syntax, that’s why you don’t have to write absolute URIs in your queries. For most SPARQL queries it’s best to look at the <em>Where</em> clause first because that describe which triples we want to pull from the dataset that we are querying. The <em>Where</em> clause does this with one or more triple patterns which are likely triples with variables as wildcards substituted into one, two or all three of each triples parts.
-                            </p>
-                            <p>
-                                In the <a href="#query1">Query 1</a>, one triple pattern will match against triples whose predicate is the family name property from the vCard vocabulary, whose object is string <b>Peter</b> and whose subject is anything at all. Because this triple pattern has a variable that I named <b>person</b>.
-                            </p>
-                            <h5>SELECT Clause</h5>
-                            <p>
-                                The Select clause indicates which variables values we want listed after the query executes. The <a href="#query1">Query 1</a> only has one variable so that’s the one we want to see.
-                            </p>
-                            <p>
-                                When the query executes, it finds two triples that match the specified pattern from the RDF triples set and assigned these two triples to the person variable which are the subjects e.g., emp1 and emp2. The following triples show the two matches of the above query with green colour.
-                                <pre id="rdfTriples"> <code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            We can define the prefixes in the start of SPARQL query due to the Turtle RDF syntax, that’s
+                            why you don’t have to write absolute URIs in your queries. For most SPARQL queries it’s best
+                            to look at the <em>Where</em> clause first because that describe which triples we want to
+                            pull from the dataset that we are querying. The <em>Where</em> clause does this with one or
+                            more triple patterns which are likely triples with variables as wildcards substituted into
+                            one, two or all three of each triples parts.
+                        </p>
+                        <p>
+                            In the <a href="#query1">Query 1</a>, one triple pattern will match against triples whose
+                            predicate is the family name property from the vCard vocabulary, whose object is string
+                            <b>Peter</b> and whose subject is anything at all. Because this triple pattern has a
+                            variable that I named <b>person</b>.
+                        </p>
+                        <h5>SELECT Clause</h5>
+                        <p>
+                            The Select clause indicates which variables values we want listed after the query executes.
+                            The <a href="#query1">Query 1</a> only has one variable so that’s the one we want to see.
+                        </p>
+                        <p>
+                            When the query executes, it finds two triples that match the specified pattern from the RDF
+                            triples set and assigned these two triples to the person variable which are the subjects
+                            e.g., emp1 and emp2. The following triples show the two matches of the above query with
+                            green colour.
+                        <pre id="rdfTriples"><code style="font-size:1.125rem;">
     @prefix vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt; .
     @prefix sn: &lt;http://www.snee.com/hr/&gt; .
 
@@ -235,14 +255,19 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
     sn:emp4   vcard:title               "Sales" .
     sn:emp4   sn:hireDate               "2015-11-10" .
 </code></pre>
-                            </p>
-                            <p>
-                                Let's executes the <a href="#query1">Query 1</a> and find out who are these Peters. we get the following table as a result.<br />
-                                <img src="images/9.png" class="img-fluid w-25 m-auto d-block mt-1" />
-                            </p>
-                            <p>
-                                From the above results, we can see that emp1 and emp2 are just identifiers. This doesn’t give us meaningful result. <br /><b id="query2">Query 2: Now let's add a second triple pattern in the <em>WHERE</em> clause that matches on the given name of the employee, who matches the first triple pattern and stores that value in a new <b>givenName</b> variable</b>.
-                                <pre>
+                        </p>
+                        <p>
+                            Let's executes the <a href="#query1">Query 1</a> and find out who are these Peters. we get
+                            the following table as a result.<br />
+                            <img src="images/9.png" class="img-fluid w-25 m-auto d-block mt-1" />
+                        </p>
+                        <p>
+                            From the above results, we can see that emp1 and emp2 are just identifiers. This doesn’t
+                            give us meaningful result. <br /><b id="query2">Query 2: Now let's add a second triple
+                                pattern in the <em>WHERE</em> clause that matches on the given name of the employee, who
+                                matches the first triple pattern and stores that value in a new <b>givenName</b>
+                                variable</b>.
+                        <pre>
                                 <code style="font-size:1.125rem;">
     PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt; 
 
@@ -252,14 +277,22 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
        ?person vcard:family-name "Peter" . 
        ?person vcard:given-name ?givenName .
     }</code></pre>
-                            </p>
-                            <p>
-                                The explanation of the <a href="#query2">Query 2</a> is that we need to adjust the <em>SELECT</em> Clause with the new variable givenName because now we want this in the result. The SPARQL query processor finds each triple that matches the first triple pattern and store the value in the person variable. When it looks for the second triple pattern in the <em>WHERE</em> clause, who have a triple that matches the first triple pattern. In easy words, SPARQL processor get all triples of family-name Peter along with given-name. So when we run the <a href="#query2">Query 2</a> we see given name values in the result.
-                                <img src="images/10.png" class="img-fluid w-50 m-auto d-block mt-1" />
-                            </p>
-                            <p>
-                                <b id="query3">Query 3: Let's retrieve the given name, family name and hire date of all the employees.</b><br /> We can do this with a <em>WHERE</em> Clause that has three triple patterns one for each piece of information that we want to retrieve.
-                                <pre><code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            The explanation of the <a href="#query2">Query 2</a> is that we need to adjust the
+                            <em>SELECT</em> Clause with the new variable givenName because now we want this in the
+                            result. The SPARQL query processor finds each triple that matches the first triple pattern
+                            and store the value in the person variable. When it looks for the second triple pattern in
+                            the <em>WHERE</em> clause, who have a triple that matches the first triple pattern. In easy
+                            words, SPARQL processor get all triples of family-name Peter along with given-name. So when
+                            we run the <a href="#query2">Query 2</a> we see given name values in the result.
+                            <img src="images/10.png" class="img-fluid w-50 m-auto d-block mt-1" />
+                        </p>
+                        <p>
+                            <b id="query3">Query 3: Let's retrieve the given name, family name and hire date of all the
+                                employees.</b><br /> We can do this with a <em>WHERE</em> Clause that has three triple
+                            patterns one for each piece of information that we want to retrieve.
+                        <pre><code style="font-size:1.125rem;">
     PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
     PREFIX sn: &lt;http://www.snee.com/hr/&gt;
 
@@ -271,15 +304,18 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
         ?person sn:hireDate ?hireDate .
     }
 </code></pre>
-                            </p>
-                            <p>
-                                When we run the <a href="#query3">query 3</a>, we get the following results.
-                                <img src="images/11.png" class="img-fluid w-75 m-auto d-block mt-1" />
-                            </p>
-                            <h5>FILTER Keyword</h5>
-                            <p>
-                                If we want to narrow down the results based on some condition, we can use a <em>FILTER</em> pattern. <br /> <b id="query4">Query 4: Let’s say we want a list of employees who are hired before November 1<sup>st</sup> so the <em>FILTER</em> pattern specifies that we only want HD values that are less than November 1<sup>st</sup> 2015</b>.
-                                <pre><code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            When we run the <a href="#query3">query 3</a>, we get the following results.
+                            <img src="images/11.png" class="img-fluid w-75 m-auto d-block mt-1" />
+                        </p>
+                        <h5>FILTER Keyword</h5>
+                        <p>
+                            If we want to narrow down the results based on some condition, we can use a <em>FILTER</em>
+                            pattern. <br /> <b id="query4">Query 4: Let’s say we want a list of employees who are hired
+                                before November 1<sup>st</sup> so the <em>FILTER</em> pattern specifies that we only
+                                want HD values that are less than November 1<sup>st</sup> 2015</b>.
+                        <pre><code style="font-size:1.125rem;">
     PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
     PREFIX sn: &lt;http://www.snee.com/hr/&gt;
 
@@ -291,14 +327,16 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
         ?person sn:hireDate ?hireDate .
         FILTER(?hireDate &lt; &quot;2015-11-01&quot;)
     }</code></pre>
-                            </p>
-                            <p>
-                                When we run the <a href="#query4">query 4</a>, we get the following results in the ISO 8601 date format.
-                                <img src="images/12.png" class="img-fluid w-75 m-auto d-block mt-1" />
-                            </p>
-                            <p>
-                                <b id="query5">Query 5: Let’s remove the <em>FILTER</em> condition and list the employees and their completed orientation values instead of their hire date values.</b>
-                                <pre><code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            When we run the <a href="#query4">query 4</a>, we get the following results in the ISO 8601
+                            date format.
+                            <img src="images/12.png" class="img-fluid w-75 m-auto d-block mt-1" />
+                        </p>
+                        <p>
+                            <b id="query5">Query 5: Let’s remove the <em>FILTER</em> condition and list the employees
+                                and their completed orientation values instead of their hire date values.</b>
+                        <pre><code style="font-size:1.125rem;">
     PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
     PREFIX sn: &lt;http://www.snee.com/hr/&gt;
 
@@ -309,18 +347,28 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
         ?person vcard:family-name ?familyName .
         ?person sn:completedOrientation  ?oDate .
     }</code></pre>
-                            </p>
-                            <p>
-                                When we run the <a href="#query5">query 5</a>, we get the following results.
-                                <img src="images/13.png" class="img-fluid w-75 m-auto d-block mt-1" />
-                            </p>
-                            <p>
-                                We see only Heidi and John’s orientation dates but the other employees don’t appear at all in the results why not? Let’s look more closely at the query triple patterns. The query first looks for a triple with a given name value and then a triple with the same subject as the subject that it found to match the first triple pattern but with a family name value and then another triple with the same subject and a completed orientation value. John and Heidi each have triples that match all the query triple patterns but Imran and Duke cannot match all three triple patterns. You have noted that John actually had two triples that matched the third pattern of the query, so the query had two rows of results for him, one for each completed orientation value.
-                            </p>
-                            <h5>OPTIONAL Keyword</h5>
-                            <p>
-                                <b id="query6">Query 6: Let’s take another example, list of all employees and if they have any their completed orientation values.</b><br /> We can tell query processor that matching on the third triple pattern is <em>OPTIONAL</em>.
-                                <pre><code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            When we run the <a href="#query5">query 5</a>, we get the following results.
+                            <img src="images/13.png" class="img-fluid w-75 m-auto d-block mt-1" />
+                        </p>
+                        <p>
+                            We see only Heidi and John’s orientation dates but the other employees don’t appear at all
+                            in the results why not? Let’s look more closely at the query triple patterns. The query
+                            first looks for a triple with a given name value and then a triple with the same subject as
+                            the subject that it found to match the first triple pattern but with a family name value and
+                            then another triple with the same subject and a completed orientation value. John and Heidi
+                            each have triples that match all the query triple patterns but Imran and Duke cannot match
+                            all three triple patterns. You have noted that John actually had two triples that matched
+                            the third pattern of the query, so the query had two rows of results for him, one for each
+                            completed orientation value.
+                        </p>
+                        <h5>OPTIONAL Keyword</h5>
+                        <p>
+                            <b id="query6">Query 6: Let’s take another example, list of all employees and if they have
+                                any their completed orientation values.</b><br /> We can tell query processor that
+                            matching on the third triple pattern is <em>OPTIONAL</em>.
+                        <pre><code style="font-size:1.125rem;">
     PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
     PREFIX sn: &lt;http://www.snee.com/hr/&gt;
 
@@ -331,15 +379,21 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
         ?person vcard:family-name ?familyName .
         OPTIONAL { ?person sn:completedOrientation  ?oDate . }
     }</code></pre>
-                            </p>
-                            <p>
-                                This query asks for everyone with a given name and a family name and if they have a completed orientation value it will show the following result.
-                                <img src="images/14.png" class="img-fluid w-75 m-auto d-block mt-1" />
-                            </p>
-                            <h5>NOT EXISTS Keyword</h5>
-                            <p>
-                                <b id="query7">Query 7: Next let’s say that Heidi is scheduling a new orientation meeting and wants to know who to invite, in other words she wants to list all employees who do not have a completed orientation value.</b><br /> Her query asks for everyone’s given and family names but only if for any employee who matches those first two triple patterns no triple exists that lists a completed orientation value for that employee. We do this with the keywords <em>NOT EXISTS</em>.
-                                <pre><code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            This query asks for everyone with a given name and a family name and if they have a
+                            completed orientation value it will show the following result.
+                            <img src="images/14.png" class="img-fluid w-75 m-auto d-block mt-1" />
+                        </p>
+                        <h5>NOT EXISTS Keyword</h5>
+                        <p>
+                            <b id="query7">Query 7: Next let’s say that Heidi is scheduling a new orientation meeting
+                                and wants to know who to invite, in other words she wants to list all employees who do
+                                not have a completed orientation value.</b><br /> Her query asks for everyone’s given
+                            and family names but only if for any employee who matches those first two triple patterns no
+                            triple exists that lists a completed orientation value for that employee. We do this with
+                            the keywords <em>NOT EXISTS</em>.
+                        <pre><code style="font-size:1.125rem;">
     PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
     PREFIX sn: &lt;http://www.snee.com/hr/&gt;
 
@@ -350,15 +404,17 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
         ?person vcard:family-name ?familyName .
         NOT EXISTS { ?person sn:completedOrientation  ?oDate . }
     }</code></pre>
-                            </p>
-                            <p>
-                                When we run the <a href="#query7">query 7</a>, we get the following results.
-                                <img src="images/15.png" class="img-fluid w-50 m-auto d-block mt-1" />
-                            </p>
-                            <h5>BIND Keyword</h5>
-                            <p>
-                                So far, the only way we have seen to store a value in a variable is to include that variable in a triple pattern for the query processor to match against some part of triple. We can use the bind keyword to store whatever we like in a variable.
-                                <pre><code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            When we run the <a href="#query7">query 7</a>, we get the following results.
+                            <img src="images/15.png" class="img-fluid w-50 m-auto d-block mt-1" />
+                        </p>
+                        <h5>BIND Keyword</h5>
+                        <p>
+                            So far, the only way we have seen to store a value in a variable is to include that variable
+                            in a triple pattern for the query processor to match against some part of triple. We can use
+                            the bind keyword to store whatever we like in a variable.
+                        <pre><code style="font-size:1.125rem;">
     PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
     PREFIX sn: &lt;http://www.snee.com/hr/&gt;
 
@@ -368,14 +424,19 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
         ?person vcard:family-name ?familyName .
         BIND("some value" AS ?someVariable)
     }</code></pre>
-                            </p>
-                            <p>
-                                When we run the above query, we get the following results.
-                                <img src="images/16.png" class="img-fluid w-50 m-auto d-block mt-1" />
-                            </p>
-                            <p>
-                                This can be especially useful when the BIND expression uses values from other variables and calls some of SPARQL broad range of available functions to create a new value. In the following query the bind statement uses SPARQL’s concat function to concatenate the given name value stored by the first triple pattern a space and the family name value stored by the second triple pattern. It stores the result of this concatenation in a new variable called <b>fullName</b>.
-                                <pre><code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            When we run the above query, we get the following results.
+                            <img src="images/16.png" class="img-fluid w-50 m-auto d-block mt-1" />
+                        </p>
+                        <p>
+                            This can be especially useful when the BIND expression uses values from other variables and
+                            calls some of SPARQL broad range of available functions to create a new value. In the
+                            following query the bind statement uses SPARQL’s concat function to concatenate the given
+                            name value stored by the first triple pattern a space and the family name value stored by
+                            the second triple pattern. It stores the result of this concatenation in a new variable
+                            called <b>fullName</b>.
+                        <pre><code style="font-size:1.125rem;">
     PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
     PREFIX sn: &lt;http://www.snee.com/hr/&gt;
 
@@ -385,15 +446,19 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
         ?person vcard:family-name ?familyName .
         BIND(concat(?givenName," ",?familyName) AS ?fullName)
     }</code></pre>
-                            </p>
-                            <p>
-                                When we run the above query, we get the following results with new full name value for each employee.
-                                <img src="images/17.png" class="img-fluid w-50 m-auto d-block mt-1" />
-                            </p>
-                            <h5>CONSTRUCT Clause</h5>
-                            <p>
-                                All the queries we have seen so far have been <em>SELECT</em> queries which are like SQL <em>SELECT</em> statements. A Sparql construct query uses the same kind of <em>WHERE</em> clauses that a <em>SELECT</em> query can use but it can use the values stored in the variables to create the new triples.
-                                <pre><code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            When we run the above query, we get the following results with new full name value for each
+                            employee.
+                            <img src="images/17.png" class="img-fluid w-50 m-auto d-block mt-1" />
+                        </p>
+                        <h5>CONSTRUCT Clause</h5>
+                        <p>
+                            All the queries we have seen so far have been <em>SELECT</em> queries which are like SQL
+                            <em>SELECT</em> statements. A Sparql construct query uses the same kind of <em>WHERE</em>
+                            clauses that a <em>SELECT</em> query can use but it can use the values stored in the
+                            variables to create the new triples.
+                        <pre><code style="font-size:1.125rem;">
     PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
     PREFIX sn: &lt;http://www.snee.com/hr/&gt;
 
@@ -403,14 +468,17 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
         ?person vcard:family-name ?familyName .
         BIND(concat(?givenName," ",?familyName) AS ?fullName)
     }</code></pre>
-                            </p>
-                            <p>
-                                When we run the above query, we get the following new triples.
-                                <img src="images/18.png" class="img-fluid w-75 m-auto d-block mt-1" />
-                            </p>
-                            <p>
-                                Note that how the triple pattern showing the triple to construct is inside of curly braces. These curly braces can enclose multiple triple patterns which is a common practice when for example a construct query takes data conforming to one modal and creates triples conforming to another. The construction queries are great for data integration projects.
-                                <pre><code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            When we run the above query, we get the following new triples.
+                            <img src="images/18.png" class="img-fluid w-75 m-auto d-block mt-1" />
+                        </p>
+                        <p>
+                            Note that how the triple pattern showing the triple to construct is inside of curly braces.
+                            These curly braces can enclose multiple triple patterns which is a common practice when for
+                            example a construct query takes data conforming to one modal and creates triples conforming
+                            to another. The construction queries are great for data integration projects.
+                        <pre><code style="font-size:1.125rem;">
     PREFIX vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt;
     PREFIX sn: &lt;http://www.snee.com/hr/&gt;
     PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
@@ -427,10 +495,10 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
         ?person vcard:family-name ?familyName .
         BIND(concat(?givenName," ",?familyName) AS ?fullName)
     }</code></pre>
-                            </p>
-                            <p>
-                                When we run the above query, we get the following new triples.
-                                <pre><code style="font-size:1.125rem;">
+                        </p>
+                        <p>
+                            When we run the above query, we get the following new triples.
+                        <pre><code style="font-size:1.125rem;">
             @prefix vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt; .
             @prefix sn: &lt;http://www.snee.com/hr/&gt; .
             @prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
@@ -456,21 +524,24 @@ sn:emp2   sn:completedOrientation   "2015-01-30" .
             sn:emp2   foaf:familyName   "Walliam" .
             sn:emp2   foaf:givenName    "Duke"
             sn:emp2   foaf:name		"Duke Walliam"</code></pre>
-                            </p>
-                            <p>
-                                <h4>SPARQL Do More:</h4>
-                                Sparql can do a lot more than what we have seen here. You can
-                                <ul class="ps-3 pt-3">
-                                    <li>Use Data types languages tags, </li>
-                                    <li>Sort and aggregate query results </li>
-                                    <li>Add, delete and update data</li>
-                                    <li>Retrieve JSON, XML, and delimited versions of query results from query processors </li>
-                                    <li>Send queries to remote private or public data collections and there are quite a few of those out there. </li>
-                                </ul>
-                            </p>
+                        </p>
+                        <p>
+                        <h4>SPARQL Do More:</h4>
+                        Sparql can do a lot more than what we have seen here. You can
+                        <ul class="ps-3 pt-3">
+                            <li>Use Data types languages tags, </li>
+                            <li>Sort and aggregate query results </li>
+                            <li>Add, delete and update data</li>
+                            <li>Retrieve JSON, XML, and delimited versions of query results from query processors </li>
+                            <li>Send queries to remote private or public data collections and there are quite a few of
+                                those out there. </li>
+                        </ul>
+                        </p>
                         <h4>References</h4>
-                            <hr />
-                            <p><a href="https://books.google.co.uk/books?id=s2RgGxd572QC&amp;dq=Learning+SPARQL&amp;lr=" target="_blank" rel="noopener noreferrer"> DuCharme, B., 2013. Learning SPARQL: querying and updating with SPARQL 1.1. " O'Reilly Media, Inc."</a>.</p>
+                        <hr />
+                        <p><a href="https://books.google.co.uk/books?id=s2RgGxd572QC&amp;dq=Learning+SPARQL&amp;lr="
+                                target="_blank" rel="noopener noreferrer"> DuCharme, B., 2013. Learning SPARQL: querying
+                                and updating with SPARQL 1.1. " O'Reilly Media, Inc."</a>.</p>
                     </div>
                 </div>
 
