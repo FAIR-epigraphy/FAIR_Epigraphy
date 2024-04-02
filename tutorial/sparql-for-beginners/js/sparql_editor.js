@@ -759,6 +759,118 @@ function reload() {
     location.reload()
 }
 
+function loadRDFExamples(title) {
+    if (title.includes('RDF')) {
+        $('#modal_title').html(title);
+        let html = `
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-action">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="simple" name="rdoRDFExample" id="rdoRDFSimpleExample" checked>
+                                <label class="form-check-label" for="rdoRDFSimpleExample">
+                                    Simple RDF Example (Single I.Sicily RDF Data)
+                                </label>
+                            </div
+                        </li>
+                        <li class="list-group-item list-group-item-action">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="multiple isicily" name="rdoRDFExample" id="rdoRDFMultipleExample">
+                                <label class="form-check-label" for="rdoRDFMultipleExample">
+                                    Complex RDF Example (Multiple I.Sicily RDF Data)
+                                </label>
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="multi_hetero" name="rdoRDFExample" id="rdoRDFMultiHeteroExample">
+                                <label class="form-check-label" for="rdoRDFMultiHeteroExample">
+                                    Multiple and Heterogeneous RDF Example (I.Sicily, EDH)
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary float-end" onclick="loadRDFData()">Load Example</button>
+                        </div>
+                    </div>
+                    `;
+        $('#divGenericModal').html(html);
+    }
+    else {
+        alert('other')
+    }
+}
+
+function loadRDFData() {
+    var checkedValue = $("input[name='rdoRDFExample']:checked").val();
+    let quereis = '';
+    if (checkedValue === 'simple') {
+        loadFile('examples_data/simple.ttl');
+        $('#btnShowQueries').removeClass('d-none');
+        quereis = `<li>Retrieve the label of the object with the ID <b>isicily:ISic000002</b>.</li>`;
+        quereis += `<li>Find the material of the object with the ID <b>isicily:ISic000002</b>.</li>`;
+        quereis += `<li>Retrieve the type of monument represented by the object with the ID <b>isicily:ISic000002</b>.</li>`;
+        quereis += `<li>Find the latitude and longitude of the spatial location of the object with the ID <b>isicily:ISic000002</b>. (Hint: Use BIND, SPLIT and STR)</li>`;
+        quereis += `<li>Retrieve various details related to the object with the ID <b>isicily:ISic000002</b>, including its label, material, current location, found location, author, and license.</li>`;
+    }
+    else if(checkedValue === 'multiple isicily'){
+        $('#btnShowQueries').removeClass('d-none');
+        loadFile('examples_data/multiple_isicily.ttl');
+        quereis = `<li>Retrive the common pleiades (foundAt) from two IDs <b>isicily:ISic000014</b>, <b>isicily:ISic000024</b></li>`;
+        quereis += `<li>Retrive unique properties from the given data.</li>`;
+        quereis += `<li>Retrive all Diplomatic Text from the data with their IDs.</li>`;
+        quereis += `<li>Retrieve the writing language of the inscription.</li>`;
+        quereis += `<li>Retrieve the inscription ID, label, and material. The material should begin with 'li'. Order the results by label in ascending order. </li>`;
+    } 
+    else if(checkedValue === 'multi_hetero'){
+        loadFile('examples_data/multi_hetero.ttl');
+        $('#btnShowQueries').removeClass('d-none');
+        quereis = `<li>Find total number of inscriptions</li>`;
+        quereis += `<li>Find total number of triples.</li>`;
+        quereis += `<li>Find common/close match inscriptions based on Trismegistos.</li>`;
+        quereis += `<li>Retrieve all the labels of the human-made objects along with their current locations</li>`;
+        quereis += `<li>Find the human-made objects made of limestone</li>`;
+        quereis += `<li>Show all the <a href="https://www.eagle-network.eu/voc/typeins/lod/88.html" target="_blank">TIT. DEDICATORIUS</a></li>`;
+    } 
+    else {
+        alert("No option selected");
+    }
+
+    $('#listQueries').html(quereis);
+}
+
+function full_screen(ele){
+    //$('#turtle-editor').removeClass('col-md-5').addClass('col-md-12');
+    $('#turtle-editor').toggleClass("col-md-12 col-md-5");
+    $(ele).toggleClass("bi-fullscreen-exit bi-arrows-fullscreen");
+}
+
+// $('#btn-close-example').click((e)=>{
+//     $('#modal-dialog-generic').removeClass('modal-fullscreen');
+//     $('#modal-dialog-generic').addClass('modal-lg');
+// })
+
+function loadFile(fileName) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', fileName, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                const content = xhr.responseText;
+                //console.log(content);
+                store = new N3.Store();
+                editor.setValue(content);
+                ttlFile.value = '';
+                $('#btn-close-example').click();
+            } else {
+                console.error('Failed to load file: ' + xhr.status);
+            }
+        }
+    };
+    xhr.send();
+}
+
 async function copyContent() {
     let text = editor.getValue();
     const copy = async () => {

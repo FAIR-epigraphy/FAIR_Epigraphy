@@ -49,6 +49,8 @@
             max-width: 50%;
             /* Max Width of the popover (depending on the container!) */
         }
+
+        
     </style>
 </head>
 
@@ -90,7 +92,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-5 p-0">
+            <div class="col-md-5 p-0" id="turtle-editor">
                 <div class="card mt-2">
                     <div class="card-header">
                         <h5>Turtle Editor</h5>
@@ -111,6 +113,9 @@
                                 </svg>
                             </i>
                             <i type="button" class="bi bi-repeat fs-5 ms-2" onclick="reload()" title="Reload"></i>
+                            <i type="button" class="bi bi-file-earmark-code fs-5 ms-2" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" onclick="loadRDFExamples('More RDF Examples')"
+                                title="Load Example"></i>
                             <i class="bi bi-grip-vertical fs-4"></i>
                             <i type="button" onclick="copyContent()" title="Copy all content to clipboard">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
@@ -119,11 +124,27 @@
                                         d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
                                 </svg>
                             </i>
+                            <i type="button" class="bi bi-arrows-fullscreen fs-5 ms-3" title="Expand it" onclick="full_screen(this)"></i>
                             <i type="button" class="bi bi-x fs-5 ms-2" onclick="new_clear_content()"></i>
-                            <i type="button" class="bi bi-bezier fs-3 ms-2 float-end text-primary" 
-                                data-bs-toggle="modal" data-bs-target="#modalRDFGraph"
-                                title="Show RDF Visualisation">
+                            
+                            <i type="button" class="bi bi-bezier fs-3 ms-2 float-end text-primary"
+                                data-bs-toggle="modal" data-bs-target="#modalRDFGraph" title="Show RDF Visualisation">
                             </i>
+
+                            <button type="button" id="btnShowQueries" class="btn btn-warning btn-sm d-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop">
+                                <i class="bi bi-question-circle"></i> Queries
+                            </button>
+
+                            <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+                                <div class="offcanvas-header">
+                                  <h5 class="offcanvas-title" id="offcanvasTopLabel">Practice SPARQL Queries</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                  <ol id="listQueries">
+                                  </ol>
+                                </div>
+                              </div>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -191,15 +212,15 @@ sn:emp4   sn:hireDate               "2015-11-10" .</textarea>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div id="modal-dialog-generic" class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">SPARQL Examples</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="modal_title"></h5>
+                        <button type="button" id="btn-close-example" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <table class="table">
-                            <tbody id="divQueries">
+                            <tbody id="divGenericModal">
                             </tbody>
                         </table>
                     </div>
@@ -234,7 +255,7 @@ sn:emp4   sn:hireDate               "2015-11-10" .</textarea>
             <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-bezier fs-3"></i> 
+                        <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-bezier fs-3"></i>
                             RDF Visualisation
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

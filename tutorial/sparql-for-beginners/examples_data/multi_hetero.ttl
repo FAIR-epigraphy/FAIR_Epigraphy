@@ -1,0 +1,199 @@
+@prefix crm: <http://erlangen-crm.org/current/>.
+@prefix crmsci: <http://www.cidoc-crm.org/crmsci/>.
+@prefix crmtex: <http://www.cidoc-crm.org/crmtex/>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix doap: <http://usefulinc.com/ns/doap#>.
+@prefix eagle: <https://www.eaglenetwork.eu/voc/writing/lod/>.
+@prefix eagleExTech: <https://www.eagle-network.eu/voc/writing/lod/>.
+@prefix eagleInsTyp: <https://www.eagle-network.eu/voc/typeins/lod/>.
+@prefix eagleMat: <https://www.eagle-network.eu/voc/material/lod/>.
+@prefix eagleObjTyp: <https://www.eagle-network.eu/voc/objtyp/lod/>.
+@prefix edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#>.
+@prefix edh_uri: <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/>.
+@prefix edm: <http://www.europeana.eu/schemas/edm/>.
+@prefix epnet: <http://www.semanticweb.org/ontologies/2015/1/EPNet-ONTOP_Ontology#>.
+@prefix epont: <http://Temporary.Epigraphic.Ontology/>.
+@prefix extech: <https://w3id.org/executionTechnique/ontology#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix frbr: <http://purl.org/vocab/frbr/core#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix gn: <http://www.geonames.org/ontology#>.
+@prefix gndo: <http://d-nb.info/standards/elementset/gnd#>.
+@prefix igcyr: <https://igcyr.unibo.it/>.
+@prefix isicily: <http://sicily.classics.ox.ac.uk/>.
+@prefix lawd: <http://lawd.info/ontology/>.
+@prefix nmo: <http://nomisma.org/ontology#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix pav: <http://purl.org/pav/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rib: <https://romaninscriptionsofbritain.org/inscriptions/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix svcs: <http://rdfs.org/sioc/services#>.
+@prefix t: <http://www.tei-c.org/ns/1.0>.
+@prefix tm: <https://www.trismegistos.org/text/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace>.
+@prefix xs: <http://www.w3.org/2001/XMLSchema>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+isicily:ISic000014 a crm:E22_Human-Made_Object;
+    rdfs:label "I.Sicily inscription 000014";
+    epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000014/WrittenText>;
+    crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/064>;
+    nmo:Material "limestone";
+    nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/66.html>;
+    pav:authoredBy "I.Sicily";
+    pav:license <http://creativecommons.org/licenses/by/4.0/>;
+    epnet:isDocumentedBy <https://www.zotero.org/groups/382445/items/FZWWPUD6>, <http://zotero.org/groups/382445/items/R46KDTZX>, <https://www.zotero.org/groups/382445/items/PZHQV5MN>, <https://www.zotero.org/groups/382445/items/9J2C443I>;
+    geo:SpatialThing <http://sicily.classics.ox.ac.uk/ISic000014#this>;
+    lawd:foundAt <http://pleiades.stoa.org/places/462410>.
+<http://sicily.classics.ox.ac.uk/ISic000014/WrittenText> a crmtex:TX1_Written_text;
+    crm:P108_was_produced_by <http://sicily.classics.ox.ac.uk/ISic000014/Writing>;
+    crm:P56_is_found_on isicily:ISic000014;
+    nmo:hasEndDate "0250-01-01";
+    nmo:hasStartDate "0200-01-01";
+    crmsci:O6_observed_by <http://sicily.classics.ox.ac.uk/ISic000014/Reading>;
+    foaf:page <http://sicily.classics.ox.ac.uk/inscription/ISic000014>.
+<http://sicily.classics.ox.ac.uk/ISic000014#this> geo:lat_long "38.13205, 13.33561".
+<http://sicily.classics.ox.ac.uk/ISic000014/Reading> a crmtex:TX5_Reading;
+    crm:P20_had_specific_purpose <http://sicily.classics.ox.ac.uk/ISic000014/Transcription>;
+    crmtex:TXP3_is_rendered_by <http://sicily.classics.ox.ac.uk/ISic000014/Transcription>.
+<http://sicily.classics.ox.ac.uk/ISic000014/Transcription> a crmtex:TX6_Transcription;
+    epont:hasEdition <http://sicily.classics.ox.ac.uk/ISic000014/Edition>;
+    edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/88.html>;
+    crm:P1_is_identified_by "074901", "10.5281/zenodo.4333771", "3514", "9701489";
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/175727>;
+    crm:P49_created <http://sicily.classics.ox.ac.uk/ISic000014/TranscriptionText>;
+    crm:P14_carried_out_by <http://orcid.org/0000-0001-6823-0265>, <http://orcid.org/0000-0002-6686-3728>, <http://orcid.org/0000-0002-9695-0240>, <http://orcid.org/0000-0003-3819-8537>, <https://orcid.org/0000-0003-3914-9569>, <https://orcid.org/0000-0001-8417-7089>.
+<http://sicily.classics.ox.ac.uk/ISic000014/Writing> a crmtex:TX2_Writing;
+    crm:P92_brought_into_existence <http://sicily.classics.ox.ac.uk/ISic000014/WrittenWork>;
+    crmtex:TXP1_used_writing_system "la".
+<http://sicily.classics.ox.ac.uk/ISic000014/WrittenWork> a lawd:WrittenWork.
+isicily:ISic000014 skos:closeMatch <https://edh.ub.uni-heidelberg.de/edh/inschrift/HD014033>, <http://db.edcs.eu/epigr/edcs_id_en.php?p_edcs_id=EDCS-09701489>, <http://www.edr-edr.it/edr_programmi/res_complex_comune.php?do=book&id_nr=EDR074901>.
+
+<http://sicily.classics.ox.ac.uk/ISic000014/TranscriptionText> a crm:E33_Linguistic_Object ;
+	epont:hasDiplomaticText "IULIAE·AU[ .] / MATRI·CASTRO[ .] / IMP·L·SEPTIMI·SEVERI·P̣[ ..] / P̣ERTINẠC̣ỊṢẠỤG·ARABIC̣[ .] / [.. 15 ..]Ị[.. 8 ..] / - - - - -"@la ;
+        epont:hasSimplifiedTranscription "IuliaeAugustae matricastrorum ImperatorisLuciSeptimiSeveriPii PertinacisAugustiArabici AdiabeniciParthiciMaximi"@la ;
+	epont:hasTranscription "Iuliae·Au[g](ustae) / matri·castro[r](um) / Imp(eratoris)·L(uci)·Septimi·Severi·P̣[ii] / P̣ertinạc̣ịṣẠụg(usti)·Arabic̣[i] / [AdiabeniciParth]ị[ciMaximi- - ? - -] / - - - - -"@la .
+
+isicily:ISic000298 a crm:E22_Human-Made_Object;
+    rdfs:label "Dedication to the Genius of the city of Catania";
+    epont:carriesText <http://sicily.classics.ox.ac.uk/ISic000298/WrittenText>;
+    edh:representsTypeOfMonument <http://www.eagle-network.eu/voc/objtyp/lod/259>;
+    crm:P55_has_current_location <http://sicily.classics.ox.ac.uk/museum/018>;
+    nmo:Material "marble (white)";
+    nmo:hasMaterial <http://www.eagle-network.eu/voc/material/lod/48.html>;
+    nmo:hasObjectType "plaque";
+    pav:authoredBy "I.Sicily";
+    pav:license <http://creativecommons.org/licenses/by/4.0/>;
+    epnet:isDocumentedBy <https://www.zotero.org/groups/382445/items/GQN8UZSI>, <https://www.zotero.org/groups/382445/items/VF9MMBI9>, <https://www.zotero.org/groups/382445/items/XHMS9K6S>, <http://zotero.org/groups/382445/items/R46KDTZX>, <http://zotero.org/groups/382445/items/BVD8KVF7>, <https://www.zotero.org/groups/382445/items/JBI7CI5R>, <http://zotero.org/groups/382445/items/7VWTI6D2>, <https://www.zotero.org/groups/382445/items/2EUC82DH>;
+    geo:SpatialThing <http://sicily.classics.ox.ac.uk/ISic000298#this>;
+    lawd:foundAt <http://pleiades.stoa.org/places/462270>.
+<http://sicily.classics.ox.ac.uk/ISic000298/WrittenText> a crmtex:TX1_Written_text;
+    crm:P108_was_produced_by <http://sicily.classics.ox.ac.uk/ISic000298/Writing>;
+    crm:P56_is_found_on isicily:ISic000298;
+    nmo:hasEndDate "0421-01-01";
+    nmo:hasStartDate "0337-01-01";
+    crmsci:O6_observed_by <http://sicily.classics.ox.ac.uk/ISic000298/Reading>;
+    foaf:page <http://sicily.classics.ox.ac.uk/inscription/ISic000298>.
+<http://sicily.classics.ox.ac.uk/ISic000298#this> geo:lat_long "37.49223, 15.07041".
+<http://sicily.classics.ox.ac.uk/ISic000298/Reading> a crmtex:TX5_Reading;
+    crm:P20_had_specific_purpose <http://sicily.classics.ox.ac.uk/ISic000298/Transcription>;
+    crmtex:TXP3_is_rendered_by <http://sicily.classics.ox.ac.uk/ISic000298/Transcription>.
+<http://sicily.classics.ox.ac.uk/ISic000298/Transcription> a crmtex:TX6_Transcription;
+    epont:hasEdition <http://sicily.classics.ox.ac.uk/ISic000298/Edition>;
+    edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/88.html>;
+    crm:P1_is_identified_by "074187", "10.5281/zenodo.4022606", "10.5281/zenodo.4334867", "2", "21900333";
+    crm:P48_has_preferred_identifier <https://www.trismegistos.org/text/175826>;
+    crm:P49_created <http://sicily.classics.ox.ac.uk/ISic000298/TranscriptionText>;
+    crm:P14_carried_out_by <http://orcid.org/0000-0001-6823-0265>, <http://orcid.org/0000-0002-6686-3728>, <http://orcid.org/0000-0002-9695-0240>, <http://orcid.org/0000-0003-3819-8537>, <https://orcid.org/0000-0003-3914-9569>.
+<http://sicily.classics.ox.ac.uk/ISic000298/Writing> a crmtex:TX2_Writing;
+    crm:P92_brought_into_existence <http://sicily.classics.ox.ac.uk/ISic000298/WrittenWork>;
+    crmtex:TXP1_used_writing_system "la".
+<http://sicily.classics.ox.ac.uk/ISic000298/WrittenWork> a lawd:WrittenWork.
+isicily:ISic000298 skos:closeMatch <https://edh.ub.uni-heidelberg.de/edh/inschrift/HD019138>, <http://db.edcs.eu/epigr/edcs_id_en.php?p_edcs_id=EDCS-21900333>, <http://www.edr-edr.it/edr_programmi/res_complex_comune.php?do=book&id_nr=EDR074187>, <http://laststatues.classics.ox.ac.uk/database/detail-base.php?record=LSA-2056>.
+<http://sicily.classics.ox.ac.uk/ISic000298/TranscriptionText> a crm:E33_Linguistic_Object ;
+	epont:hasDiplomaticText "VERNANTIBUS / SAECULISDDDNNN / GENIO SPLENDIDAE UR / BISCATINAE / FACUNDUSPORFYRIUS / MYNATIDIUSVC· / CONS·EIUSDEM"@la ;
+        epont:hasSimplifiedTranscription "Vernantibus saeculisdominorumnostrorum Genio splendidae ur bisCatinae FacundusPorfyrius Mynatidiusvirclarissimus consulariseiusdem"@la ;
+	epont:hasTranscription "Vernantibus / saeculisd(ominorum)n(ostrorum) / Genio splendidae ur- / bisCatinae / FacundusPorfyrius / Mynatidiusv(ir)c(larissimus)· / cons(ularis)·eiusdem"@la .
+
+
+edh_uri:HD019138 a crm:E22_Human-Made_Object ;
+    rdfs:label "Inscription from Catina &ndash; Catania (Sicilia, Melita)"^^xsd:string ;
+    epont:carriesText <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/WrittenText> ;
+    lawd:foundAt <https://pleiades.stoa.org/places/462270> ;
+    pav:authoredBy "Epigraphische Datenbank Heidelberg"^^xsd:string ;
+    pav:license <http://creativecommons.org/licenses/by-sa/4.0/> ;
+    gn:name "Catina"^^xsd:string ;
+    geo:SpatialThing <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138#this> .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138#this> geo:lat_long "37.502959,15.088142" .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/Transcription> ;
+    crmtex:TXP3_is_rendered_by <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/Transcription> .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epont:hasDiplomaticText "VERNANTIBUS / SAECULISDDDNNN / GENIO SPLENDIDAE UR / BIS CATINAE / FACUNDUS PORFYRIUS / MYNATIDIUSVC / CONSEIUSDEM"@la ;
+        epont:hasSimplifiedTranscription "Vernantibus saeculisdominorumnostrorum genio splendidae ur bis Catinae Facundus Porfyrius Mynatidiusvirclarissimus consulariseiusdem"@la ;
+	epont:hasTranscription "Vernantibus / saeculisd(ominorum)n(ostrorum) / genio splendidae ur- / bis Catinae / Facundus Porfyrius / Mynatidiusv(ir)c(larissimus) / cons(ularis)eiusdem"@la .
+
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "la"^^xsd:string .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/Writing> ;
+    crm:P56_is_found_on edh_uri:HD019138 ;
+    crmsci:O6_observed_by <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/Reading> ;
+    foaf:page <https://edh.ub.uni-heidelberg.de/edh/inschrift/HD019138> .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/WrittenWork> a lawd:WrittenWork .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/Edition> ;
+    edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/143> ;
+    crm:P1_is_identified_by "HD019138"^^xsd:string ;
+    crm:P48_has_preferred_identifier tm:175826 ;
+    crm:P49_created <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD019138/TranscriptionText> .
+
+edh_uri:HD014033 a crm:E22_Human-Made_Object ;
+    rdfs:label "Inscription from Panormus, bei &ndash; Boccadifalcone (Sicilia, Melita)"^^xsd:string ;
+    epont:carriesText <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/WrittenText> ;
+    lawd:foundAt <https://pleiades.stoa.org/places/462410> ;
+    pav:authoredBy "Epigraphische Datenbank Heidelberg"^^xsd:string ;
+    pav:license <http://creativecommons.org/licenses/by-sa/4.0/> ;
+    gn:name "Panormus, bei"^^xsd:string ;
+    geo:SpatialThing <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033#this> .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033#this> geo:lat_long "38.1112268,13.3524434" .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/Reading> a crmtex:TX5_Reading ;
+    crm:P20_had_specific_purpose <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/Transcription> ;
+    crmtex:TXP3_is_rendered_by <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/Transcription> .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/TranscriptionText> a crm:E33_Linguistic_Object ;
+    epont:hasDiplomaticText "IULIAE AU[ .] / MATRI CASTRO[ .] / IMPLSEPTIMI SEVERI P[ ..] / PERTINACISAUGARABIC[ .] / [.. 16 ..]I[CI MAXIMI ------"@la ;
+        epont:hasSimplifiedTranscription "Iuliae Augustae matri castrorum ImperatorisLuciSeptimi Severi Pii PertinacisAugustiArabici Adiabenici Parthici maximi"@la ;
+	epont:hasTranscription "Iuliae Au[g(ustae)] / matri castro[r(um)] / Imp(eratoris)L(uci)Septimi Severi P[ii] / PertinacisAug(usti)Arabic[i] / [Adiabenici Parth]i[ci maximi ------"@la .
+
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/Writing> a crmtex:TX2_Writing ;
+    crm:P92_brought_into_existence <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/WrittenWork> ;
+    crmtex:TXP1_used_writing_system "la"^^xsd:string .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/WrittenText> a crmtex:TX1_Written_text ;
+    crm:P108_was_produced_by <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/Writing> ;
+    crm:P56_is_found_on edh_uri:HD014033 ;
+    crmsci:O6_observed_by <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/Reading> ;
+    foaf:page <https://edh.ub.uni-heidelberg.de/edh/inschrift/HD014033> .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/WrittenWork> a lawd:WrittenWork .
+
+<https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/Transcription> a crmtex:TX6_Transcription ;
+    epont:hasEdition <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/Edition> ;
+    edh:representsTypeOfInscription <http://www.eagle-network.eu/voc/typeins/lod/143> ;
+    crm:P1_is_identified_by "HD014033"^^xsd:string ;
+    crm:P49_created <https://edh-www.adw.uni-heidelberg.de/test/edh/inschrift/HD014033/TranscriptionText> .

@@ -1,0 +1,25 @@
+@prefix crm: <http://erlangen-crm.org/current/>.
+@prefix edh: <http://edh-www.adw.uni-heidelberg.de/edh/ontology#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix isicily: <http://sicily.classics.ox.ac.uk/>.
+@prefix lawd: <http://lawd.info/ontology/>.
+@prefix nmo: <http://nomisma.org/ontology#>.
+@prefix pav: <http://purl.org/pav/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+
+isicily:ISic000002   a     			      		crm:E22_Human-Made_Object ;
+		     rdfs:label       		      			"Epitaph for Lurius Zosimus" ;
+		     edh:representsTypeOfMonument      <http://www.eagle-network.eu/voc/objtyp/lod/259.html> ;
+		     crm:P55_has_current_location      	<http://sicily.classics.ox.ac.uk/museum/064> ;
+		     nmo:Material 		      		   	"marble" ;
+		     nmo:hasMaterial 	              		<http://www.eagle-network.eu/voc/material/lod/48.html> ;
+		     nmo:hasObjectType 	             	"plaque" ;
+		     pav:authoredBy 	              		"I.Sicily" ;
+		     pav:license 	              			<http://creativecommons.org/licenses/by/4.0/> ;
+		     geo:SpatialThing                 		<http://sicily.classics.ox.ac.uk/ISic000002#this> ;
+		     lawd:foundAt 	              			<http://pleiades.stoa.org/places/462270> ;
+		     skos:closeMatch 	              		<http://db.edcs.eu/epigr/edcs_id_en.php?p_edcs_id=EDCS-21900397> ,
+						      			<http://www.edr-edr.it/edr_programmi/res_complex_comune.php?do=book&id_nr=EDR141180> .
+<http://sicily.classics.ox.ac.uk/ISic000002#this> geo:lat_long  "37.49223, 15.07041" .
